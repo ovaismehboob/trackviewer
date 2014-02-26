@@ -171,6 +171,7 @@
     <PRIResource Include="Strings\en-US\Resources.resw">
       <SubType>Designer</SubType>
     </PRIResource>
+    <Content Include="Assets\trackviewer.png" />
     <Content Include="DataModel\SampleData.json" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -59,7 +60,7 @@ namespace TrackViewer
 
                 long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
                 txtWelcome.Text = "Welcome, you're connected!";
-                txtMyTrackId.Text = "Your Track ID is "+ trackNo.ToString();
+                txtMyTrackId.Text = "Your TrackViewer ID is "+ trackNo.ToString();
                 ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
 
                 PostTrackingInfo();
@@ -203,6 +204,7 @@ namespace TrackViewer
         {
             if (btnTrack.Content.Equals("Go Track"))
             {
+                if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid Track Id"); txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); return; }
                 btnTrack.Content = "Cancel";
                 txtTrackId.IsEnabled = false;
             }
@@ -213,5 +215,51 @@ namespace TrackViewer
 
             }
         }
+
+        private void SetMessage(MessageType messageType, String message)
+        {
+            txtMessage.Text = message;
+            switch(messageType)
+            {
+                case MessageType.Warning:
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Orange); 
+                    break;
+                case MessageType.Error:
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    break;
+                case MessageType.Information:
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+                    break;
+                default:
+                    break;
+               
+            }
+            HideMessage();
+
+        }
+
+        private void HideMessage()
+        {
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += timer_HideMessage;
+            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Start();
+        }
+
+        async void timer_HideMessage(object sender, object e)
+        {
+            txtMessage.Text = "";
+            var timer=(DispatcherTimer) sender;
+            timer.Stop();
+            
+        }
+    }
+
+
+
+    public enum MessageType{
+
+        Warning, Information, Error
     }
 }

@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="#FF383B40">
-        <TextBlock FontSize="30" HorizontalAlignment="Left" Height="51" Margin="186,109,0,0" TextWrapping="Wrap" Text="Track Viewer" VerticalAlignment="Top" Width="258"/>
+        <TextBlock FontSize="30" HorizontalAlignment="Left" Height="51" Margin="186,109,0,0" TextWrapping="Wrap" Text="TrackViewer" VerticalAlignment="Top" Width="258"/>
 
         <Maps:Map x:Name="trvMap"   MapType="Aerial"  ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True" Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="600" Margin="483,96,0,0" VerticalAlignment="Top" Width="783" BorderThickness="5">
         </Maps:Map>
@@ -18,9 +18,10 @@
             <TextBlock Text="Connecting..." x:Name="txtWelcome" Margin="0,10,10,10"  FontSize="15" />
             <TextBlock Text="" x:Name="txtMyTrackId" Margin="0,10,10,10" FontSize="20" />
             <ToggleSwitch x:Name="toggleSwitch"  OffContent="On Tracking" Margin="0,10,10,10" OnContent="Off Tracking" />
-            <TextBlock FontSize="15" Text="Enter Track ID:" Margin="0,50,10,10" />
+            <TextBlock FontSize="15" Text="Enter User TrackViewer ID to track" Margin="0,50,10,10" />
             <TextBox x:Name="txtTrackId" FontSize="15" />
             <Button x:Name="btnTrack" HorizontalAlignment="Right" Content="Go Track" Click="btnTrack_Click" />
+            <TextBlock x:Name="txtMessage" FontSize="15" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="82" Margin="101,96,0,0" VerticalAlignment="Top" Width="71" Source="Assets/trackviewer.png"/>
 
