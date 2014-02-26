@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="aaad91cd-0f89-443f-a9bd-df5bcc90a975" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://127.0.0.1:81/TrackService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TrackService3.xsd" MetadataType="Schema" ID="17074820-a017-40cb-bea7-33b2e44ce492" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TrackService31.xsd" MetadataType="Schema" ID="e0232faf-175f-427a-bb32-44ebc19cc936" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TrackService1.wsdl" MetadataType="Wsdl" ID="22fa3603-d825-41f8-b0f8-e3fe9026f70a" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?wsdl" />
+    <MetadataFile FileName="TrackService1.disco" MetadataType="Disco" ID="dca547eb-42ef-4cea-bce7-ed50ac3e2710" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?disco" />
+    <MetadataFile FileName="TrackService32.xsd" MetadataType="Schema" ID="3707cc4a-f3ca-4a26-84d5-90d4bc08ead6" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,25 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TrackViewer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Bing.Maps"
+    x:Class="TrackViewer.TrackMap"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock FontSize="30" HorizontalAlignment="Left" Height="51" Margin="102,96,0,0" TextWrapping="Wrap" Text="Track Viewer" VerticalAlignment="Top" Width="258"/>
+
+        <Maps:Map x:Name="trvMap"  MapType="HighContrast" ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True" Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="600" Margin="483,96,0,0" VerticalAlignment="Top" Width="783"/>
+        <TextBlock HorizontalAlignment="Left" Height="60" Margin="102,147,0,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="339"/>
+        <StackPanel HorizontalAlignment="Left" Height="411" Margin="102,249,0,0" VerticalAlignment="Top" Width="339">
+            <TextBlock Text="" x:Name="txtWelcome" Margin="0,10,10,10"  FontSize="20" />
+            <TextBlock Text="" x:Name="txtMyTrackId" Margin="0,10,10,10" FontSize="30" />
+            <TextBlock FontSize="15" Text="Enter Track ID:" Margin="0,70,10,10" />
+            <TextBox x:Name="txtTrackId" FontSize="15" />
+            <Button x:Name="btnTrack" HorizontalAlignment="Right" Content="Go Track" Click="btnTrack_Click" />
+        </StackPanel>
+
+    </Grid>
+</Page>
