@@ -170,10 +170,13 @@ namespace TrackViewer
 
         async void timer_Tick(object sender, object e)
         {
-          Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
-          Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-          ProxyTracker.GetInstance().MyTrackLocation=new Services.TrackService.TrackLocation{ Latitude= location.Latitude, Longitude=location.Longitude};
-          await ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
+            if (toggleSwitch.IsOn)
+            {
+                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+                Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
+                ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
+                await ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
+            }
         }
 
 
