@@ -58,13 +58,19 @@ namespace TrackViewer
             {
                 await SetCurrentLocation();
 
-                long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
-                txtWelcome.Text = "Welcome, you're connected!";
-                txtMyTrackId.Text = "Your TrackViewer ID is "+ trackNo.ToString();
-                ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
+                try
+                {
+                    long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
+                    txtWelcome.Text = "Welcome, you're connected!";
+                    txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
+                    EnableControls();
+                    ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
 
-                PostTrackingInfo();
-                FetchTrackingInfo();
+                    PostTrackingInfo();
+                    FetchTrackingInfo();
+                
+                }
+                catch (Exception ex) { MapCurrentLocation(); }
                 
                 // Display the location information in the textboxes.
                 //   LatitudeTextbox.Text = pos.Coordinate.Latitude.ToString();
@@ -93,6 +99,15 @@ namespace TrackViewer
             //CancelGetLocationButton.IsEnabled = false;
         }
 
+
+        void EnableControls()
+        {
+
+            toggleSwitch.Visibility = Visibility.Visible;
+            txtTrackId.Visibility = Visibility.Visible;
+            txtEnterUserTrackID.Visibility = Visibility.Visible;
+            btnTrack.Visibility = Visibility.Visible;
+        }
 
         async Task SetCurrentLocation()
         {

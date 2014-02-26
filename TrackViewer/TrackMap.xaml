@@ -17,10 +17,10 @@
         <StackPanel HorizontalAlignment="Left" Height="411" Margin="102,249,0,0" VerticalAlignment="Top" Width="339">
             <TextBlock Text="Connecting..."  FontSize="11" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="0,10,10,10"   Foreground="#FF080808" />
             <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="0,5,10,10" FontSize="20" Foreground="#FF080808" />
-            <ToggleSwitch  FontSize="15" x:Name="toggleSwitch"  OffContent="You're Tracking is Off" Margin="0,0,10,10" OnContent="You're Tracking is On" Foreground="#FF080808" />
-            <TextBlock FontSize="15" FontWeight="SemiBold"  Text="Enter User TrackViewer ID to track" Margin="0,50,10,10" Foreground="#FF080808" />
-            <TextBox x:Name="txtTrackId" FontSize="15" Foreground="#FF080808" />
-            <Button x:Name="btnTrack" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
+            <ToggleSwitch  FontSize="15" x:Name="toggleSwitch" Visibility="Collapsed"  OffContent="You're Tracking is Off" Margin="0,0,10,10" OnContent="You're Tracking is On" Foreground="#FF080808" />
+            <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter User TrackViewer ID to track" Margin="0,50,10,10" Foreground="#FF080808" />
+            <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Foreground="#FF080808" />
+            <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
             <TextBlock x:Name="txtMessage" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="82" Margin="101,96,0,0" VerticalAlignment="Top" Width="71" Source="Assets/trackviewer.png"/>
