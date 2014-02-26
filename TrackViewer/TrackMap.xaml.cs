@@ -202,14 +202,14 @@ namespace TrackViewer
 
         private async void btnTrack_Click(object sender, RoutedEventArgs e)
         {
-            if (btnTrack.Content.Equals("Go Track"))
+            if (btnTrack.Content.Equals("Track now"))
             {
                 if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid Track Id"); txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); return; }
                 btnTrack.Content = "Cancel";
                 txtTrackId.IsEnabled = false;
             }
             else { 
-                btnTrack.Content = "Go Track";
+                btnTrack.Content = "Track now";
                 txtTrackId.IsEnabled = true;
                 await SetCurrentLocation();
 
@@ -222,7 +222,7 @@ namespace TrackViewer
             switch(messageType)
             {
                 case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Orange); 
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Yellow); 
                     break;
                 case MessageType.Error:
                     txtMessage.Foreground = new SolidColorBrush(Colors.Red);
