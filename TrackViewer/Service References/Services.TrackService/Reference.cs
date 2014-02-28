@@ -90,6 +90,15 @@ namespace TrackViewer.Services.TrackService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/GetTrackingInfo", ReplyAction="http://tempuri.org/ITrackService/GetTrackingInfoResponse")]
         System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackLocation> GetTrackingInfoAsync(long trackId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/StartTrackingRestful", ReplyAction="http://tempuri.org/ITrackService/StartTrackingRestfulResponse")]
+        System.Threading.Tasks.Task<long> StartTrackingRestfulAsync(string deviceId, string latitude, string longitude, string trackNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/PublishTrackingInfoRestful", ReplyAction="http://tempuri.org/ITrackService/PublishTrackingInfoRestfulResponse")]
+        System.Threading.Tasks.Task PublishTrackingInfoRestfulAsync(string latitude, string longitude, string trackNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/GetTrackingInfoRestful", ReplyAction="http://tempuri.org/ITrackService/GetTrackingInfoRestfulResponse")]
+        System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackLocation> GetTrackingInfoRestfulAsync(string trackId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -149,6 +158,18 @@ namespace TrackViewer.Services.TrackService {
         
         public System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackLocation> GetTrackingInfoAsync(long trackId) {
             return base.Channel.GetTrackingInfoAsync(trackId);
+        }
+        
+        public System.Threading.Tasks.Task<long> StartTrackingRestfulAsync(string deviceId, string latitude, string longitude, string trackNo) {
+            return base.Channel.StartTrackingRestfulAsync(deviceId, latitude, longitude, trackNo);
+        }
+        
+        public System.Threading.Tasks.Task PublishTrackingInfoRestfulAsync(string latitude, string longitude, string trackNo) {
+            return base.Channel.PublishTrackingInfoRestfulAsync(latitude, longitude, trackNo);
+        }
+        
+        public System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackLocation> GetTrackingInfoRestfulAsync(string trackId) {
+            return base.Channel.GetTrackingInfoRestfulAsync(trackId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

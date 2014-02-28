@@ -14,9 +14,11 @@ namespace WCFTrackServiceWebRole
     {
 
         [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/starttracking/{deviceId}")]
         Int64 StartTracking(String deviceId, TrackLocation location);
 
         [OperationContract]
+        [WebInvoke(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/publishtracking")]
         void PublishTrackingInfo(Int64 trackId, TrackLocation location);
 
         [OperationContract]
@@ -25,6 +27,16 @@ namespace WCFTrackServiceWebRole
         [OperationContract]
         TrackLocation GetTrackingInfo(Int64 trackId);
         // TODO: Add your service operations here
+
+        //Restful Methods
+        [WebGet(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/starttrackingrestful/{deviceId}/{latitude}/{longitude}/{trackNo}")]
+        Int64 StartTrackingRestful(String deviceId, String latitude, String longitude, String trackNo);
+
+        [WebGet(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/publishtrackingrestful/{latitude}/{longitude}/{trackNo} ")]
+        void PublishTrackingInfoRestful(String latitude, String longitude, String trackNo);
+
+         [WebGet(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/gettrackinginforestful/{trackId}")]
+        TrackLocation GetTrackingInfoRestful(String trackId);
     }
 
 

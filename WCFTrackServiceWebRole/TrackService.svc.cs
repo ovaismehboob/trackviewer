@@ -12,6 +12,7 @@ namespace WCFTrackServiceWebRole
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class TrackService : ITrackService
     {
+        
         public long StartTracking(String deviceId, TrackLocation location)
         {
             Random random=new Random();
@@ -47,6 +48,23 @@ namespace WCFTrackServiceWebRole
         public TrackLocation GetTrackingInfo(long trackId)
         {
             return ((TrackStorage.userTracks[trackId] == null) ? null : (TrackLocation)TrackStorage.userTracks[trackId]);
+        }
+
+
+        public long StartTrackingRestful(String deviceId, String latitude, String longitude, String trackNo)
+        {
+            return StartTracking(deviceId, new TrackLocation { Latitude = Convert.ToDouble(latitude), Longitude = Convert.ToDouble(longitude), TrackNo = Convert.ToInt32(trackNo) });
+        }
+
+
+        public void PublishTrackingInfoRestful(string latitude, string longitude, string trackNo)
+        {
+            PublishTrackingInfo(Convert.ToInt64(trackNo), new TrackLocation { TrackNo = Convert.ToInt32(trackNo), Longitude = Convert.ToDouble(longitude), Latitude = Convert.ToDouble(latitude) });
+        }
+
+        public TrackLocation GetTrackingInfoRestful(string trackId)
+        {
+            return GetTrackingInfo(Convert.ToInt64(trackId));
         }
     }
 }
