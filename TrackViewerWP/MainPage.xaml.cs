@@ -38,23 +38,16 @@ namespace TrackViewerWP
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
         }
-        async void MapCurrentLocation()
+        void MapCurrentLocation()
         {
             // Change the state of our buttons.
 
             
             try
             {
-                await SetCurrentLocation();
+                SetCurrentLocation();
 
-                try
-                {
-                    ProxyTracker.GetInstance().Client.StartTrackingCompleted += Client_StartTrackingCompleted;
-                    ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
-                    
-                }
-                catch (Exception ex) { MapCurrentLocation(); }
-
+             
                 // Display the location information in the textboxes.
                 //   LatitudeTextbox.Text = pos.Coordinate.Latitude.ToString();
                 //  LongitudeTextbox.Text = pos.Coordinate.Longitude.ToString();
@@ -97,7 +90,7 @@ namespace TrackViewerWP
         }
 
 
-        async Task SetCurrentLocation()
+        async void SetCurrentLocation()
         {
             // Get the cancellation token.
             _cts = new CancellationTokenSource();
@@ -131,7 +124,17 @@ namespace TrackViewerWP
             }
 
             // Set the map to the given location and zoom level.
-            trvMap.SetView(location, zoomLevel); 
+            trvMap.SetView(location, zoomLevel);
+
+            try
+            {
+                ProxyTracker.GetInstance().Client.StartTrackingCompleted += Client_StartTrackingCompleted;
+                ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
+
+            }
+            catch (Exception ex) { MapCurrentLocation(); }
+
+
         }
 
         private void PostTrackingInfo()
@@ -203,7 +206,7 @@ namespace TrackViewerWP
             trvMap.SetView(location, zoomLevel); 
         }
 
-        private async void btnTrack_Click(object sender, RoutedEventArgs e)
+        private void btnTrack_Click(object sender, RoutedEventArgs e)
         {
             if (btnTrack.Content.Equals("Track now"))
             {
@@ -215,8 +218,7 @@ namespace TrackViewerWP
             {
                 btnTrack.Content = "Track now";
                 txtTrackId.IsEnabled = true;
-                await SetCurrentLocation();
-
+                SetCurrentLocation();
             }
         }
         private void SetMessage(MessageType messageType, String message)
@@ -250,12 +252,11 @@ namespace TrackViewerWP
             timer.Start();
         }
 
-        async void timer_HideMessage(object sender, object e)
+        void timer_HideMessage(object sender, object e)
         {
             txtMessage.Text = "";
             var timer = (DispatcherTimer)sender;
             timer.Stop();
-
         }
 
 

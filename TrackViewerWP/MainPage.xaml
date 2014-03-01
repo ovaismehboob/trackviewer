@@ -63,7 +63,7 @@
                 <ColumnDefinition Width="193*"/>
             </Grid.ColumnDefinitions>
 
-            <Maps:Map x:Name="trvMap" BorderThickness="5" CredentialsProvider="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" ZoomBarVisibility="Visible" HorizontalAlignment="Center" Height="332" Margin="10,10,5,0" VerticalAlignment="Top" Width="441" Grid.ColumnSpan="2"/>
+            <Maps:Map x:Name="trvMap" BorderThickness="5" CredentialsProvider="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" UseOptimizedManipulationRouting="True" AnimationLevel="Full" CopyrightVisibility="Visible" Culture="en-US"  TabNavigation="Cycle"  ZoomBarVisibility="Visible" HorizontalAlignment="Center" Height="332" Margin="10,10,5,0" VerticalAlignment="Top" Width="441" Grid.ColumnSpan="2"/>
 
 
 
@@ -73,11 +73,11 @@
 
         </Grid>
         <StackPanel HorizontalAlignment="Left" Height="184" Margin="20,200,0,0" VerticalAlignment="Top" Width="450">
-            <TextBlock Text="Connecting..."  FontSize="13" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="10,0,10,0"   />
-            <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="10,0,10,0" FontSize="20" />
-            <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,10,0"  />
+            <TextBlock Text="Connecting..."  FontSize="13" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="10,0,20,0"   />
+            <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="10,0,20,0" FontSize="20" />
+            <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,20,0"  />
             <TextBox x:Name="txtTrackId" FontSize="15" />
-            <Button x:Name="btnTrack"  HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" FontSize="13"/>
+            <Button x:Name="btnTrack"  HorizontalAlignment="Center" Content="Track now" Click="btnTrack_Click" FontSize="13"/>
             <TextBlock x:Name="txtMessage" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
         </StackPanel>
 
