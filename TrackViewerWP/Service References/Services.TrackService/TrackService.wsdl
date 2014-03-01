@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TrackService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://127.0.0.1:81/TrackService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://127.0.0.1:81/TrackService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://127.0.0.1:81/TrackService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFTrackServiceWebRole" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITrackService_StartTracking_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartTracking" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_StartTracking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartTrackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_PublishTrackingInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishTrackingInfo" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_PublishTrackingInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishTrackingInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_StopTracking_InputMessage">
+    <wsdl:part name="parameters" element="tns:StopTracking" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_StopTracking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StopTrackingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_GetTrackingInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrackingInfo" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_GetTrackingInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrackingInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_StartTrackingRestful_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartTrackingRestful" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_StartTrackingRestful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartTrackingRestfulResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_PublishTrackingInfoRestful_InputMessage">
+    <wsdl:part name="parameters" element="tns:PublishTrackingInfoRestful" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_PublishTrackingInfoRestful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PublishTrackingInfoRestfulResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_GetTrackingInfoRestful_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrackingInfoRestful" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_GetTrackingInfoRestful_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrackingInfoRestfulResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITrackService">
+    <wsdl:operation name="StartTracking">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/StartTracking" message="tns:ITrackService_StartTracking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/StartTrackingResponse" message="tns:ITrackService_StartTracking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishTrackingInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/PublishTrackingInfo" message="tns:ITrackService_PublishTrackingInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/PublishTrackingInfoResponse" message="tns:ITrackService_PublishTrackingInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StopTracking">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/StopTracking" message="tns:ITrackService_StopTracking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/StopTrackingResponse" message="tns:ITrackService_StopTracking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrackingInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/GetTrackingInfo" message="tns:ITrackService_GetTrackingInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/GetTrackingInfoResponse" message="tns:ITrackService_GetTrackingInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartTrackingRestful">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/StartTrackingRestful" message="tns:ITrackService_StartTrackingRestful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/StartTrackingRestfulResponse" message="tns:ITrackService_StartTrackingRestful_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PublishTrackingInfoRestful">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/PublishTrackingInfoRestful" message="tns:ITrackService_PublishTrackingInfoRestful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/PublishTrackingInfoRestfulResponse" message="tns:ITrackService_PublishTrackingInfoRestful_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrackingInfoRestful">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/GetTrackingInfoRestful" message="tns:ITrackService_GetTrackingInfoRestful_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/GetTrackingInfoRestfulResponse" message="tns:ITrackService_GetTrackingInfoRestful_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITrackService" type="tns:ITrackService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="StartTracking">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/StartTracking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublishTrackingInfo">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/PublishTrackingInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StopTracking">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/StopTracking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrackingInfo">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/GetTrackingInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartTrackingRestful">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/StartTrackingRestful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PublishTrackingInfoRestful">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/PublishTrackingInfoRestful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrackingInfoRestful">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/GetTrackingInfoRestful" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TrackService">
+    <wsdl:port name="BasicHttpBinding_ITrackService" binding="tns:BasicHttpBinding_ITrackService">
+      <soap:address location="http://127.0.0.1:81/TrackService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
