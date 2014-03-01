@@ -35,6 +35,7 @@ namespace TrackViewerWP
             MapCurrentLocation();
             _locationIcon10m = new LocationIcon10m();
             _locationIcon100m = new LocationIcon100m();
+            
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
         }
@@ -79,14 +80,22 @@ namespace TrackViewerWP
         {
 
             long trackNo = (long)e.Result;
-            txtWelcome.Text = "Welcome, you're connected!";
-            txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
+            if (trackNo > 0)
+            {
+                txtWelcome.Text = "Welcome, you're connected!";
+                txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
 
-            ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
+                txtTrackId.Visibility = Visibility.Visible;
+                btnTrack.Visibility = Visibility.Visible;
+                txtEnterUserTrackID.Visibility = Visibility.Visible;
+                chkTracking.Visibility = Visibility.Visible;
+                txtMyTrackId.Visibility = Visibility.Visible;
+                imgLoading.Visibility = Visibility.Collapsed;
+                ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
 
-            PostTrackingInfo();
-            FetchTrackingInfo();
-
+                PostTrackingInfo();
+                FetchTrackingInfo();
+            }
         }
 
 
@@ -130,7 +139,7 @@ namespace TrackViewerWP
             {
                 ProxyTracker.GetInstance().Client.StartTrackingCompleted += Client_StartTrackingCompleted;
                 ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
-
+               
             }
             catch (Exception ex) { MapCurrentLocation(); }
 
@@ -149,13 +158,13 @@ namespace TrackViewerWP
 
         async void timer_Tick(object sender, object e)
         {
-            //if (toggleSwitch.IsOn)
-            //{
+            if(chkTracking.IsChecked==true)
+            {
                 Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
                 System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
                 ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
                 ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
-            //}
+            }
         }
 
 

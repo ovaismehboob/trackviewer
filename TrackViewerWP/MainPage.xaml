@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
-    xmlns:Maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
+    xmlns:Maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"   
+    xmlns:Overlays="clr-namespace:Microsoft.Phone.Controls.Maps.Overlays;assembly=Microsoft.Phone.Controls.Maps"
     x:Class="TrackViewerWP.MainPage"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -57,13 +58,16 @@
 
             Before shipping remove this XAML and the image itself.-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Margin="12,336,10,28" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="263*"/>
-                <ColumnDefinition Width="193*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="26*"/>
+                <ColumnDefinition Width="81*"/>
+                <ColumnDefinition Width="77*"/>
+                <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
 
-            <Maps:Map x:Name="trvMap" BorderThickness="5" CredentialsProvider="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" UseOptimizedManipulationRouting="True" AnimationLevel="Full" CopyrightVisibility="Visible" Culture="en-US"  TabNavigation="Cycle"  ZoomBarVisibility="Visible" HorizontalAlignment="Center" Height="332" Margin="10,10,5,0" VerticalAlignment="Top" Width="441" Grid.ColumnSpan="2"/>
+            <Maps:Map x:Name="trvMap" Mode="Aerial" BorderThickness="5" CredentialsProvider="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" UseOptimizedManipulationRouting="True" AnimationLevel="Full" CopyrightVisibility="Visible" Culture="en-US"  TabNavigation="Cycle"  ZoomBarVisibility="Visible" HorizontalAlignment="Center" Height="391" Margin="0,10,0,0" VerticalAlignment="Top" Width="458" Grid.ColumnSpan="5"/>
 
 
 
@@ -72,14 +76,17 @@
 
 
         </Grid>
-        <StackPanel HorizontalAlignment="Left" Height="184" Margin="20,200,0,0" VerticalAlignment="Top" Width="450">
-            <TextBlock Text="Connecting..."  FontSize="13" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="10,0,20,0"   />
-            <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="10,0,20,0" FontSize="20" />
-            <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,20,0"  />
-            <TextBox x:Name="txtTrackId" FontSize="15" />
-            <Button x:Name="btnTrack"  HorizontalAlignment="Center" Content="Track now" Click="btnTrack_Click" FontSize="13"/>
+        <StackPanel HorizontalAlignment="Left" Height="216" Margin="0,120,0,0" VerticalAlignment="Top" Width="480">
+            <TextBlock Text="Connecting to TrackViewer service, please wait..."  FontSize="15" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="10,5,20,0"   />
+            <TextBlock Text="" Visibility="Collapsed" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="10,0,20,0" FontSize="20" />
+            <TextBlock Visibility="Collapsed" x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,20,0"  />
+            <TextBox Visibility="Collapsed" x:Name="txtTrackId" FontSize="15" Margin="0,0,132,0" Height="66" />
+            <CheckBox Visibility="Collapsed" x:Name="chkTracking" Content="Enable Tracking" FontSize="15" HorizontalAlignment="Left" Height="76" Width="176" Margin="16,0,0,0"/>
+             
             <TextBlock x:Name="txtMessage" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" />
+        <Image Width="130" Height="130" x:Name="imgLoading" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
         </StackPanel>
+        <Button x:Name="btnTrack" Visibility="Collapsed"  HorizontalAlignment="Center" Content="Track now" Click="btnTrack_Click" FontSize="13" Margin="340,190,30,137"/>
 
     </Grid>
 
