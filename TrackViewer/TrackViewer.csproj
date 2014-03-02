@@ -171,6 +171,13 @@
     <PRIResource Include="Strings\en-US\Resources.resw">
       <SubType>Designer</SubType>
     </PRIResource>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-140.png" />
+    <Content Include="Assets\BadgeLogo.scale-180.png" />
+    <Content Include="Assets\loading.png" />
+    <Content Include="Assets\Logo.scale-140.png" />
+    <Content Include="Assets\Logo.scale-180.png" />
+    <Content Include="Assets\Logo.scale-80.png" />
     <Content Include="Assets\trackviewer.png" />
     <Content Include="DataModel\SampleData.json" />
   </ItemGroup>

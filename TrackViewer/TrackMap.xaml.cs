@@ -107,6 +107,7 @@ namespace TrackViewer
             txtTrackId.Visibility = Visibility.Visible;
             txtEnterUserTrackID.Visibility = Visibility.Visible;
             btnTrack.Visibility = Visibility.Visible;
+            imgLoading.Visibility = Visibility.Collapsed;
         }
 
         async Task SetCurrentLocation()
@@ -267,7 +268,7 @@ namespace TrackViewer
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += timer_HideMessage;
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromSeconds(10);
             timer.Start();
         }
 
