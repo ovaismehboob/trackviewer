@@ -180,12 +180,24 @@ namespace TrackViewerWP
         void timer_TickFetch(object sender, object e)
         {
 
+            long trackId = 0;
+             
             if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("Cancel"))
             {
                 ProxyTracker.GetInstance().Client.GetTrackingInfoCompleted += Client_GetTrackingInfoCompleted;
-                ProxyTracker.GetInstance().Client.GetTrackingInfoAsync(Convert.ToInt64(txtTrackId.Text));
+                if (Int64.TryParse(txtTrackId.Text, out trackId))
+                {
+                    ProxyTracker.GetInstance().Client.GetTrackingInfoAsync(Convert.ToInt64(txtTrackId.Text));
+                }
+                else
+                {
+                    SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
+
+                }
+                
 
             }
+
         }
 
         void Client_GetTrackingInfoCompleted(object sender, Services.TrackService.GetTrackingInfoCompletedEventArgs e)
@@ -219,7 +231,7 @@ namespace TrackViewerWP
         {
             if (btnTrack.Content.Equals("Track now"))
             {
-                if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid Track Id"); txtTrackId.Focus(); return; }
+                if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid TrackViewer ID");  return; }
                 btnTrack.Content = "Cancel";
                 txtTrackId.IsEnabled = false;
             }
@@ -257,7 +269,7 @@ namespace TrackViewerWP
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += timer_HideMessage;
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromSeconds(10);
             timer.Start();
         }
 
