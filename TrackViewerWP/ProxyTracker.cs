@@ -52,10 +52,10 @@ namespace TrackViewerWP
 
         public String GetDeviceId()
         {
-            string deviceSerial = string.Empty;
+            byte[] myDeviceID = (byte[])Microsoft.Phone.Info.DeviceExtendedProperties.GetValue("DeviceUniqueId");
 
-            return deviceSerial;
-
+            string deviceIDAsString = Convert.ToBase64String(myDeviceID);
+            return deviceIDAsString;
 
         }
 

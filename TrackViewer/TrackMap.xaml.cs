@@ -236,8 +236,10 @@ namespace TrackViewer
             else { 
                 btnTrack.Content = "Track now";
                 txtTrackId.IsEnabled = true;
+                try { 
                 await SetCurrentLocation();
-
+                }
+                catch {  }
             }
         }
 

@@ -35,7 +35,17 @@ namespace WCFTrackServiceWebRole
 
         public void PublishTrackingInfo(long trackId, TrackLocation location)
         {
-            TrackStorage.userTracks[trackId] = location;
+
+            var enumerator= TrackStorage.userTracks.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                var val = (TrackLocation) enumerator.Value;
+                if (val.TrackNo == trackId) { 
+                    val = location;
+                    break;
+                }
+            }
+            //TrackStorage.userTracks[trackId] = location;\
         }
 
         public long StopTracking(long trackId)
@@ -47,7 +57,15 @@ namespace WCFTrackServiceWebRole
 
         public TrackLocation GetTrackingInfo(long trackId)
         {
-            return ((TrackStorage.userTracks[trackId] == null) ? null : (TrackLocation)TrackStorage.userTracks[trackId]);
+           // return ((TrackStorage.userTracks[trackId] == null) ? null : (TrackLocation)TrackStorage.userTracks[trackId]);
+
+            var enumerator = TrackStorage.userTracks.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                var val = (TrackLocation)enumerator.Value;
+                if (val.TrackNo == trackId)
+                    return val;
+            } return null;
         }
 
 
