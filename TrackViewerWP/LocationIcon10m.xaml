@@ -21,8 +21,8 @@
                 <CompositeTransform ScaleX="-1"/>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <TextBlock  FontSize="8" Height="18" Canvas.Left="9" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Text}" Canvas.Top="5" Width="100" FontWeight="Bold"/>
-        <TextBlock  FontSize="8" Height="18" Canvas.Left="8.769" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Lat}" Canvas.Top="38.107" Width="100.747" RenderTransformOrigin="0.445,2.364" UseLayoutRounding="False" d:LayoutRounding="Auto" FontWeight="Bold"></TextBlock>
-        <TextBlock FontSize="8" Height="18" Canvas.Left="9" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Lon}" Canvas.Top="22" Width="100" RenderTransformOrigin="0.445,2.364" FontWeight="Bold"/>
+        <TextBlock  FontSize="9" Height="18" Canvas.Left="9" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Text}" Canvas.Top="5" Width="100" FontWeight="Bold"/>
+        <TextBlock  FontSize="9" Height="18" Canvas.Left="8.769" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Lat}" Canvas.Top="38.107" Width="100.747" RenderTransformOrigin="0.445,2.364" UseLayoutRounding="False" d:LayoutRounding="Auto" FontWeight="Bold"></TextBlock>
+        <TextBlock FontSize="9" Height="18" Canvas.Left="9" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Lon}" Canvas.Top="22" Width="100" RenderTransformOrigin="0.445,2.364" FontWeight="Bold"/>
     </Canvas>
 </UserControl>

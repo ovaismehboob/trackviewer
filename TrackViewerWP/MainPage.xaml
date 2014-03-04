@@ -73,7 +73,7 @@
             <TextBlock x:Name="txtMessage"  FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="10,0,0,0" />
             <Image Width="130" Height="130" x:Name="imgLoading" Visibility="Visible" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
         </StackPanel>
-        <Button x:Name="btnTrack" Visibility="Collapsed"  HorizontalAlignment="Center" Content="Track now" Click="btnTrack_Click" FontSize="13" Margin="332,267,38,60"/>
+        <Button x:Name="btnTrack" Visibility="Collapsed"  HorizontalAlignment="Center" Height="66" Content="Track now" Click="btnTrack_Click" FontSize="13" Margin="332,267,38,60"/>
         <Image HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="87" Source="/Assets/93-24.png"/>
 
     </Grid>
