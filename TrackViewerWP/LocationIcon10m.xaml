@@ -11,8 +11,18 @@
 
 
     <Canvas>
-        <Ellipse Height="25" Width="25" Fill="#FFF0F0F0" Margin="-12.5,-12.5,0,0"></Ellipse>
-        <Ellipse Height="20" Width="20" Fill="Black" Margin="-10,-10,0,0"></Ellipse>
+        <Ellipse Height="55" Width="55" Fill="Black" Opacity=".35" Margin="-27.5,-27.5,0,0"></Ellipse>
+        <Ellipse Height="50" Width="50" Fill="LightSeaGreen"  Opacity=".65" Margin="-25,-25,0,0"></Ellipse>
+        <Ellipse Height="25" Width="25" Fill="AliceBlue"  Margin="-12.5,-12.5,0,0"></Ellipse>
+        <Ellipse Height="20"  Width="20" Fill="DodgerBlue"  Margin="-10,-10,0,0"></Ellipse>
         <Ellipse Height="10" Width="10" Fill="White" Margin="-5,-5,0,0"></Ellipse>
+        <Rectangle Height="58" Canvas.Left="1" Canvas.Top="1" Width="113" Opacity="0.7" RenderTransformOrigin="0.5,0.5" Fill="#FFCFEBF9"  ScrollViewer.VerticalScrollBarVisibility="Disabled" RadiusX="13" RadiusY="13">
+            <Rectangle.RenderTransform>
+                <CompositeTransform ScaleX="-1"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <TextBlock  FontSize="8" Height="18" Canvas.Left="9" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Text}" Canvas.Top="5" Width="100" FontWeight="Bold"/>
+        <TextBlock  FontSize="8" Height="18" Canvas.Left="8.769" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Lat}" Canvas.Top="38.107" Width="100.747" RenderTransformOrigin="0.445,2.364" UseLayoutRounding="False" d:LayoutRounding="Auto" FontWeight="Bold"></TextBlock>
+        <TextBlock FontSize="8" Height="18" Canvas.Left="9" Foreground="Black" TextWrapping="Wrap" Text="{Binding Path=Lon}" Canvas.Top="22" Width="100" RenderTransformOrigin="0.445,2.364" FontWeight="Bold"/>
     </Canvas>
 </UserControl>

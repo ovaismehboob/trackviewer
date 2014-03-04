@@ -101,6 +101,18 @@ namespace TrackViewerWP
 
         async void SetCurrentLocation()
         {
+
+
+            foreach (var children in trvMap.Children)
+            {
+                if (children.GetType().Name == "LocationIcon100m")
+                {
+                    trvMap.Children.Remove(children);
+                    break;
+                }
+
+            }
+            
             // Get the cancellation token.
             _cts = new CancellationTokenSource();
             token = _cts.Token;
@@ -116,21 +128,17 @@ namespace TrackViewerWP
             double zoomLevel = 13.0f;
 
             //// if we have GPS level accuracy
-            if (pos.Coordinate.Accuracy <= 10)
-            {
-                // Add the 10m icon and zoom closer.
-                trvMap.Children.Add(_locationIcon10m);
-                MapLayer.SetPosition(_locationIcon10m, location);
-                zoomLevel = 15.0f;
-            }
-            // Else if we have Wi-Fi level accuracy.
-            else if (pos.Coordinate.Accuracy <= 100)
-            {
-                // Add the 100m icon and zoom a little closer.
-                trvMap.Children.Add(_locationIcon100m);
-                MapLayer.SetPosition(_locationIcon100m, location);
-                zoomLevel = 14.0f;
-            }
+            Callout callout = new Callout();
+
+            callout.Text = "My Location";
+            callout.Lon = "Lon (λ): " + location.Longitude.ToString();
+            callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+            _locationIcon100m.DataContext = callout;
+            // Add the 100m icon and zoom a little closer.
+            trvMap.Children.Add(_locationIcon100m);
+
+            MapLayer.SetPosition(_locationIcon100m, location);
+            zoomLevel = 17.0f;
 
             // Set the map to the given location and zoom level.
             trvMap.SetView(location, zoomLevel);
@@ -192,7 +200,7 @@ namespace TrackViewerWP
                 else
                 {
                     SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
-
+                    btnTrack_Click(sender, null);
                 }
                 
 
@@ -205,9 +213,23 @@ namespace TrackViewerWP
             var res =e.Result;
             if (res != null)
                 SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
+            else
+            {
+                SetMessage(MessageType.Error, "Couldn't find any location info for specified TrackViewer ID");
+                btnTrack_Click(sender, null);
+            }
         }
         void SetUserTrackCurrentLocation(double latitude, double longitude)
         {
+
+            foreach (var children in trvMap.Children)
+            {
+                if (children.GetType().Name=="LocationIcon10m") {
+                    trvMap.Children.Remove(children);
+                    break;
+                }
+
+            }
             // Get the cancellation token.
             _cts = new CancellationTokenSource();
             token = _cts.Token;
@@ -218,13 +240,20 @@ namespace TrackViewerWP
 
             // Now set the zoom level of the map based on the accuracy of our location data.
             // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
-            double zoomLevel = 20.0f;
+            double zoomLevel = 17.0f;
             LocationIcon10m _locationUserIcon10m = new LocationIcon10m();
+            Callout callout = new Callout();
+
+            callout.Text = "Tracker's Location";
+            callout.Lon = "Lon (λ): " + location.Longitude.ToString();
+            callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+            _locationUserIcon10m.DataContext = callout;
             // Add the 10m icon and zoom closer.
             trvMap.Children.Add(_locationUserIcon10m);
             MapLayer.SetPosition(_locationUserIcon10m, location);
             // Set the map to the given location and zoom level.
             trvMap.SetView(location, zoomLevel); 
+            
         }
 
         private void btnTrack_Click(object sender, RoutedEventArgs e)
@@ -240,6 +269,14 @@ namespace TrackViewerWP
                 btnTrack.Content = "Track now";
                 txtTrackId.IsEnabled = true;
                 SetCurrentLocation();
+                foreach (var children in trvMap.Children)
+                {
+                    if (children.GetType().Name == "LocationIcon10m")
+                    {
+                        trvMap.Children.Remove(children);
+                        break;
+                    }
+                }
             }
         }
         private void SetMessage(MessageType messageType, String message)

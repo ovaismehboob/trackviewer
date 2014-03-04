@@ -11,8 +11,7 @@
     <Grid Background="#FFBBBCC3">
         <TextBlock FontSize="30" HorizontalAlignment="Left" Height="51" Margin="186,109,0,0" TextWrapping="Wrap" Text="TrackViewer" VerticalAlignment="Top" Width="258" Foreground="#FF080808" FontFamily="Eras Light ITC"/>
 
-        <Maps:Map x:Name="trvMap"   MapType="Aerial"  ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True"  Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="600" Margin="483,96,0,0" VerticalAlignment="Top" Width="783" BorderThickness="5">
-        </Maps:Map>
+        <Maps:Map x:Name="trvMap"   MapType="Aerial"  ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True"  Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="600" Margin="483,96,0,0" VerticalAlignment="Top" Width="783" BorderThickness="5"/>
         <TextBlock HorizontalAlignment="Left" Height="60" Margin="102,184,0,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
         <StackPanel HorizontalAlignment="Left" Height="411" Margin="102,249,0,0" VerticalAlignment="Top" Width="339">
             <TextBlock Text="Connecting to TrackViewer service, please wait..."  FontSize="11"  x:Name="txtWelcome" Margin="0,10,0,10"   Foreground="#FF080808" />
@@ -22,8 +21,8 @@
             <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter User TrackViewer ID to track" Margin="0,50,10,10" Foreground="#FF080808" />
             <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Foreground="#FF080808" />
             <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
-            <TextBlock x:Name="txtMessage" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
-            
+            <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
+         
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="82" Margin="101,96,0,0" VerticalAlignment="Top" Width="71" Source="Assets/trackviewer.png"/>
 
