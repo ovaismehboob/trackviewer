@@ -15,6 +15,24 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackViewerWP", "TrackViewerWP\TrackViewerWP.csproj", "{6F70C0B6-FEE7-43BD-B653-F1FCBDFEDE53}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ovaismehboob.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TrackService\\TrackService.ccproj
+		SccProjectName1 = TrackService
+		SccLocalPath1 = TrackService
+		SccProjectUniqueName2 = TrackViewer\\TrackViewer.csproj
+		SccProjectName2 = TrackViewer
+		SccLocalPath2 = TrackViewer
+		SccProjectUniqueName3 = TrackViewerWP\\TrackViewerWP.csproj
+		SccProjectName3 = TrackViewerWP
+		SccLocalPath3 = TrackViewerWP
+		SccProjectUniqueName4 = WCFTrackServiceWebRole\\WCFTrackServiceWebRole.csproj
+		SccProjectName4 = WCFTrackServiceWebRole
+		SccLocalPath4 = WCFTrackServiceWebRole
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
