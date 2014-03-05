@@ -14,25 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFTrackServiceWebRole", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackViewerWP", "TrackViewerWP\TrackViewerWP.csproj", "{6F70C0B6-FEE7-43BD-B653-F1FCBDFEDE53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{14AA8B0C-4A2A-4CC6-995D-319708889027}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://ovaismehboob.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = TrackService\\TrackService.ccproj
-		SccProjectName1 = TrackService
-		SccLocalPath1 = TrackService
-		SccProjectUniqueName2 = TrackViewer\\TrackViewer.csproj
-		SccProjectName2 = TrackViewer
-		SccLocalPath2 = TrackViewer
-		SccProjectUniqueName3 = TrackViewerWP\\TrackViewerWP.csproj
-		SccProjectName3 = TrackViewerWP
-		SccLocalPath3 = TrackViewerWP
-		SccProjectUniqueName4 = WCFTrackServiceWebRole\\WCFTrackServiceWebRole.csproj
-		SccProjectName4 = WCFTrackServiceWebRole
-		SccLocalPath4 = WCFTrackServiceWebRole
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -108,6 +92,16 @@ Global
 		{6F70C0B6-FEE7-43BD-B653-F1FCBDFEDE53}.Release|x86.ActiveCfg = Release|x86
 		{6F70C0B6-FEE7-43BD-B653-F1FCBDFEDE53}.Release|x86.Build.0 = Release|x86
 		{6F70C0B6-FEE7-43BD-B653-F1FCBDFEDE53}.Release|x86.Deploy.0 = Release|x86
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Release|ARM.ActiveCfg = Release|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Release|x64.ActiveCfg = Release|Any CPU
+		{14AA8B0C-4A2A-4CC6-995D-319708889027}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

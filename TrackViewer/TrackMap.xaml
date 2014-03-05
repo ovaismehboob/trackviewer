@@ -22,7 +22,7 @@
             <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Foreground="#FF080808" />
             <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
             <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
-         
+
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="82" Margin="101,96,0,0" VerticalAlignment="Top" Width="71" Source="Assets/trackviewer.png"/>
 

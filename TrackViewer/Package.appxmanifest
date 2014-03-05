@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="9a3cf7e6-c842-4477-b960-4680d9bd0939" Publisher="CN=Ovais" Version="1.0.0.6" />
+  <Identity Name="9a3cf7e6-c842-4477-b960-4680d9bd0939" Publisher="CN=Ovais" Version="1.0.0.7" />
   <Properties>
     <DisplayName>TrackViewer</DisplayName>
     <PublisherDisplayName>Ovais</PublisherDisplayName>
