@@ -27,6 +27,8 @@ namespace TrackViewerWP
         CancellationToken token;
         LocationIcon10m _locationIcon10m;
         LocationIcon100m _locationIcon100m;
+        DispatcherTimer myTimer;
+        DispatcherTimer trackerTimer;
         // Constructor
         public MainPage()
         {
@@ -35,7 +37,8 @@ namespace TrackViewerWP
             MapCurrentLocation();
             _locationIcon10m = new LocationIcon10m();
             _locationIcon100m = new LocationIcon100m();
-            
+            if (myTimer != null) myTimer.Stop();
+            if (trackerTimer != null) trackerTimer.Stop();
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
         }
@@ -157,10 +160,10 @@ namespace TrackViewerWP
         private void PostTrackingInfo()
         {
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += timer_Tick;
-            timer.Interval = TimeSpan.FromSeconds(10);
-            timer.Start();
+            myTimer = new DispatcherTimer();
+            myTimer.Tick += timer_Tick;
+            myTimer.Interval = TimeSpan.FromSeconds(10);
+            myTimer.Start();
 
         }
 
@@ -179,10 +182,10 @@ namespace TrackViewerWP
 
         private void FetchTrackingInfo()
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += timer_TickFetch;
-            timer.Interval = TimeSpan.FromSeconds(10);
-            timer.Start();
+            trackerTimer = new DispatcherTimer();
+            trackerTimer.Tick += timer_TickFetch;
+            trackerTimer.Interval = TimeSpan.FromSeconds(10);
+            trackerTimer.Start();
         }
 
         void timer_TickFetch(object sender, object e)
@@ -235,7 +238,7 @@ namespace TrackViewerWP
             token = _cts.Token;
             // Get the location.
 
-
+            CloseMessage();
             System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(latitude, longitude);
 
             // Now set the zoom level of the map based on the accuracy of our location data.
@@ -263,6 +266,7 @@ namespace TrackViewerWP
                 if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid TrackViewer ID");  return; }
                 btnTrack.Content = "Cancel";
                 txtTrackId.IsEnabled = false;
+                ShowMessage("Searching Tracker's location...");
             }
             else
             {
@@ -316,6 +320,15 @@ namespace TrackViewerWP
             var timer = (DispatcherTimer)sender;
             timer.Stop();
         }
+
+        private void ShowMessage(String message)
+        {
+            txtMessage.Text = message;
+            txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+
+        }
+
+        private void CloseMessage() { txtMessage.Text = ""; }
 
 
         // Sample code for building a localized ApplicationBar

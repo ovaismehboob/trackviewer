@@ -35,12 +35,16 @@ namespace TrackViewer
         LocationIcon10m _locationIcon10m;
         LocationIcon100m _locationIcon100m;
         CancellationToken token;
+        DispatcherTimer myTimer;
+        DispatcherTimer trackerTimer;
         public TrackMap()
         {
             this.InitializeComponent();
             _geolocator = new Geolocator();
             _locationIcon10m = new LocationIcon10m();
             _locationIcon100m = new LocationIcon100m();
+            if (myTimer != null) myTimer.Stop();
+            if (trackerTimer != null) trackerTimer.Stop();
             MapCurrentLocation();
         }
 
@@ -215,6 +219,7 @@ namespace TrackViewer
 
             }
 
+            CloseMessage();
           //  trvMap.Children.Clear();
             // Get the cancellation token.
             _cts = new CancellationTokenSource();
@@ -257,11 +262,10 @@ namespace TrackViewer
         }
         private void PostTrackingInfo()
         {
-
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick += timer_Tick;
-            timer.Interval = TimeSpan.FromSeconds(10);
-            timer.Start();
+            myTimer = new DispatcherTimer();
+            myTimer.Tick += timer_Tick;
+            myTimer.Interval = TimeSpan.FromSeconds(10);
+            myTimer.Start();
             
         }
 
@@ -279,10 +283,11 @@ namespace TrackViewer
 
 
         private void FetchTrackingInfo() {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Tick+=timer_TickFetch;
-            timer.Interval = TimeSpan.FromSeconds(10);
-            timer.Start();
+            trackerTimer = new DispatcherTimer();
+            trackerTimer.Tick += timer_TickFetch;
+            trackerTimer.Interval = TimeSpan.FromSeconds(10);
+            trackerTimer.Start();
+          
         }
 
         async void timer_TickFetch(object sender, object e)
@@ -319,6 +324,8 @@ namespace TrackViewer
                 if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid Track Id"); txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); return; }
                 btnTrack.Content = "Cancel";
                 txtTrackId.IsEnabled = false;
+                ShowMessage("Searching Tracker's location...");
+                
             }
             else { 
                 btnTrack.Content = "Track now";
@@ -337,6 +344,15 @@ namespace TrackViewer
             }
         }
 
+        private void ShowMessage(String message)
+        {
+            txtMessage.Text = message;
+            txtMessage.Foreground = new SolidColorBrush(Colors.DarkGreen);
+
+        }
+
+        private void CloseMessage() { txtMessage.Text = ""; }
+
         private void SetMessage(MessageType messageType, String message)
         {
             txtMessage.Text = message;
@@ -349,7 +365,7 @@ namespace TrackViewer
                     txtMessage.Foreground = new SolidColorBrush(Colors.Red);
                     break;
                 case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.DarkGreen);
                     break;
                 default:
                     break;
