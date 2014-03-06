@@ -66,7 +66,7 @@ namespace TrackViewer
                 try
                 {
                     long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
-                    txtWelcome.Text = "Welcome, you're connected!";
+                    txtWelcome.Text = "Welcome "+ProxyTracker.GetInstance().Name+", you're connected!";
                     txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
                     EnableControls();
                     

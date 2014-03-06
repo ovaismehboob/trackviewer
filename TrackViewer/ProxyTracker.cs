@@ -50,6 +50,8 @@ namespace TrackViewer
             get{ return client;}
         }
 
+        public String Name { set; get; }
+
         public String GetDeviceId()
         {
             string deviceSerial = string.Empty;
