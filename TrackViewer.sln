@@ -13,6 +13,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFTrackServiceWebRole", "WCFTrackServiceWebRole\WCFTrackServiceWebRole.csproj", "{0159865F-646D-4938-80CC-8B5F33E96D03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackViewerWP", "TrackViewerWP\TrackViewerWP.csproj", "{6F70C0B6-FEE7-43BD-B653-F1FCBDFEDE53}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0159865F-646D-4938-80CC-8B5F33E96D03} = {0159865F-646D-4938-80CC-8B5F33E96D03}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{14AA8B0C-4A2A-4CC6-995D-319708889027}"
 EndProject

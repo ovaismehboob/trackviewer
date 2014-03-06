@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="Assets\loading.png" />
     <Content Include="README_FIRST.txt" />
+    <None Include="Service References\Services.TrackService\TrackService1.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -151,22 +152,22 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.TrackService\TrackService.wsdl" />
-    <None Include="Service References\Services.TrackService\TrackService.xsd">
+    <None Include="Service References\Services.TrackService\TrackService1.wsdl" />
+    <None Include="Service References\Services.TrackService\TrackService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.TrackService\TrackService1.xsd">
+    <None Include="Service References\Services.TrackService\TrackService31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Services.TrackService\TrackService2.xsd">
+    <None Include="Service References\Services.TrackService\TrackService32.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Services.TrackService\TrackViewerWP.Services.TrackService.TrackLocation.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <Content Include="Assets\48-48.png" />
     <Content Include="Assets\64-64.png" />
     <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\Services.TrackService\TrackViewerWP.Services.TrackService.TrackLocation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\93-24.png" />
@@ -195,7 +196,6 @@
     </None>
     <None Include="Service References\Services.TrackService\configuration.svcinfo" />
     <None Include="Service References\Services.TrackService\configuration91.svcinfo" />
-    <None Include="Service References\Services.TrackService\TrackService.disco" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

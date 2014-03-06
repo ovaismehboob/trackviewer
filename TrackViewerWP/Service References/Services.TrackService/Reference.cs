@@ -113,6 +113,21 @@ namespace TrackViewerWP.Services.TrackService {
         System.IAsyncResult BeginGetTrackingInfoRestful(string trackId, System.AsyncCallback callback, object asyncState);
         
         TrackViewerWP.Services.TrackService.TrackLocation EndGetTrackingInfoRestful(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ITrackService/IsUserRegistered", ReplyAction="http://tempuri.org/ITrackService/IsUserRegisteredResponse")]
+        System.IAsyncResult BeginIsUserRegistered(string deviceId, System.AsyncCallback callback, object asyncState);
+        
+        bool EndIsUserRegistered(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ITrackService/RegisterUser", ReplyAction="http://tempuri.org/ITrackService/RegisterUserResponse")]
+        System.IAsyncResult BeginRegisterUser(string deviceId, string activationCode, string name, string emailAddress, System.AsyncCallback callback, object asyncState);
+        
+        long EndRegisterUser(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ITrackService/UpdateIsActivated", ReplyAction="http://tempuri.org/ITrackService/UpdateIsActivatedResponse")]
+        System.IAsyncResult BeginUpdateIsActivated(string deviceId, System.AsyncCallback callback, object asyncState);
+        
+        void EndUpdateIsActivated(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -216,6 +231,44 @@ namespace TrackViewerWP.Services.TrackService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class IsUserRegisteredCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public IsUserRegisteredCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class RegisterUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public RegisterUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public long Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((long)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class TrackServiceClient : System.ServiceModel.ClientBase<TrackViewerWP.Services.TrackService.ITrackService>, TrackViewerWP.Services.TrackService.ITrackService {
         
         private BeginOperationDelegate onBeginStartTrackingDelegate;
@@ -259,6 +312,24 @@ namespace TrackViewerWP.Services.TrackService {
         private EndOperationDelegate onEndGetTrackingInfoRestfulDelegate;
         
         private System.Threading.SendOrPostCallback onGetTrackingInfoRestfulCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginIsUserRegisteredDelegate;
+        
+        private EndOperationDelegate onEndIsUserRegisteredDelegate;
+        
+        private System.Threading.SendOrPostCallback onIsUserRegisteredCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginRegisterUserDelegate;
+        
+        private EndOperationDelegate onEndRegisterUserDelegate;
+        
+        private System.Threading.SendOrPostCallback onRegisterUserCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginUpdateIsActivatedDelegate;
+        
+        private EndOperationDelegate onEndUpdateIsActivatedDelegate;
+        
+        private System.Threading.SendOrPostCallback onUpdateIsActivatedCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -326,6 +397,12 @@ namespace TrackViewerWP.Services.TrackService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> PublishTrackingInfoRestfulCompleted;
         
         public event System.EventHandler<GetTrackingInfoRestfulCompletedEventArgs> GetTrackingInfoRestfulCompleted;
+        
+        public event System.EventHandler<IsUserRegisteredCompletedEventArgs> IsUserRegisteredCompleted;
+        
+        public event System.EventHandler<RegisterUserCompletedEventArgs> RegisterUserCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> UpdateIsActivatedCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -665,6 +742,149 @@ namespace TrackViewerWP.Services.TrackService {
                         trackId}, this.onEndGetTrackingInfoRestfulDelegate, this.onGetTrackingInfoRestfulCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TrackViewerWP.Services.TrackService.ITrackService.BeginIsUserRegistered(string deviceId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginIsUserRegistered(deviceId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool TrackViewerWP.Services.TrackService.ITrackService.EndIsUserRegistered(System.IAsyncResult result) {
+            return base.Channel.EndIsUserRegistered(result);
+        }
+        
+        private System.IAsyncResult OnBeginIsUserRegistered(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string deviceId = ((string)(inValues[0]));
+            return ((TrackViewerWP.Services.TrackService.ITrackService)(this)).BeginIsUserRegistered(deviceId, callback, asyncState);
+        }
+        
+        private object[] OnEndIsUserRegistered(System.IAsyncResult result) {
+            bool retVal = ((TrackViewerWP.Services.TrackService.ITrackService)(this)).EndIsUserRegistered(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnIsUserRegisteredCompleted(object state) {
+            if ((this.IsUserRegisteredCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.IsUserRegisteredCompleted(this, new IsUserRegisteredCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void IsUserRegisteredAsync(string deviceId) {
+            this.IsUserRegisteredAsync(deviceId, null);
+        }
+        
+        public void IsUserRegisteredAsync(string deviceId, object userState) {
+            if ((this.onBeginIsUserRegisteredDelegate == null)) {
+                this.onBeginIsUserRegisteredDelegate = new BeginOperationDelegate(this.OnBeginIsUserRegistered);
+            }
+            if ((this.onEndIsUserRegisteredDelegate == null)) {
+                this.onEndIsUserRegisteredDelegate = new EndOperationDelegate(this.OnEndIsUserRegistered);
+            }
+            if ((this.onIsUserRegisteredCompletedDelegate == null)) {
+                this.onIsUserRegisteredCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnIsUserRegisteredCompleted);
+            }
+            base.InvokeAsync(this.onBeginIsUserRegisteredDelegate, new object[] {
+                        deviceId}, this.onEndIsUserRegisteredDelegate, this.onIsUserRegisteredCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TrackViewerWP.Services.TrackService.ITrackService.BeginRegisterUser(string deviceId, string activationCode, string name, string emailAddress, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginRegisterUser(deviceId, activationCode, name, emailAddress, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        long TrackViewerWP.Services.TrackService.ITrackService.EndRegisterUser(System.IAsyncResult result) {
+            return base.Channel.EndRegisterUser(result);
+        }
+        
+        private System.IAsyncResult OnBeginRegisterUser(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string deviceId = ((string)(inValues[0]));
+            string activationCode = ((string)(inValues[1]));
+            string name = ((string)(inValues[2]));
+            string emailAddress = ((string)(inValues[3]));
+            return ((TrackViewerWP.Services.TrackService.ITrackService)(this)).BeginRegisterUser(deviceId, activationCode, name, emailAddress, callback, asyncState);
+        }
+        
+        private object[] OnEndRegisterUser(System.IAsyncResult result) {
+            long retVal = ((TrackViewerWP.Services.TrackService.ITrackService)(this)).EndRegisterUser(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnRegisterUserCompleted(object state) {
+            if ((this.RegisterUserCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.RegisterUserCompleted(this, new RegisterUserCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void RegisterUserAsync(string deviceId, string activationCode, string name, string emailAddress) {
+            this.RegisterUserAsync(deviceId, activationCode, name, emailAddress, null);
+        }
+        
+        public void RegisterUserAsync(string deviceId, string activationCode, string name, string emailAddress, object userState) {
+            if ((this.onBeginRegisterUserDelegate == null)) {
+                this.onBeginRegisterUserDelegate = new BeginOperationDelegate(this.OnBeginRegisterUser);
+            }
+            if ((this.onEndRegisterUserDelegate == null)) {
+                this.onEndRegisterUserDelegate = new EndOperationDelegate(this.OnEndRegisterUser);
+            }
+            if ((this.onRegisterUserCompletedDelegate == null)) {
+                this.onRegisterUserCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnRegisterUserCompleted);
+            }
+            base.InvokeAsync(this.onBeginRegisterUserDelegate, new object[] {
+                        deviceId,
+                        activationCode,
+                        name,
+                        emailAddress}, this.onEndRegisterUserDelegate, this.onRegisterUserCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TrackViewerWP.Services.TrackService.ITrackService.BeginUpdateIsActivated(string deviceId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUpdateIsActivated(deviceId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void TrackViewerWP.Services.TrackService.ITrackService.EndUpdateIsActivated(System.IAsyncResult result) {
+            base.Channel.EndUpdateIsActivated(result);
+        }
+        
+        private System.IAsyncResult OnBeginUpdateIsActivated(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string deviceId = ((string)(inValues[0]));
+            return ((TrackViewerWP.Services.TrackService.ITrackService)(this)).BeginUpdateIsActivated(deviceId, callback, asyncState);
+        }
+        
+        private object[] OnEndUpdateIsActivated(System.IAsyncResult result) {
+            ((TrackViewerWP.Services.TrackService.ITrackService)(this)).EndUpdateIsActivated(result);
+            return null;
+        }
+        
+        private void OnUpdateIsActivatedCompleted(object state) {
+            if ((this.UpdateIsActivatedCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UpdateIsActivatedCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UpdateIsActivatedAsync(string deviceId) {
+            this.UpdateIsActivatedAsync(deviceId, null);
+        }
+        
+        public void UpdateIsActivatedAsync(string deviceId, object userState) {
+            if ((this.onBeginUpdateIsActivatedDelegate == null)) {
+                this.onBeginUpdateIsActivatedDelegate = new BeginOperationDelegate(this.OnBeginUpdateIsActivated);
+            }
+            if ((this.onEndUpdateIsActivatedDelegate == null)) {
+                this.onEndUpdateIsActivatedDelegate = new EndOperationDelegate(this.OnEndUpdateIsActivated);
+            }
+            if ((this.onUpdateIsActivatedCompletedDelegate == null)) {
+                this.onUpdateIsActivatedCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateIsActivatedCompleted);
+            }
+            base.InvokeAsync(this.onBeginUpdateIsActivatedDelegate, new object[] {
+                        deviceId}, this.onEndUpdateIsActivatedDelegate, this.onUpdateIsActivatedCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -835,6 +1055,47 @@ namespace TrackViewerWP.Services.TrackService {
                 object[] _args = new object[0];
                 TrackViewerWP.Services.TrackService.TrackLocation _result = ((TrackViewerWP.Services.TrackService.TrackLocation)(base.EndInvoke("GetTrackingInfoRestful", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginIsUserRegistered(string deviceId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = deviceId;
+                System.IAsyncResult _result = base.BeginInvoke("IsUserRegistered", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndIsUserRegistered(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("IsUserRegistered", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginRegisterUser(string deviceId, string activationCode, string name, string emailAddress, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[4];
+                _args[0] = deviceId;
+                _args[1] = activationCode;
+                _args[2] = name;
+                _args[3] = emailAddress;
+                System.IAsyncResult _result = base.BeginInvoke("RegisterUser", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public long EndRegisterUser(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                long _result = ((long)(base.EndInvoke("RegisterUser", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginUpdateIsActivated(string deviceId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = deviceId;
+                System.IAsyncResult _result = base.BeginInvoke("UpdateIsActivated", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndUpdateIsActivated(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("UpdateIsActivated", _args, result);
             }
         }
     }

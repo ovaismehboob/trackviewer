@@ -99,6 +99,15 @@ namespace TrackViewer.Services.TrackService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/GetTrackingInfoRestful", ReplyAction="http://tempuri.org/ITrackService/GetTrackingInfoRestfulResponse")]
         System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackLocation> GetTrackingInfoRestfulAsync(string trackId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/IsUserRegistered", ReplyAction="http://tempuri.org/ITrackService/IsUserRegisteredResponse")]
+        System.Threading.Tasks.Task<bool> IsUserRegisteredAsync(string deviceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/RegisterUser", ReplyAction="http://tempuri.org/ITrackService/RegisterUserResponse")]
+        System.Threading.Tasks.Task<long> RegisterUserAsync(string deviceId, string activationCode, string name, string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/UpdateIsActivated", ReplyAction="http://tempuri.org/ITrackService/UpdateIsActivatedResponse")]
+        System.Threading.Tasks.Task UpdateIsActivatedAsync(string deviceId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -170,6 +179,18 @@ namespace TrackViewer.Services.TrackService {
         
         public System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackLocation> GetTrackingInfoRestfulAsync(string trackId) {
             return base.Channel.GetTrackingInfoRestfulAsync(trackId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsUserRegisteredAsync(string deviceId) {
+            return base.Channel.IsUserRegisteredAsync(deviceId);
+        }
+        
+        public System.Threading.Tasks.Task<long> RegisterUserAsync(string deviceId, string activationCode, string name, string emailAddress) {
+            return base.Channel.RegisterUserAsync(deviceId, activationCode, name, emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task UpdateIsActivatedAsync(string deviceId) {
+            return base.Channel.UpdateIsActivatedAsync(deviceId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {
