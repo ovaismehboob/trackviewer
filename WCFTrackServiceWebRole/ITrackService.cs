@@ -29,14 +29,28 @@ namespace WCFTrackServiceWebRole
         // TODO: Add your service operations here
 
         //Restful Methods
-        [WebGet(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/starttrackingrestful/{deviceId}/{latitude}/{longitude}/{trackNo}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/starttrackingrestful/{deviceId}/{latitude}/{longitude}/{trackNo}")]
         Int64 StartTrackingRestful(String deviceId, String latitude, String longitude, String trackNo);
 
-        [WebGet(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/publishtrackingrestful/{latitude}/{longitude}/{trackNo} ")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/publishtrackingrestful/{latitude}/{longitude}/{trackNo} ")]
         void PublishTrackingInfoRestful(String latitude, String longitude, String trackNo);
 
-         [WebGet(ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/gettrackinginforestful/{trackId}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/gettrackinginforestful/{trackId}")]
         TrackLocation GetTrackingInfoRestful(String trackId);
+        
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/IsUserRegistered/{deviceId}")]
+        bool IsUserRegistered(String deviceId);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/RegisterUser/{deviceId}/{activationCode}/{name}/{emailAddress}")]
+        Int64 RegisterUser(String deviceId, String activationCode, String name, String emailAddress);
+
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/UpdateIsActivated/{deviceId}")]
+        void UpdateIsActivated(String deviceId);
+        
     }
 
 

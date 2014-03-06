@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DataAccess;
+using DataAccess.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -83,6 +85,49 @@ namespace WCFTrackServiceWebRole
         public TrackLocation GetTrackingInfoRestful(string trackId)
         {
             return GetTrackingInfo(Convert.ToInt64(trackId));
+        }
+
+
+        public bool IsUserRegistered(string deviceId)
+        {
+            try
+            {
+                IRepository repo = new RepositoryInitiator().FactoryMethod();
+                var results = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId).ToList();
+                if (results != null && results.Count() > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception) { return false; }
+        }
+
+        public long RegisterUser(string deviceId, string activationCode, string name, string emailAddress)
+        {
+            try
+            {
+                IRepository repo = new RepositoryInitiator().FactoryMethod();
+                var result = repo.Create<TrackUsers>(new TrackUsers { DeviceId = deviceId, ActivationCode = activationCode, Email = emailAddress, Name = name });
+                if (result != null)
+                    return result.Id;
+                else return -1;
+            }
+            catch (Exception) { return -2; }
+        }
+
+        public void UpdateIsActivated(string deviceId)
+        {
+            try
+            {
+                IRepository repo = new RepositoryInitiator().FactoryMethod();
+                var result = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId).First();
+                if (result != null)
+                {
+                    result.IsActivated = true;
+                    repo.Update<TrackUsers>(result);
+                }
+            }
+            catch (Exception) { }
         }
     }
 }
