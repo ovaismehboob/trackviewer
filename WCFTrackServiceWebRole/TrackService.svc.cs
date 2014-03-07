@@ -102,32 +102,77 @@ namespace WCFTrackServiceWebRole
             catch (Exception) { return false; }
         }
 
+        public bool IsUserActivated(string deviceId)
+        {
+            try
+            {
+                IRepository repo = new RepositoryInitiator().FactoryMethod();
+                var results = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId && i.IsActivated==true).ToList();
+                if (results != null && results.Count() > 0)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception) { return false; }
+
+        }
+
         public long RegisterUser(string deviceId, string activationCode, string name, string emailAddress)
         {
             try
             {
                 IRepository repo = new RepositoryInitiator().FactoryMethod();
+                Random random = new Random();
+                activationCode = random.Next(1000, 9999).ToString();
                 var result = repo.Create<TrackUsers>(new TrackUsers { DeviceId = deviceId, ActivationCode = activationCode, Email = emailAddress, Name = name });
                 if (result != null)
+                {
+                    EmailManager.GetInstance().SendEmail(name, emailAddress, activationCode);
                     return result.Id;
+                }
                 else return -1;
             }
             catch (Exception) { return -2; }
         }
 
-        public void UpdateIsActivated(string deviceId)
+        public bool UpdateIsActivated(string deviceId, string activationCode)
         {
             try
             {
                 IRepository repo = new RepositoryInitiator().FactoryMethod();
-                var result = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId).First();
+                var result = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId && i.ActivationCode==activationCode).First();
                 if (result != null)
                 {
                     result.IsActivated = true;
                     repo.Update<TrackUsers>(result);
+                    EmailManager.GetInstance().DevelopCompletionEmailMessage(result.Name);
+                    return true;
                 }
+                else { return false; }
             }
-            catch (Exception) { }
+            catch (Exception) { return false; }
+        }
+
+
+        public void ResendCode(string deviceId, string emailAddress)
+        {
+            IRepository repo = new RepositoryInitiator().FactoryMethod();
+            var user= repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId).First();
+            user.Email = emailAddress;
+            repo.Update(user);
+            EmailManager.GetInstance().SendEmail(user.Name, user.Email, user.ActivationCode);
+        }
+
+
+        public TrackViewerUser GetUserInfo(string deviceId)
+        {
+            IRepository repo = new RepositoryInitiator().FactoryMethod();
+            var user = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId).First();
+            if (user != null)
+            {
+                return new TrackViewerUser { Name = user.Name, ActivationCode = user.ActivationCode, DeviceId = user.DeviceId, Email = user.Email };
+            }
+            else return new TrackViewerUser();
         }
     }
 }

@@ -150,7 +150,7 @@ namespace TrackViewerWP
             {
                 ProxyTracker.GetInstance().Client.StartTrackingCompleted += Client_StartTrackingCompleted;
                 ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
-               
+
             }
             catch (Exception ex) { MapCurrentLocation(); }
 

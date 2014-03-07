@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
+using TrackViewer.Services.TrackService;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -66,6 +67,8 @@ namespace TrackViewer
                 try
                 {
                     long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
+                    Task<TrackViewerUser> trackUser= ProxyTracker.GetInstance().Client.GetUserInfoAsync(ProxyTracker.GetInstance().GetDeviceId());
+                    ProxyTracker.GetInstance().Name = trackUser.Result.Name;
                     txtWelcome.Text = "Welcome "+ProxyTracker.GetInstance().Name+", you're connected!";
                     txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
                     EnableControls();

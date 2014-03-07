@@ -43,14 +43,25 @@ namespace WCFTrackServiceWebRole
         bool IsUserRegistered(String deviceId);
 
         [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/IsUserActivated/{deviceId}")]
+        bool IsUserActivated(string deviceId);
+
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/RegisterUser/{deviceId}/{activationCode}/{name}/{emailAddress}")]
         Int64 RegisterUser(String deviceId, String activationCode, String name, String emailAddress);
 
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/UpdateIsActivated/{deviceId}")]
-        void UpdateIsActivated(String deviceId);
-        
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/UpdateIsActivated/{deviceId}/{activationCode}")]
+        bool UpdateIsActivated(String deviceId, String activationCode);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/ResendCode/{deviceId}/{emailAddress}")]
+        void ResendCode(String deviceId, String emailAddress);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/GetUserInfo/{deviceId}")]
+        TrackViewerUser GetUserInfo(String deviceId); 
     }
 
 

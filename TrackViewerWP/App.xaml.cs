@@ -100,7 +100,7 @@ namespace TrackViewerWP
                  Debugger.Break();
             }
         }
-
+        
         #region Phone application initialization
 
         // Avoid double-initialization
@@ -125,8 +125,11 @@ namespace TrackViewerWP
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
+
+          
         }
 
+     
         // Do not add any additional code to this method
         private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
         {

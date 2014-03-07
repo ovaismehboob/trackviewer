@@ -55,6 +55,12 @@
   <wsdl:message name="ITrackService_IsUserRegistered_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsUserRegisteredResponse" />
   </wsdl:message>
+  <wsdl:message name="ITrackService_IsUserActivated_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserActivated" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_IsUserActivated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserActivatedResponse" />
+  </wsdl:message>
   <wsdl:message name="ITrackService_RegisterUser_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterUser" />
   </wsdl:message>
@@ -66,6 +72,18 @@
   </wsdl:message>
   <wsdl:message name="ITrackService_UpdateIsActivated_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateIsActivatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_ResendCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResendCode" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_ResendCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResendCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
   </wsdl:message>
   <wsdl:portType name="ITrackService">
     <wsdl:operation name="StartTracking">
@@ -100,6 +118,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/IsUserRegistered" message="tns:ITrackService_IsUserRegistered_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/IsUserRegisteredResponse" message="tns:ITrackService_IsUserRegistered_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsUserActivated">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/IsUserActivated" message="tns:ITrackService_IsUserActivated_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/IsUserActivatedResponse" message="tns:ITrackService_IsUserActivated_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/RegisterUser" message="tns:ITrackService_RegisterUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/RegisterUserResponse" message="tns:ITrackService_RegisterUser_OutputMessage" />
@@ -107,6 +129,14 @@
     <wsdl:operation name="UpdateIsActivated">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/UpdateIsActivated" message="tns:ITrackService_UpdateIsActivated_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/UpdateIsActivatedResponse" message="tns:ITrackService_UpdateIsActivated_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResendCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/ResendCode" message="tns:ITrackService_ResendCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/ResendCodeResponse" message="tns:ITrackService_ResendCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/GetUserInfo" message="tns:ITrackService_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/GetUserInfoResponse" message="tns:ITrackService_GetUserInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITrackService" type="tns:ITrackService">
@@ -183,6 +213,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsUserActivated">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/IsUserActivated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RegisterUser">
       <soap:operation soapAction="http://tempuri.org/ITrackService/RegisterUser" style="document" />
       <wsdl:input>
@@ -194,6 +233,24 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateIsActivated">
       <soap:operation soapAction="http://tempuri.org/ITrackService/UpdateIsActivated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResendCode">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/ResendCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/GetUserInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

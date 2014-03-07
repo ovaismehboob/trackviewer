@@ -15,8 +15,8 @@ namespace TrackViewerWP
         
         private ProxyTracker()
         {
-
-            System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress("http://trackviewerservice.cloudapp.net/TrackService.svc");// new System.ServiceModel.EndpointAddress("http://127.0.0.1:81/TrackService.svc");
+            
+            System.ServiceModel.EndpointAddress address = new System.ServiceModel.EndpointAddress("http://trackviewerservice.cloudapp.net/TrackService.svc");//new System.ServiceModel.EndpointAddress("http://127.0.0.1:81/TrackService.svc");
             System.ServiceModel.BasicHttpBinding binding =new System.ServiceModel.BasicHttpBinding(System.ServiceModel.BasicHttpSecurityMode.None);
 
             client = new Services.TrackService.TrackServiceClient(binding, address);

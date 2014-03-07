@@ -75,6 +75,81 @@ namespace TrackViewer.Services.TrackService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TrackViewerUser", Namespace="http://schemas.datacontract.org/2004/07/WCFTrackServiceWebRole")]
+    public partial class TrackViewerUser : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string ActivationCodeField;
+        
+        private string DeviceIdField;
+        
+        private string EmailField;
+        
+        private string NameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ActivationCode {
+            get {
+                return this.ActivationCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ActivationCodeField, value) != true)) {
+                    this.ActivationCodeField = value;
+                    this.RaisePropertyChanged("ActivationCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeviceId {
+            get {
+                return this.DeviceIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceIdField, value) != true)) {
+                    this.DeviceIdField = value;
+                    this.RaisePropertyChanged("DeviceId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Services.TrackService.ITrackService")]
     public interface ITrackService {
@@ -103,11 +178,20 @@ namespace TrackViewer.Services.TrackService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/IsUserRegistered", ReplyAction="http://tempuri.org/ITrackService/IsUserRegisteredResponse")]
         System.Threading.Tasks.Task<bool> IsUserRegisteredAsync(string deviceId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/IsUserActivated", ReplyAction="http://tempuri.org/ITrackService/IsUserActivatedResponse")]
+        System.Threading.Tasks.Task<bool> IsUserActivatedAsync(string deviceId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/RegisterUser", ReplyAction="http://tempuri.org/ITrackService/RegisterUserResponse")]
         System.Threading.Tasks.Task<long> RegisterUserAsync(string deviceId, string activationCode, string name, string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/UpdateIsActivated", ReplyAction="http://tempuri.org/ITrackService/UpdateIsActivatedResponse")]
-        System.Threading.Tasks.Task UpdateIsActivatedAsync(string deviceId);
+        System.Threading.Tasks.Task<bool> UpdateIsActivatedAsync(string deviceId, string activationCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/ResendCode", ReplyAction="http://tempuri.org/ITrackService/ResendCodeResponse")]
+        System.Threading.Tasks.Task ResendCodeAsync(string deviceId, string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/GetUserInfo", ReplyAction="http://tempuri.org/ITrackService/GetUserInfoResponse")]
+        System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackViewerUser> GetUserInfoAsync(string deviceId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -185,12 +269,24 @@ namespace TrackViewer.Services.TrackService {
             return base.Channel.IsUserRegisteredAsync(deviceId);
         }
         
+        public System.Threading.Tasks.Task<bool> IsUserActivatedAsync(string deviceId) {
+            return base.Channel.IsUserActivatedAsync(deviceId);
+        }
+        
         public System.Threading.Tasks.Task<long> RegisterUserAsync(string deviceId, string activationCode, string name, string emailAddress) {
             return base.Channel.RegisterUserAsync(deviceId, activationCode, name, emailAddress);
         }
         
-        public System.Threading.Tasks.Task UpdateIsActivatedAsync(string deviceId) {
-            return base.Channel.UpdateIsActivatedAsync(deviceId);
+        public System.Threading.Tasks.Task<bool> UpdateIsActivatedAsync(string deviceId, string activationCode) {
+            return base.Channel.UpdateIsActivatedAsync(deviceId, activationCode);
+        }
+        
+        public System.Threading.Tasks.Task ResendCodeAsync(string deviceId, string emailAddress) {
+            return base.Channel.ResendCodeAsync(deviceId, emailAddress);
+        }
+        
+        public System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackViewerUser> GetUserInfoAsync(string deviceId) {
+            return base.Channel.GetUserInfoAsync(deviceId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

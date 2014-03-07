@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureLocalStorageTraceListener.cs" />
+    <Compile Include="EmailManager.cs" />
     <Compile Include="TrackLocation.cs" />
     <Compile Include="TrackService.svc.cs">
       <DependentUpon>TrackService.svc</DependentUpon>
@@ -103,6 +104,7 @@
     <Compile Include="ITrackService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrackStorage.cs" />
+    <Compile Include="TrackViewerUser.cs" />
     <Compile Include="WebRole.cs" />
   </ItemGroup>
   <ItemGroup>

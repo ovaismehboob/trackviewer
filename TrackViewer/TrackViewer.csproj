@@ -141,6 +141,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TrackMap.xaml.cs">
       <DependentUpon>TrackMap.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\Services.TrackService\TrackViewer.Services.TrackService.TrackLocation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Services.TrackService\TrackViewer.Services.TrackService.TrackViewerUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="TrackViewer_TemporaryKey.pfx" />
@@ -209,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Registration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Splash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

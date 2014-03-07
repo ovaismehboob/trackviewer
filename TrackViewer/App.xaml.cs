@@ -88,15 +88,8 @@ namespace TrackViewer
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                try
-                {
-                    var result = await ProxyTracker.GetInstance().Client.IsUserRegisteredAsync(ProxyTracker.GetInstance().GetDeviceId().ToString());
-                    if (result == true)
-                        rootFrame.Navigate(typeof(TrackMap), e.Arguments);
-                    else
-                        rootFrame.Navigate(typeof(Registration), e.Arguments);
-                }
-                catch (Exception) { }
+
+                rootFrame.Navigate(typeof(Splash), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();

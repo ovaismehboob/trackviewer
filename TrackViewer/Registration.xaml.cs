@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using TrackViewer.Services.TrackService;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -24,27 +25,101 @@ namespace TrackViewer
     /// </summary>
     public sealed partial class Registration : Page
     {
+        String deviceId = "";
         public Registration()
         {
             this.InitializeComponent();
+            deviceId = ProxyTracker.GetInstance().GetDeviceId().ToString();
+            CheckIfUserActivated();
+            
         }
 
-        private void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
+        async void CheckIfUserActivated()
         {
-            if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
+
+
+            var registrationStatus=await ProxyTracker.GetInstance().Client.IsUserRegisteredAsync(deviceId);
+            if (registrationStatus == true)
             {
-                Task<long> result=ProxyTracker.GetInstance().Client.RegisterUserAsync(ProxyTracker.GetInstance().GetDeviceId(), "", txtName.Text.Trim(), txtEmailAddress.Text.Trim());
-                if(result.Result>0){
-                    this.Frame.Navigate(typeof(TrackMap));
+                var activationStatus = await ProxyTracker.GetInstance().Client.IsUserActivatedAsync(deviceId);
+                if (activationStatus == false)
+                {
+                    txtName.IsEnabled = false;
+                   // txtEmailAddress.IsEnabled = false;
+                    btnSendActivation.Content = "Resend Code";
+                   // txtActivationCode.IsEnabled = true;
+                    btnCompleteRegistration.IsEnabled = true;
+
+                    Task<TrackViewerUser> user = ProxyTracker.GetInstance().Client.GetUserInfoAsync(deviceId);
+                    txtName.Text = user.Result.Name;
+                    txtEmailAddress.Text = user.Result.Email;
+                }
+            }
+        }
+
+        private async void btnSendCompleteRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (txtActivationCode.Text.Trim() != "")
+                {
+                    var result=await ProxyTracker.GetInstance().Client.UpdateIsActivatedAsync(deviceId, txtActivationCode.Text.Trim());
+                    if (result == true) { 
+                        SetMessage(MessageType.Information, "Thank you for completing your registration");
+                        this.Frame.Navigate(typeof(TrackMap));
+                    }
+                    else
+                    {
+                        SetMessage(MessageType.Error, "Please enter valid activation code");
+                    }
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Some error occured, please try again later");
+                    SetMessage(MessageType.Error, "Please enter valid activation code");
+                }
+            }
+            catch (Exception)
+            {
+                SetMessage(MessageType.Error, "Some error occured, please check your internet connection or try again later");
+            }
+        }
+
+
+        private async void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (btnSendActivation.Content.ToString().Equals("Register"))
+            {
+                if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
+                {
+                    Task<long> result = ProxyTracker.GetInstance().Client.RegisterUserAsync(ProxyTracker.GetInstance().GetDeviceId(), "", txtName.Text.Trim(), txtEmailAddress.Text.Trim());
+                    if (result.Result > 0)
+                    {
+                        SetMessage(MessageType.Information,"Thankyou for registering, your activation code has been sent to your email address");
+                        txtName.IsEnabled = false;
+                        btnSendActivation.Content = "Resend Code";
+                        btnCompleteRegistration.IsEnabled = true;
+                    }
+                    else
+                    {
+                        SetMessage(MessageType.Error, "Some error occured, please try again later");
+                    }
+                }
+                else
+                {
+                    SetMessage(MessageType.Error, "Name and Email Address cannot be empty, please enter correct information");
                 }
             }
             else
             {
-                SetMessage(MessageType.Error, "Name and Email Address cannot be empty, please enter correct information");
+
+                try
+                {
+                    await ProxyTracker.GetInstance().Client.ResendCodeAsync(deviceId, txtEmailAddress.Text.Trim());
+                    SetMessage(MessageType.Information, "Activation code has been sent to your email address");
+                }
+                catch (Exception ex) {
+                    SetMessage(MessageType.Error, "Some error occured, please try again later");
+                }
             }
         }
 
