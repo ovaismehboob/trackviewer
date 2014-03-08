@@ -145,7 +145,7 @@ namespace WCFTrackServiceWebRole
                 {
                     result.IsActivated = true;
                     repo.Update<TrackUsers>(result);
-                    EmailManager.GetInstance().DevelopCompletionEmailMessage(result.Name);
+                    EmailManager.GetInstance().SendCompletionEmail(result.Name,result.Email);
                     return true;
                 }
                 else { return false; }

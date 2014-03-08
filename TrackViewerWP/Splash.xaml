@@ -58,7 +58,8 @@
 
         <StackPanel HorizontalAlignment="Left" Margin="0,120,0,36" Width="480">
             <TextBlock FontSize="17" HorizontalAlignment="Center" Height="127" Margin="18,50,18,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="444"/>
-            <TextBlock x:Name="txtMessage" FontSize="17" Foreground="Yellow" Text="Checking account status, please wait..." Margin="18,50,18,0" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock x:Name="txtMessage" FontSize="17" Foreground="White" Text="Checking account status, please wait..." Margin="18,50,18,0" HorizontalAlignment="Center"></TextBlock>
+            <Button x:Name="btnRetry" Visibility="Collapsed" Content="Retry" Click="btnRetry_Click" ></Button>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="87" Source="/Assets/93-24.png"/>
 

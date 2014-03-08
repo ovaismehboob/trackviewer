@@ -31,6 +31,8 @@ namespace TrackViewerWP
         }
 
 
+        public String Name { set; get; }
+
         public long MyTrackId
         {
 

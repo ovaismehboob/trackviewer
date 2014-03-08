@@ -9,9 +9,9 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://trackviewerservice.cloudapp.net/TrackService.svc"
-                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ITrackService"
-                contract="Services.TrackService.ITrackService" name="BasicHttpBinding_ITrackService" />
+            <endpoint address="http://127.0.0.1:81/TrackService.svc" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_ITrackService" contract="Services.TrackService.ITrackService"
+                name="BasicHttpBinding_ITrackService" />
         </client>
     </system.serviceModel>
 </configuration>

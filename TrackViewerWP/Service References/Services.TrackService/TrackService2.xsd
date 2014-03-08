@@ -8,4 +8,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TrackLocation" nillable="true" type="tns:TrackLocation" />
+  <xs:complexType name="TrackViewerUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActivationCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TrackViewerUser" nillable="true" type="tns:TrackViewerUser" />
 </xs:schema>

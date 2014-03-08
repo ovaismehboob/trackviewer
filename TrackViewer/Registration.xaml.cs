@@ -36,24 +36,31 @@ namespace TrackViewer
 
         async void CheckIfUserActivated()
         {
-
-
-            var registrationStatus=await ProxyTracker.GetInstance().Client.IsUserRegisteredAsync(deviceId);
-            if (registrationStatus == true)
+            try
             {
-                var activationStatus = await ProxyTracker.GetInstance().Client.IsUserActivatedAsync(deviceId);
-                if (activationStatus == false)
-                {
-                    txtName.IsEnabled = false;
-                   // txtEmailAddress.IsEnabled = false;
-                    btnSendActivation.Content = "Resend Code";
-                   // txtActivationCode.IsEnabled = true;
-                    btnCompleteRegistration.IsEnabled = true;
 
-                    Task<TrackViewerUser> user = ProxyTracker.GetInstance().Client.GetUserInfoAsync(deviceId);
-                    txtName.Text = user.Result.Name;
-                    txtEmailAddress.Text = user.Result.Email;
+                var registrationStatus = await ProxyTracker.GetInstance().Client.IsUserRegisteredAsync(deviceId);
+                if (registrationStatus == true)
+                {
+                    var activationStatus = await ProxyTracker.GetInstance().Client.IsUserActivatedAsync(deviceId);
+                    if (activationStatus == false)
+                    {
+                        txtName.IsEnabled = false;
+                        // txtEmailAddress.IsEnabled = false;
+                        btnSendActivation.Content = "Resend Code";
+                        // txtActivationCode.IsEnabled = true;
+                        btnCompleteRegistration.IsEnabled = true;
+
+                        Task<TrackViewerUser> user = ProxyTracker.GetInstance().Client.GetUserInfoAsync(deviceId);
+                        txtName.Text = user.Result.Name;
+                        txtEmailAddress.Text = user.Result.Email;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                SetMessage(MessageType.Warning, "Some error occured in connectivity, trying again...");
+                CheckIfUserActivated();
             }
         }
 
@@ -63,6 +70,8 @@ namespace TrackViewer
             {
                 if (txtActivationCode.Text.Trim() != "")
                 {
+                    txtMessage.Text = "Finalizing Registration process...";
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     var result=await ProxyTracker.GetInstance().Client.UpdateIsActivatedAsync(deviceId, txtActivationCode.Text.Trim());
                     if (result == true) { 
                         SetMessage(MessageType.Information, "Thank you for completing your registration");
@@ -91,6 +100,8 @@ namespace TrackViewer
             {
                 if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
                 {
+                    txtMessage.Text = "Registering...";
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     Task<long> result = ProxyTracker.GetInstance().Client.RegisterUserAsync(ProxyTracker.GetInstance().GetDeviceId(), "", txtName.Text.Trim(), txtEmailAddress.Text.Trim());
                     if (result.Result > 0)
                     {
@@ -114,6 +125,8 @@ namespace TrackViewer
 
                 try
                 {
+                    txtMessage.Text = "Resending activation code...";
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     await ProxyTracker.GetInstance().Client.ResendCodeAsync(deviceId, txtEmailAddress.Text.Trim());
                     SetMessage(MessageType.Information, "Activation code has been sent to your email address");
                 }

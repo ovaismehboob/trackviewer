@@ -57,17 +57,18 @@
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
 
         <StackPanel HorizontalAlignment="Left" Margin="0,120,0,36" Width="480">
-            <TextBlock x:Name="txtNewUserRegistration" FontSize="23" FontWeight="SemiBold" Visibility="Visible"  Text="New User Registration" Margin="10,50,10,10" ></TextBlock>
-            <TextBlock x:Name="txtEnterName" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Name" Margin="10,35,10,5" ></TextBlock>
-            <TextBox x:Name="txtName" FontSize="15" Visibility="Visible" Margin="0,5,10,5"></TextBox>
-            <TextBlock x:Name="txtEnterEmailAddress" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Email Address" Margin="10,5,10,5"  />
-            <TextBox x:Name="txtEmailAddress" FontSize="15" Visibility="Visible" Margin="0,5,10,5" />
-            <TextBlock x:Name="txtEnterActivationCode" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter Activation Code" Margin="10,5,10,5" />
-            <TextBox x:Name="txtActivationCode" FontSize="15" Visibility="Collapsed"/>
-            <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Center" Content="Complete Registration!"/>
-            <Button x:Name="btnSendActivation" Visibility="Visible" HorizontalAlignment="Center" Content="Register" Click="btnSendActivation_Click" Margin="10,5,10,5" />
-            <TextBlock x:Name="txtMessage" Text="" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
-
+            <TextBlock x:Name="txtNewUserRegistration" FontSize="23" FontWeight="SemiBold" Visibility="Visible"  Text="New User Registration" Margin="20,50,10,10" />
+            <TextBlock FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="For each device there is a separate registration process, Please fill following fields and complete the registration process to proceed" TextWrapping="Wrap" Margin="20,0,10,20" />
+            <TextBlock x:Name="txtEnterName" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Name" Margin="20,10,20,0" />
+            <TextBox x:Name="txtName" FontSize="15" Visibility="Visible" Margin="10,0,10,0" Foreground="#FF080808" />
+            <TextBlock x:Name="txtEnterEmailAddress" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Email Address" Margin="20,10,20,0" />
+            <TextBox x:Name="txtEmailAddress" FontSize="15" Visibility="Visible" Margin="10,0,10,0" Foreground="#FF080808" />
+            <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Center" Content="Complete Registration!" Foreground="#FF080808" Background="#FFC9C9C9" />
+            <Button x:Name="btnSendActivation" Visibility="Visible" HorizontalAlignment="Center" Content="Register" Margin="0,0,0,0"  Click="btnSendActivation_Click_1" />
+            <TextBlock x:Name="txtEnterActivationCode"  FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Activation Code" Margin="20,10,20,0"/>
+            <TextBox x:Name="txtActivationCode" Margin="10,0,10,0" FontSize="15" Visibility="Visible" IsEnabled="True" Foreground="#FF080808" />
+            <Button x:Name="btnCompleteRegistration" Visibility="Visible"  IsEnabled="False" HorizontalAlignment="Center" Content="Complete Registration!" Margin="0,0,0,0" Click="btnSendCompleteRegistration_Click" />
+            <TextBlock x:Name="txtMessage" Text="" FontSize="15" TextWrapping="Wrap" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="10,10,10,10" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="87" Source="/Assets/93-24.png"/>
 

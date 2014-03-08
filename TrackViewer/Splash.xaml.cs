@@ -49,7 +49,11 @@ namespace TrackViewer
                 else
                     this.Frame.Navigate(typeof(Registration));
             }
-            catch (Exception ex) { SetMessage(MessageType.Error,"Some error occured, please check your internet connection or try again later");}
+            catch (Exception ex) {
+                
+                SetMessage(MessageType.Error,"Some error occured, please check your internet connection or try again later");
+                btnRetry.Visibility = Visibility.Visible;
+            }
         }
 
         private void SetMessage(MessageType messageType, String message)
@@ -89,6 +93,15 @@ namespace TrackViewer
             var timer = (DispatcherTimer)sender;
             timer.Stop();
 
+        }
+
+        private void btnRetry_Click(object sender, RoutedEventArgs e)
+        {
+             CheckUserAccountStatus();
+             txtMessage.Text = "Checking account status, please wait...";
+             txtMessage.Foreground = new SolidColorBrush(Colors.Black);
+             btnRetry.Visibility = Visibility.Collapsed;
+                 
         }
     }
 }

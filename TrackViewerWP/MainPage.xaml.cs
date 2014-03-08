@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows.Media;
 using Microsoft.Phone.Controls.Maps;
+using TrackViewerWP.Services.TrackService;
 
 namespace TrackViewerWP
 {
@@ -85,7 +86,8 @@ namespace TrackViewerWP
             long trackNo = (long)e.Result;
             if (trackNo > 0)
             {
-                txtWelcome.Text = "Welcome, you're connected!";
+                ProxyTracker.GetInstance().Client.GetUserInfoCompleted += Client_GetUserInfoCompleted;
+                ProxyTracker.GetInstance().Client.GetUserInfoAsync(ProxyTracker.GetInstance().GetDeviceId());
                 txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
 
                 txtTrackId.Visibility = Visibility.Visible;
@@ -101,6 +103,15 @@ namespace TrackViewerWP
             }
         }
 
+        void Client_GetUserInfoCompleted(object sender, GetUserInfoCompletedEventArgs e)
+        {
+            ProxyTracker.GetInstance().Name = e.Result.Name;
+
+            txtWelcome.Text = "Welcome "+e.Result.Name+", you're connected!";
+        
+        
+        }
+
 
         async void SetCurrentLocation()
         {
@@ -108,6 +119,7 @@ namespace TrackViewerWP
 
             foreach (var children in trvMap.Children)
             {
+
                 if (children.GetType().Name == "LocationIcon100m")
                 {
                     trvMap.Children.Remove(children);
@@ -175,6 +187,11 @@ namespace TrackViewerWP
                 System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
                 ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
                 ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
+            }
+
+            if (!btnTrack.Content.ToString().Equals("Cancel"))
+            {
+                SetCurrentLocation();
             }
         }
 

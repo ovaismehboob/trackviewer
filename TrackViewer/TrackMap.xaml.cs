@@ -281,6 +281,11 @@ namespace TrackViewer
                 ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
                 await ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
             }
+
+            if (!btnTrack.Content.ToString().Equals("Cancel"))
+            {
+                await SetCurrentLocation();
+            }
         }
 
 

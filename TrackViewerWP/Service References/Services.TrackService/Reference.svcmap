@@ -20,14 +20,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://trackviewerservice.cloudapp.net/TrackService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://127.0.0.1:81/TrackService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TrackService3.xsd" MetadataType="Schema" ID="40253954-d02c-4d0d-bd24-62159c5bc2b8" SourceId="1" SourceUrl="http://trackviewerservice.cloudapp.net/TrackService.svc?xsd=xsd0" />
-    <MetadataFile FileName="TrackService1.wsdl" MetadataType="Wsdl" ID="9a4f45ff-b60f-4d78-bc09-f4b60e8a521a" SourceId="1" SourceUrl="http://trackviewerservice.cloudapp.net/TrackService.svc?wsdl" />
-    <MetadataFile FileName="TrackService1.disco" MetadataType="Disco" ID="71e2c235-764a-4e21-a193-9e5875c8ef58" SourceId="1" SourceUrl="http://trackviewerservice.cloudapp.net/TrackService.svc?disco" />
-    <MetadataFile FileName="TrackService31.xsd" MetadataType="Schema" ID="4257af76-6876-4299-b83b-825f8e392bea" SourceId="1" SourceUrl="http://trackviewerservice.cloudapp.net/TrackService.svc?xsd=xsd2" />
-    <MetadataFile FileName="TrackService32.xsd" MetadataType="Schema" ID="1162eee5-d2f0-4774-a313-64b0562f26a1" SourceId="1" SourceUrl="http://trackviewerservice.cloudapp.net/TrackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TrackService.xsd" MetadataType="Schema" ID="b0939f2e-aa85-401b-a3f8-7f01298f28a8" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TrackService1.xsd" MetadataType="Schema" ID="89681019-2bd0-4763-91f7-a09e0403513c" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TrackService.wsdl" MetadataType="Wsdl" ID="2ec18d39-a895-4833-a264-25158db1163c" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?wsdl" />
+    <MetadataFile FileName="TrackService.disco" MetadataType="Disco" ID="ba47cbfd-5db2-41a3-9803-9616f4a47bb3" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?disco" />
+    <MetadataFile FileName="TrackService2.xsd" MetadataType="Schema" ID="0703c3ed-cb76-409f-96a1-638489eddcf0" SourceId="1" SourceUrl="http://127.0.0.1:81/TrackService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
