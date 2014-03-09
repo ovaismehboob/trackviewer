@@ -192,6 +192,9 @@ namespace TrackViewer.Services.TrackService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/GetUserInfo", ReplyAction="http://tempuri.org/ITrackService/GetUserInfoResponse")]
         System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackViewerUser> GetUserInfoAsync(string deviceId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrackService/DeactivateUserAccount", ReplyAction="http://tempuri.org/ITrackService/DeactivateUserAccountResponse")]
+        System.Threading.Tasks.Task DeactivateUserAccountAsync(string deviceId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -287,6 +290,10 @@ namespace TrackViewer.Services.TrackService {
         
         public System.Threading.Tasks.Task<TrackViewer.Services.TrackService.TrackViewerUser> GetUserInfoAsync(string deviceId) {
             return base.Channel.GetUserInfoAsync(deviceId);
+        }
+        
+        public System.Threading.Tasks.Task DeactivateUserAccountAsync(string deviceId) {
+            return base.Channel.DeactivateUserAccountAsync(deviceId);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

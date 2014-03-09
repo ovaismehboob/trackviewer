@@ -85,6 +85,12 @@
   <wsdl:message name="ITrackService_GetUserInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="ITrackService_DeactivateUserAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateUserAccount" />
+  </wsdl:message>
+  <wsdl:message name="ITrackService_DeactivateUserAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateUserAccountResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITrackService">
     <wsdl:operation name="StartTracking">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/StartTracking" message="tns:ITrackService_StartTracking_InputMessage" />
@@ -137,6 +143,10 @@
     <wsdl:operation name="GetUserInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/GetUserInfo" message="tns:ITrackService_GetUserInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/GetUserInfoResponse" message="tns:ITrackService_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateUserAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITrackService/DeactivateUserAccount" message="tns:ITrackService_DeactivateUserAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITrackService/DeactivateUserAccountResponse" message="tns:ITrackService_DeactivateUserAccount_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITrackService" type="tns:ITrackService">
@@ -251,6 +261,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserInfo">
       <soap:operation soapAction="http://tempuri.org/ITrackService/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateUserAccount">
+      <soap:operation soapAction="http://tempuri.org/ITrackService/DeactivateUserAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

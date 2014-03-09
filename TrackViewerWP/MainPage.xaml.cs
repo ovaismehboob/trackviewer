@@ -347,6 +347,28 @@ namespace TrackViewerWP
 
         private void CloseMessage() { txtMessage.Text = ""; }
 
+        private void ApplicationBarMenuItemPrivacyPolicy_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("We can store any information you enter or provide to us in any other way. The types of information collected may include your name, email address, device Id and the track information. As the application is network-capable and a real-time in nature, we uses to push and pull data to/from our service.", "Privacy Policy", MessageBoxButton.OK);
+        }
+
+        private void ApplicationBarMenuItemDeactivateAccount_Click(object sender, EventArgs e)
+        {
+
+            MessageBoxResult result=MessageBox.Show("Are you sure to deactivate your account", "Confirmation", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                ProxyTracker.GetInstance().Client.DeactivateUserAccountCompleted += Client_DeactivateUserAccountCompleted;
+                ProxyTracker.GetInstance().Client.DeactivateUserAccountAsync(ProxyTracker.GetInstance().GetDeviceId());
+            }
+         }
+
+        void Client_DeactivateUserAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            MessageBox.Show("Account has been deactivated successfully");
+            this.NavigationService.Navigate(new Uri("/Splash", UriKind.Relative));
+        }
+
 
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()

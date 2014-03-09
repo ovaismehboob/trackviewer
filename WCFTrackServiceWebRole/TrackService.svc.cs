@@ -174,5 +174,16 @@ namespace WCFTrackServiceWebRole
             }
             else return new TrackViewerUser();
         }
+
+
+        public void DeactivateUserAccount(string deviceId)
+        {
+            IRepository repo = new RepositoryInitiator().FactoryMethod();
+            var user = repo.All<TrackUsers>().Where(i => i.DeviceId == deviceId).First();
+            if (user != null)
+            {
+                repo.Delete<TrackUsers>(user);
+            }
+        }
     }
 }

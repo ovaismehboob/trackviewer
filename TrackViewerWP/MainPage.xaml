@@ -21,7 +21,16 @@
             <GradientStop Color="#FFB6B6B6" Offset="1"/>
         </LinearGradientBrush>
     </phone:PhoneApplicationPage.Background>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Privacy Policy" Click="ApplicationBarMenuItemPrivacyPolicy_Click"/>
+                <shell:ApplicationBarMenuItem Text="Deactivate Account" Click="ApplicationBarMenuItemDeactivateAccount_Click"  />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
+    
     <Grid x:Name="LayoutRoot" Background="Transparent" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -61,7 +61,11 @@ namespace WCFTrackServiceWebRole
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/GetUserInfo/{deviceId}")]
-        TrackViewerUser GetUserInfo(String deviceId); 
+        TrackViewerUser GetUserInfo(String deviceId);
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "/DeactivateUserAccount/{deviceId}")]
+        void DeactivateUserAccount(String deviceId);
     }
 
 

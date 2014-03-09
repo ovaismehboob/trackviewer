@@ -218,6 +218,11 @@ namespace TrackViewerWP.Services.TrackService {
         System.IAsyncResult BeginGetUserInfo(string deviceId, System.AsyncCallback callback, object asyncState);
         
         TrackViewerWP.Services.TrackService.TrackViewerUser EndGetUserInfo(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ITrackService/DeactivateUserAccount", ReplyAction="http://tempuri.org/ITrackService/DeactivateUserAccountResponse")]
+        System.IAsyncResult BeginDeactivateUserAccount(string deviceId, System.AsyncCallback callback, object asyncState);
+        
+        void EndDeactivateUserAccount(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -496,6 +501,12 @@ namespace TrackViewerWP.Services.TrackService {
         
         private System.Threading.SendOrPostCallback onGetUserInfoCompletedDelegate;
         
+        private BeginOperationDelegate onBeginDeactivateUserAccountDelegate;
+        
+        private EndOperationDelegate onEndDeactivateUserAccountDelegate;
+        
+        private System.Threading.SendOrPostCallback onDeactivateUserAccountCompletedDelegate;
+        
         private BeginOperationDelegate onBeginOpenDelegate;
         
         private EndOperationDelegate onEndOpenDelegate;
@@ -574,6 +585,8 @@ namespace TrackViewerWP.Services.TrackService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ResendCodeCompleted;
         
         public event System.EventHandler<GetUserInfoCompletedEventArgs> GetUserInfoCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> DeactivateUserAccountCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -1198,6 +1211,51 @@ namespace TrackViewerWP.Services.TrackService {
                         deviceId}, this.onEndGetUserInfoDelegate, this.onGetUserInfoCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult TrackViewerWP.Services.TrackService.ITrackService.BeginDeactivateUserAccount(string deviceId, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginDeactivateUserAccount(deviceId, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        void TrackViewerWP.Services.TrackService.ITrackService.EndDeactivateUserAccount(System.IAsyncResult result) {
+            base.Channel.EndDeactivateUserAccount(result);
+        }
+        
+        private System.IAsyncResult OnBeginDeactivateUserAccount(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string deviceId = ((string)(inValues[0]));
+            return ((TrackViewerWP.Services.TrackService.ITrackService)(this)).BeginDeactivateUserAccount(deviceId, callback, asyncState);
+        }
+        
+        private object[] OnEndDeactivateUserAccount(System.IAsyncResult result) {
+            ((TrackViewerWP.Services.TrackService.ITrackService)(this)).EndDeactivateUserAccount(result);
+            return null;
+        }
+        
+        private void OnDeactivateUserAccountCompleted(object state) {
+            if ((this.DeactivateUserAccountCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.DeactivateUserAccountCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void DeactivateUserAccountAsync(string deviceId) {
+            this.DeactivateUserAccountAsync(deviceId, null);
+        }
+        
+        public void DeactivateUserAccountAsync(string deviceId, object userState) {
+            if ((this.onBeginDeactivateUserAccountDelegate == null)) {
+                this.onBeginDeactivateUserAccountDelegate = new BeginOperationDelegate(this.OnBeginDeactivateUserAccount);
+            }
+            if ((this.onEndDeactivateUserAccountDelegate == null)) {
+                this.onEndDeactivateUserAccountDelegate = new EndOperationDelegate(this.OnEndDeactivateUserAccount);
+            }
+            if ((this.onDeactivateUserAccountCompletedDelegate == null)) {
+                this.onDeactivateUserAccountCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnDeactivateUserAccountCompleted);
+            }
+            base.InvokeAsync(this.onBeginDeactivateUserAccountDelegate, new object[] {
+                        deviceId}, this.onEndDeactivateUserAccountDelegate, this.onDeactivateUserAccountCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -1450,6 +1508,18 @@ namespace TrackViewerWP.Services.TrackService {
                 object[] _args = new object[0];
                 TrackViewerWP.Services.TrackService.TrackViewerUser _result = ((TrackViewerWP.Services.TrackService.TrackViewerUser)(base.EndInvoke("GetUserInfo", _args, result)));
                 return _result;
+            }
+            
+            public System.IAsyncResult BeginDeactivateUserAccount(string deviceId, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = deviceId;
+                System.IAsyncResult _result = base.BeginInvoke("DeactivateUserAccount", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public void EndDeactivateUserAccount(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                base.EndInvoke("DeactivateUserAccount", _args, result);
             }
         }
     }
