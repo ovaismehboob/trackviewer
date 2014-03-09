@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\loading.png" />
+    <Content Include="Assets\trackviewersplash.png" />
     <Content Include="README_FIRST.txt" />
     <None Include="Service References\Services.TrackService\TrackService.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />

@@ -45,7 +45,7 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <TextBlock Text="TrackViewer" Margin="0,-7,0,305" Style="{StaticResource PhoneTextTitle1Style}" HorizontalAlignment="Right" Width="388"/>
+        <Image Margin="0,-7,10,305"  HorizontalAlignment="Right" Source="Assets/trackviewersplash.png" Width="388"/>
 
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
