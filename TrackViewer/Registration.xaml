@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="#FFBBBCC3">
-        <TextBlock FontSize="30" HorizontalAlignment="Center" Height="51" Margin="186,109,0,0" TextWrapping="Wrap" Text="TrackViewer" VerticalAlignment="Top" Width="258" Foreground="#FF080808" FontFamily="Eras Light ITC"/>
+        <Image HorizontalAlignment="Center" Height="54" Margin="607,109,501,0" VerticalAlignment="Top" Width="258"  Source="Assets/trackviewersplash.png" />
         <TextBlock HorizontalAlignment="Center" Height="60" Margin="102,184,0,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
         <StackPanel HorizontalAlignment="Center" Height="459" Margin="565,249,462,0" VerticalAlignment="Top" Width="339">
             <TextBlock x:Name="txtNewUserRegistration" FontSize="23" FontWeight="SemiBold" Visibility="Visible"  Text="New User Registration" Margin="0,50,10,10" Foreground="#FF080808" />

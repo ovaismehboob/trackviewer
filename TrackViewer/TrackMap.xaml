@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="#FFBBBCC3">
-        <TextBlock FontSize="30" HorizontalAlignment="Left" Height="51" Margin="186,109,0,0" TextWrapping="Wrap" Text="TrackViewer" VerticalAlignment="Top" Width="258" Foreground="#FF080808" FontFamily="Eras Light ITC"/>
+        <Image HorizontalAlignment="Left" Height="51" Margin="177,109,0,0" VerticalAlignment="Top" Width="258"  Source="Assets/trackviewersplash.png" />
 
         <Maps:Map x:Name="trvMap"   MapType="Aerial"  ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True"  Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="600" Margin="483,96,0,0" VerticalAlignment="Top" Width="783" BorderThickness="5"/>
         <TextBlock HorizontalAlignment="Left" Height="60" Margin="102,184,0,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>

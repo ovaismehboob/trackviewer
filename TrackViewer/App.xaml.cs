@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ApplicationSettings;
 
 // The Hub App template is documented at http://go.microsoft.com/fwlink/?LinkId=321221
 
@@ -34,7 +35,25 @@ namespace TrackViewer
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
         }
+
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        {
+            SettingsPane.GetForCurrentView().CommandsRequested += (s, e) =>
+            {
+                SettingsCommand defaultsCommand = new SettingsCommand("privacy", "Privacy Policy",
+                    (handler) =>
+                    {
+                        TrackViewerSettings sf = new TrackViewerSettings();
+                        sf.Show();
+                    });
+                e.Request.ApplicationCommands.Add(defaultsCommand);
+            };
+
+            base.OnWindowCreated(args);
+        }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -93,6 +112,8 @@ namespace TrackViewer
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            
         }
 
         /// <summary>
