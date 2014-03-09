@@ -146,8 +146,8 @@ namespace TrackViewerWP
             Callout callout = new Callout();
 
             callout.Text = "My Location";
-            callout.Lon = "Lon (λ): " + location.Longitude.ToString();
-            callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+            callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
+            callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
             _locationIcon100m.DataContext = callout;
             // Add the 100m icon and zoom a little closer.
             trvMap.Children.Add(_locationIcon100m);
@@ -265,8 +265,8 @@ namespace TrackViewerWP
             Callout callout = new Callout();
 
             callout.Text = "Tracker's Location";
-            callout.Lon = "Lon (λ): " + location.Longitude.ToString();
-            callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+            callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7); ;
+            callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7); ;
             _locationUserIcon10m.DataContext = callout;
             // Add the 10m icon and zoom closer.
             trvMap.Children.Add(_locationUserIcon10m);

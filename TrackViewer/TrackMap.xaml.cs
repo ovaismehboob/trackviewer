@@ -169,24 +169,6 @@ namespace TrackViewer
             // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
             double zoomLevel = 13.0f;
 
-            // if we have GPS level accuracy
-            //if (pos.Coordinate.Accuracy <= 10)
-            //{
-
-            //    Callout callout = new Callout();
-
-            //    callout.Text = "My Location";
-            //    callout.Lon = "Lon (λ): " + location.Longitude.ToString();
-            //    callout.Lat = "Lat (φ): " + location.Latitude.ToString();
-            //    _locationIcon10m.DataContext = callout;
-            //    // Add the 10m icon and zoom closer.
-            //   trvMap.Children.Add(_locationIcon10m);
-            //   MapLayer.SetPosition(_locationIcon10m, location);
-            //   zoomLevel = 15.0f;
-            //}
-            // Else if we have Wi-Fi level accuracy.
-            //else if (pos.Coordinate.Accuracy <= 100)
-            //{
 
                 Callout callout = new Callout();
 
@@ -199,11 +181,7 @@ namespace TrackViewer
                
                 MapLayer.SetPosition(_locationIcon100m, location);
                 zoomLevel = 17.0f;
-           // }
-
-          
-            
-
+           
             // Set the map to the given location and zoom level.
             trvMap.SetView(location, zoomLevel); 
 
