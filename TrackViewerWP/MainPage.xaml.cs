@@ -105,10 +105,12 @@ namespace TrackViewerWP
 
         void Client_GetUserInfoCompleted(object sender, GetUserInfoCompletedEventArgs e)
         {
+            try { 
             ProxyTracker.GetInstance().Name = e.Result.Name;
 
             txtWelcome.Text = "Welcome "+e.Result.Name+", you're connected!";
-        
+            }
+            catch { }
         
         }
 
@@ -116,57 +118,59 @@ namespace TrackViewerWP
         async void SetCurrentLocation()
         {
 
-
-            foreach (var children in trvMap.Children)
-            {
-
-                if (children.GetType().Name == "LocationIcon100m")
-                {
-                    trvMap.Children.Remove(children);
-                    break;
-                }
-
-            }
-            
-            // Get the cancellation token.
-            _cts = new CancellationTokenSource();
-            token = _cts.Token;
-            // Get the location.
-            Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
-            //  MessageTextbox.Text = "";
-
-            System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-            ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = pos.Coordinate.Latitude, Longitude = pos.Coordinate.Longitude };
-
-            // Now set the zoom level of the map based on the accuracy of our location data.
-            // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
-            double zoomLevel = 13.0f;
-
-            //// if we have GPS level accuracy
-            Callout callout = new Callout();
-
-            callout.Text = "My Location";
-            callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
-            callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
-            _locationIcon100m.DataContext = callout;
-            // Add the 100m icon and zoom a little closer.
-            trvMap.Children.Add(_locationIcon100m);
-
-            MapLayer.SetPosition(_locationIcon100m, location);
-            zoomLevel = 17.0f;
-
-            // Set the map to the given location and zoom level.
-            trvMap.SetView(location, zoomLevel);
-
             try
             {
-                ProxyTracker.GetInstance().Client.StartTrackingCompleted += Client_StartTrackingCompleted;
-                ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
+                foreach (var children in trvMap.Children)
+                {
+
+                    if (children.GetType().Name == "LocationIcon100m")
+                    {
+                        trvMap.Children.Remove(children);
+                        break;
+                    }
+
+                }
+
+                // Get the cancellation token.
+                _cts = new CancellationTokenSource();
+                token = _cts.Token;
+                // Get the location.
+                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+                //  MessageTextbox.Text = "";
+
+                System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
+                ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = pos.Coordinate.Latitude, Longitude = pos.Coordinate.Longitude };
+
+                // Now set the zoom level of the map based on the accuracy of our location data.
+                // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
+                double zoomLevel = 13.0f;
+
+                //// if we have GPS level accuracy
+                Callout callout = new Callout();
+
+                callout.Text = "My Location";
+                callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
+                callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
+                _locationIcon100m.DataContext = callout;
+                // Add the 100m icon and zoom a little closer.
+                trvMap.Children.Add(_locationIcon100m);
+
+                MapLayer.SetPosition(_locationIcon100m, location);
+                zoomLevel = 17.0f;
+
+                // Set the map to the given location and zoom level.
+                trvMap.SetView(location, zoomLevel);
+
+                try
+                {
+                    ProxyTracker.GetInstance().Client.StartTrackingCompleted += Client_StartTrackingCompleted;
+                    ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
+
+                }
+                catch (Exception ex) { MapCurrentLocation(); }
 
             }
-            catch (Exception ex) { MapCurrentLocation(); }
-
-
+            catch { }
         }
 
         private void PostTrackingInfo()
@@ -174,25 +178,29 @@ namespace TrackViewerWP
 
             myTimer = new DispatcherTimer();
             myTimer.Tick += timer_Tick;
-            myTimer.Interval = TimeSpan.FromSeconds(10);
+            myTimer.Interval = TimeSpan.FromSeconds(30);
             myTimer.Start();
 
         }
 
         async void timer_Tick(object sender, object e)
         {
-            if(chkTracking.IsChecked==true)
+            try
             {
-                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
-                System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-                ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
-                ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
-            }
+                if (chkTracking.IsChecked == true)
+                {
+                    Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+                    System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
+                    ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
+                    ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
+                }
 
-            if (!btnTrack.Content.ToString().Equals("Cancel"))
-            {
-                SetCurrentLocation();
+                if (!btnTrack.Content.ToString().Equals("Cancel"))
+                {
+                    SetCurrentLocation();
+                }
             }
+            catch { }
         }
 
 
@@ -201,95 +209,58 @@ namespace TrackViewerWP
         {
             trackerTimer = new DispatcherTimer();
             trackerTimer.Tick += timer_TickFetch;
-            trackerTimer.Interval = TimeSpan.FromSeconds(10);
+            trackerTimer.Interval = TimeSpan.FromSeconds(30);
             trackerTimer.Start();
         }
 
         void timer_TickFetch(object sender, object e)
         {
-
-            long trackId = 0;
-             
-            if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("Cancel"))
+            try
             {
-                ProxyTracker.GetInstance().Client.GetTrackingInfoCompleted += Client_GetTrackingInfoCompleted;
-                if (Int64.TryParse(txtTrackId.Text, out trackId))
-                {
-                    ProxyTracker.GetInstance().Client.GetTrackingInfoAsync(Convert.ToInt64(txtTrackId.Text));
-                }
-                else
-                {
-                    SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
-                    btnTrack_Click(sender, null);
-                }
-                
+                long trackId = 0;
 
+                if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("Cancel"))
+                {
+                    ProxyTracker.GetInstance().Client.GetTrackingInfoCompleted += Client_GetTrackingInfoCompleted;
+                    if (Int64.TryParse(txtTrackId.Text, out trackId))
+                    {
+                        ProxyTracker.GetInstance().Client.GetTrackingInfoAsync(Convert.ToInt64(txtTrackId.Text));
+                    }
+                    else
+                    {
+                        SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
+                        btnTrack_Click(sender, null);
+                    }
+
+
+                }
             }
-
+            catch { }
         }
 
         void Client_GetTrackingInfoCompleted(object sender, Services.TrackService.GetTrackingInfoCompletedEventArgs e)
         {
-            var res =e.Result;
-            if (res != null)
-                SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
-            else
+            try
             {
-                SetMessage(MessageType.Error, "Couldn't find any location info for specified TrackViewer ID");
+                var res = e.Result;
+                if (res != null)
+                    SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
+                else
+                {
+                    SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                    btnTrack_Click(sender, null);
+                }
+            }
+            catch
+            {
+                SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
                 btnTrack_Click(sender, null);
             }
         }
         void SetUserTrackCurrentLocation(double latitude, double longitude)
         {
-
-            foreach (var children in trvMap.Children)
+            try
             {
-                if (children.GetType().Name=="LocationIcon10m") {
-                    trvMap.Children.Remove(children);
-                    break;
-                }
-
-            }
-            // Get the cancellation token.
-            _cts = new CancellationTokenSource();
-            token = _cts.Token;
-            // Get the location.
-
-            CloseMessage();
-            System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(latitude, longitude);
-
-            // Now set the zoom level of the map based on the accuracy of our location data.
-            // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
-            double zoomLevel = 17.0f;
-            LocationIcon10m _locationUserIcon10m = new LocationIcon10m();
-            Callout callout = new Callout();
-
-            callout.Text = "Tracker's Location";
-            callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7); ;
-            callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7); ;
-            _locationUserIcon10m.DataContext = callout;
-            // Add the 10m icon and zoom closer.
-            trvMap.Children.Add(_locationUserIcon10m);
-            MapLayer.SetPosition(_locationUserIcon10m, location);
-            // Set the map to the given location and zoom level.
-            trvMap.SetView(location, zoomLevel); 
-            
-        }
-
-        private void btnTrack_Click(object sender, RoutedEventArgs e)
-        {
-            if (btnTrack.Content.Equals("Track now"))
-            {
-                if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid TrackViewer ID");  return; }
-                btnTrack.Content = "Cancel";
-                txtTrackId.IsEnabled = false;
-                ShowMessage("Searching Tracker's location...");
-            }
-            else
-            {
-                btnTrack.Content = "Track now";
-                txtTrackId.IsEnabled = true;
-                SetCurrentLocation();
                 foreach (var children in trvMap.Children)
                 {
                     if (children.GetType().Name == "LocationIcon10m")
@@ -297,8 +268,62 @@ namespace TrackViewerWP
                         trvMap.Children.Remove(children);
                         break;
                     }
+
+                }
+                // Get the cancellation token.
+                _cts = new CancellationTokenSource();
+                token = _cts.Token;
+                // Get the location.
+
+                CloseMessage();
+                System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(latitude, longitude);
+
+                // Now set the zoom level of the map based on the accuracy of our location data.
+                // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
+                double zoomLevel = 17.0f;
+                LocationIcon10m _locationUserIcon10m = new LocationIcon10m();
+                Callout callout = new Callout();
+
+                callout.Text = "Tracker's Location";
+                callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7); ;
+                callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7); ;
+                _locationUserIcon10m.DataContext = callout;
+                // Add the 10m icon and zoom closer.
+                trvMap.Children.Add(_locationUserIcon10m);
+                MapLayer.SetPosition(_locationUserIcon10m, location);
+                // Set the map to the given location and zoom level.
+                trvMap.SetView(location, zoomLevel);
+            }
+            catch { }
+        }
+
+        private void btnTrack_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (btnTrack.Content.Equals("Track now"))
+                {
+                    if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid TrackViewer ID"); return; }
+                    btnTrack.Content = "Cancel";
+                    txtTrackId.IsEnabled = false;
+                    ShowMessage("Searching Tracker's location...");
+                }
+                else
+                {
+                    btnTrack.Content = "Track now";
+                    txtTrackId.IsEnabled = true;
+                    SetCurrentLocation();
+                    foreach (var children in trvMap.Children)
+                    {
+                        if (children.GetType().Name == "LocationIcon10m")
+                        {
+                            trvMap.Children.Remove(children);
+                            break;
+                        }
+                    }
                 }
             }
+            catch { }
         }
         private void SetMessage(MessageType messageType, String message)
         {
@@ -354,18 +379,21 @@ namespace TrackViewerWP
 
         private void ApplicationBarMenuItemDeactivateAccount_Click(object sender, EventArgs e)
         {
-
-            MessageBoxResult result=MessageBox.Show("Are you sure to deactivate your account", "Confirmation", MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.OK)
+            try
             {
-                ProxyTracker.GetInstance().Client.DeactivateUserAccountCompleted += Client_DeactivateUserAccountCompleted;
-                ProxyTracker.GetInstance().Client.DeactivateUserAccountAsync(ProxyTracker.GetInstance().GetDeviceId());
+                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account", "Confirmation", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    ProxyTracker.GetInstance().Client.DeactivateUserAccountCompleted += Client_DeactivateUserAccountCompleted;
+                    ProxyTracker.GetInstance().Client.DeactivateUserAccountAsync(ProxyTracker.GetInstance().GetDeviceId());
+                }
             }
+            catch { MessageBox.Show("Sorry, we couldnt process your request at this time. Please check your internet connection or try again later","Error",MessageBoxButton.OK); }
          }
 
         void Client_DeactivateUserAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            MessageBox.Show("Account has been deactivated successfully");
+            MessageBox.Show("Account has been deactivated successfully","Information",MessageBoxButton.OK);
             this.NavigationService.Navigate(new Uri("/Splash", UriKind.Relative));
         }
 

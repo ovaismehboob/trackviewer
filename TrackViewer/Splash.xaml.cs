@@ -50,8 +50,8 @@ namespace TrackViewer
                     this.Frame.Navigate(typeof(Registration));
             }
             catch (Exception ex) {
-                
-                SetMessage(MessageType.Error,"Some error occured, please check your internet connection or try again later");
+
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 btnRetry.Visibility = Visibility.Visible;
             }
         }
@@ -97,11 +97,18 @@ namespace TrackViewer
 
         private void btnRetry_Click(object sender, RoutedEventArgs e)
         {
-             CheckUserAccountStatus();
-             txtMessage.Text = "Checking account status, please wait...";
-             txtMessage.Foreground = new SolidColorBrush(Colors.Black);
-             btnRetry.Visibility = Visibility.Collapsed;
-                 
+            try
+            {
+                CheckUserAccountStatus();
+            }
+            catch{
+                return;
+            }
+
+                txtMessage.Text = "Checking account status, please wait...";
+                txtMessage.Foreground = new SolidColorBrush(Colors.Black);
+                btnRetry.Visibility = Visibility.Collapsed;
+            
         }
     }
 }

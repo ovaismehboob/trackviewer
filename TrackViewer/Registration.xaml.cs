@@ -89,7 +89,7 @@ namespace TrackViewer
             }
             catch (Exception)
             {
-                SetMessage(MessageType.Error, "Some error occured, please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
         }
 
@@ -112,7 +112,7 @@ namespace TrackViewer
                     }
                     else
                     {
-                        SetMessage(MessageType.Error, "Some error occured, please try again later");
+                        SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                     }
                 }
                 else
@@ -131,7 +131,7 @@ namespace TrackViewer
                     SetMessage(MessageType.Information, "Activation code has been sent to your email address");
                 }
                 catch (Exception ex) {
-                    SetMessage(MessageType.Error, "Some error occured, please try again later");
+                    SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 }
             }
         }

@@ -26,34 +26,51 @@ namespace TrackViewerWP
             }
             catch (Exception)
             {
-                SetMessage(MessageType.Error, "Service is not responding, please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 btnRetry.Visibility = Visibility.Visible;
             }
         }
 
         void Client_IsUserRegisteredCompleted(object sender, Services.TrackService.IsUserRegisteredCompletedEventArgs e)
         {
-            if ((bool)e.Result == true)
+            try
             {
-                    
-                    ProxyTracker.GetInstance().Client.IsUserActivatedCompleted+=Client_IsUserActivatedCompleted;
+                if ((bool)e.Result == true)
+                {
+
+                    ProxyTracker.GetInstance().Client.IsUserActivatedCompleted += Client_IsUserActivatedCompleted;
                     ProxyTracker.GetInstance().Client.IsUserActivatedAsync(ProxyTracker.GetInstance().GetDeviceId().ToString());
-           
+
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new Uri("/Registration.xaml", UriKind.Relative));
+                }
             }
-            else{
-                this.NavigationService.Navigate(new Uri("/Registration.xaml", UriKind.Relative));
+            catch (Exception ex)
+            {
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                btnRetry.Visibility = Visibility.Visible;
+                
             }
         }
 
         void Client_IsUserActivatedCompleted(object sender, Services.TrackService.IsUserActivatedCompletedEventArgs e)
         {
-            if (e.Result == true)
+            try
             {
-                this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                if (e.Result == true)
+                {
+                    this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new Uri("/Registration.xaml", UriKind.Relative));
+                }
             }
-            else
-            {
-                this.NavigationService.Navigate(new Uri("/Registration.xaml", UriKind.Relative));
+            catch (Exception ex) {
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                btnRetry.Visibility = Visibility.Visible;
             }
         }
 
@@ -63,13 +80,13 @@ namespace TrackViewerWP
             switch (messageType)
             {
                 case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Yellow);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.White);
                     break;
                 case MessageType.Error:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.White);
                     break;
                 case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.White);
                     break;
                 default:
                     break;
@@ -80,8 +97,8 @@ namespace TrackViewerWP
         private void btnRetry_Click(object sender, RoutedEventArgs e)
         {
             CheckAccountStatus();
-            txtMessage.Text = "Checking account status, please wait...";
-            txtMessage.Foreground = new SolidColorBrush(Colors.Black);
+            txtMessage.Text = "Authenticating device and loading user information, please wait...";
+            txtMessage.Foreground = new SolidColorBrush(Colors.White);
             btnRetry.Visibility = Visibility.Collapsed;
         }
     }

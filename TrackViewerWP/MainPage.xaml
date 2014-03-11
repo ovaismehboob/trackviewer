@@ -29,8 +29,8 @@
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-    
-    
+
+
     <Grid x:Name="LayoutRoot" Background="Transparent" RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -71,7 +71,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
-            <Maps:Map x:Name="trvMap" Grid.Column="0" Grid.Row="0" Mode="Aerial" BorderThickness="5" CredentialsProvider="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" UseOptimizedManipulationRouting="True" AnimationLevel="Full" CopyrightVisibility="Visible" Culture="en-US"  TabNavigation="Cycle"  ZoomBarVisibility="Visible" HorizontalAlignment="Center" Height="385" Margin="1,0" VerticalAlignment="Top" Width="458"/>
+            <Maps:Map x:Name="trvMap" Grid.Column="0" Grid.Row="0" Mode="Aerial" BorderThickness="5" CredentialsProvider="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" UseOptimizedManipulationRouting="True" AnimationLevel="Full" CopyrightVisibility="Visible" Culture="en-US"  TabNavigation="Cycle"  ZoomBarVisibility="Visible" HorizontalAlignment="Center" Height="323" Margin="1,0" VerticalAlignment="Top" Width="458"/>
         </Grid>
         <StackPanel HorizontalAlignment="Left" Margin="0,120,0,36" Width="480">
             <TextBlock Text="Connecting to TrackViewer service, please wait..."  FontSize="15" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="10,0,20,0"   />

@@ -76,7 +76,6 @@ namespace WCFTrackServiceWebRole
         {
 
             string smtphost = System.Configuration.ConfigurationSettings.AppSettings.Get("SMTPHost");
-            string subject = System.Configuration.ConfigurationSettings.AppSettings.Get("Subject");
             string userName = System.Configuration.ConfigurationSettings.AppSettings.Get("UserName");
             string password = System.Configuration.ConfigurationSettings.AppSettings.Get("Password");
             int port = Convert.ToInt32(System.Configuration.ConfigurationSettings.AppSettings.Get("Port"));
@@ -89,7 +88,7 @@ namespace WCFTrackServiceWebRole
                 message.To.Add(to);
                 message.From = new MailAddress(from);
                 message.Body = DevelopCompletionEmailMessage(name);
-                message.Subject = subject;
+                message.Subject = "Thankyou for Registering";
                 message.IsBodyHtml = true;
                 System.Net.Mail.SmtpClient smpt = new System.Net.Mail.SmtpClient();
                 smpt.Host = smtphost;

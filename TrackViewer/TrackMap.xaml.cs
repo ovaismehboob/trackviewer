@@ -51,65 +51,68 @@ namespace TrackViewer
 
         async void MapCurrentLocation()
         {
-            // Change the state of our buttons.
-
-
-            // Remove any previous location icon.
-            if (trvMap.Children.Count > 0)
-            {
-                trvMap.Children.RemoveAt(0);
-            }
-
             try
             {
-                await SetCurrentLocation();
+
+
+                // Remove any previous location icon.
+                if (trvMap.Children.Count > 0)
+                {
+                    trvMap.Children.RemoveAt(0);
+                }
 
                 try
                 {
-                    long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
-                    Task<TrackViewerUser> trackUser= ProxyTracker.GetInstance().Client.GetUserInfoAsync(ProxyTracker.GetInstance().GetDeviceId());
-                    ProxyTracker.GetInstance().Name = trackUser.Result.Name;
-                    txtWelcome.Text = "Welcome "+ProxyTracker.GetInstance().Name+", you're connected!";
-                    txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
-                    EnableControls();
-                    
-                   
-                    
-                    ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
+                    await SetCurrentLocation();
 
-                    PostTrackingInfo();
-                    FetchTrackingInfo();
+                    try
+                    {
+                        long trackNo = await ProxyTracker.GetInstance().Client.StartTrackingAsync(ProxyTracker.GetInstance().GetDeviceId(), ProxyTracker.GetInstance().MyTrackLocation);
+                        Task<TrackViewerUser> trackUser = ProxyTracker.GetInstance().Client.GetUserInfoAsync(ProxyTracker.GetInstance().GetDeviceId());
+                        ProxyTracker.GetInstance().Name = trackUser.Result.Name;
+                        txtWelcome.Text = "Welcome " + ProxyTracker.GetInstance().Name + ", you're connected!";
+                        txtMyTrackId.Text = "Your TrackViewer ID is " + trackNo.ToString();
+                        EnableControls();
 
-                    //var trackLocation = ProxyTracker.GetInstance().MyTrackLocation;
-                    //SetPushPin("↓", new Location { Latitude = trackLocation.Latitude, Longitude = trackLocation.Longitude });
+
+
+                        ProxyTracker.GetInstance().MyTrackId = Convert.ToInt64(trackNo);
+
+                        PostTrackingInfo();
+                        FetchTrackingInfo();
+
+                        //var trackLocation = ProxyTracker.GetInstance().MyTrackLocation;
+                        //SetPushPin("↓", new Location { Latitude = trackLocation.Latitude, Longitude = trackLocation.Longitude });
+                    }
+                    catch (Exception ex) { MapCurrentLocation(); }
+
+                    // Display the location information in the textboxes.
+                    //   LatitudeTextbox.Text = pos.Coordinate.Latitude.ToString();
+                    //  LongitudeTextbox.Text = pos.Coordinate.Longitude.ToString();
+                    //  AccuracyTextbox.Text = pos.Coordinate.Accuracy.ToString();
                 }
-                catch (Exception ex) { MapCurrentLocation(); }
-                
-                // Display the location information in the textboxes.
-                //   LatitudeTextbox.Text = pos.Coordinate.Latitude.ToString();
-                //  LongitudeTextbox.Text = pos.Coordinate.Longitude.ToString();
-                //  AccuracyTextbox.Text = pos.Coordinate.Accuracy.ToString();
-            }
-            catch (System.UnauthorizedAccessException)
-            {
-                //MessageTextbox.Text = "Location disabled.";
+                catch (System.UnauthorizedAccessException)
+                {
+                    //MessageTextbox.Text = "Location disabled.";
 
-                //LatitudeTextbox.Text = "No data";
-                //LongitudeTextbox.Text = "No data";
-                //AccuracyTextbox.Text = "No data";
-            }
-            catch (TaskCanceledException)
-            {
-                //     MessageTextbox.Text = "Operation canceled.";
-            }
-            finally
-            {
-                _cts = null;
-            }
+                    //LatitudeTextbox.Text = "No data";
+                    //LongitudeTextbox.Text = "No data";
+                    //AccuracyTextbox.Text = "No data";
+                }
+                catch (TaskCanceledException)
+                {
+                    //     MessageTextbox.Text = "Operation canceled.";
+                }
+                finally
+                {
+                    _cts = null;
+                }
 
-            // Reset the buttons.
-            //MapLocationButton.IsEnabled = true;
-            //CancelGetLocationButton.IsEnabled = false;
+                // Reset the buttons.
+                //MapLocationButton.IsEnabled = true;
+                //CancelGetLocationButton.IsEnabled = false;
+            }
+            catch { }
         }
 
 
@@ -144,30 +147,31 @@ namespace TrackViewer
 
         async Task SetCurrentLocation()
         {
-
-            foreach (var children in trvMap.Children)
+            try
             {
-                if (children.GetType().Name == "LocationIcon100m")
+                foreach (var children in trvMap.Children)
                 {
-                    trvMap.Children.Remove(children);
-                    break;
+                    if (children.GetType().Name == "LocationIcon100m")
+                    {
+                        trvMap.Children.Remove(children);
+                        break;
+                    }
+
                 }
 
-            }
-            
-            // Get the cancellation token.
-            _cts = new CancellationTokenSource();
-            token = _cts.Token;
-            // Get the location.
-            Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
-            //  MessageTextbox.Text = "";
+                // Get the cancellation token.
+                _cts = new CancellationTokenSource();
+                token = _cts.Token;
+                // Get the location.
+                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+                //  MessageTextbox.Text = "";
 
-            Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-            ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = pos.Coordinate.Latitude, Longitude = pos.Coordinate.Longitude };
+                Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
+                ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = pos.Coordinate.Latitude, Longitude = pos.Coordinate.Longitude };
 
-            // Now set the zoom level of the map based on the accuracy of our location data.
-            // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
-            double zoomLevel = 13.0f;
+                // Now set the zoom level of the map based on the accuracy of our location data.
+                // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
+                double zoomLevel = 13.0f;
 
 
                 Callout callout = new Callout();
@@ -178,92 +182,102 @@ namespace TrackViewer
                 _locationIcon100m.DataContext = callout;
                 // Add the 100m icon and zoom a little closer.
                 trvMap.Children.Add(_locationIcon100m);
-               
+
                 MapLayer.SetPosition(_locationIcon100m, location);
                 zoomLevel = 17.0f;
-           
-            // Set the map to the given location and zoom level.
-            trvMap.SetView(location, zoomLevel); 
+
+                // Set the map to the given location and zoom level.
+                trvMap.SetView(location, zoomLevel);
+            }
+            catch { }
 
         }
 
 
         async void SetUserTrackCurrentLocation(double latitude, double longitude)
         {
-            foreach (var children in trvMap.Children)
+            try
             {
-                if (children.GetType().Name == "LocationIcon10m")
+                foreach (var children in trvMap.Children)
                 {
-                    trvMap.Children.Remove(children);
-                    break;
+                    if (children.GetType().Name == "LocationIcon10m")
+                    {
+                        trvMap.Children.Remove(children);
+                        break;
+                    }
+
                 }
 
+                CloseMessage();
+                //  trvMap.Children.Clear();
+                // Get the cancellation token.
+                _cts = new CancellationTokenSource();
+                token = _cts.Token;
+                // Get the location.
+
+
+                Location location = new Location(latitude, longitude);
+
+                //// Now set the zoom level of the map based on the accuracy of our location data.
+                //// Default to IP level accuracy. We only show the region at this level - No icon is displayed.
+                //double zoomLevel = 13.0f;
+
+                //// Add the 10m icon and zoom closer.
+                //if (trvMap.Children.Count == 0) { 
+                //    trvMap.Children.Add(_locationIcon10m);
+                //}
+
+                //MapLayer.SetPosition(_locationIcon10m, location);
+                //zoomLevel = 15.0f;
+
+                //// Set the map to the given location and zoom level.
+                //trvMap.SetView(location, zoomLevel);
+
+                // Now set the zoom level of the map based on the accuracy of our location data.
+                // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
+                double zoomLevel = 17.0f;
+                LocationIcon10m _locationUserIcon10m = new LocationIcon10m();
+                Callout callout = new Callout();
+
+                callout.Text = "Tracker's Location";
+                callout.Lon = "Lon (λ): " + location.Longitude.ToString();
+                callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+                _locationUserIcon10m.DataContext = callout;
+                // Add the 10m icon and zoom closer.
+                trvMap.Children.Add(_locationUserIcon10m);
+                MapLayer.SetPosition(_locationUserIcon10m, location);
+                // Set the map to the given location and zoom level.
+                trvMap.SetView(location, zoomLevel);
             }
-
-            CloseMessage();
-          //  trvMap.Children.Clear();
-            // Get the cancellation token.
-            _cts = new CancellationTokenSource();
-            token = _cts.Token;
-            // Get the location.
-          
-
-            Location location = new Location(latitude,longitude);
-            
-            //// Now set the zoom level of the map based on the accuracy of our location data.
-            //// Default to IP level accuracy. We only show the region at this level - No icon is displayed.
-            //double zoomLevel = 13.0f;
-
-            //// Add the 10m icon and zoom closer.
-            //if (trvMap.Children.Count == 0) { 
-            //    trvMap.Children.Add(_locationIcon10m);
-            //}
-
-            //MapLayer.SetPosition(_locationIcon10m, location);
-            //zoomLevel = 15.0f;
-            
-            //// Set the map to the given location and zoom level.
-            //trvMap.SetView(location, zoomLevel);
-
-            // Now set the zoom level of the map based on the accuracy of our location data.
-            // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
-            double zoomLevel = 17.0f;
-            LocationIcon10m _locationUserIcon10m = new LocationIcon10m();
-            Callout callout = new Callout();
-
-            callout.Text = "Tracker's Location";
-            callout.Lon = "Lon (λ): " + location.Longitude.ToString();
-            callout.Lat = "Lat (φ): " + location.Latitude.ToString();
-            _locationUserIcon10m.DataContext = callout;
-            // Add the 10m icon and zoom closer.
-            trvMap.Children.Add(_locationUserIcon10m);
-            MapLayer.SetPosition(_locationUserIcon10m, location);
-            // Set the map to the given location and zoom level.
-            trvMap.SetView(location, zoomLevel); 
+            catch { }
         }
         private void PostTrackingInfo()
         {
             myTimer = new DispatcherTimer();
             myTimer.Tick += timer_Tick;
-            myTimer.Interval = TimeSpan.FromSeconds(10);
+            myTimer.Interval = TimeSpan.FromSeconds(30);
             myTimer.Start();
             
         }
 
         async void timer_Tick(object sender, object e)
         {
-            if (toggleSwitch.IsOn)
+            try
             {
-                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
-                Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
-                ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
-                await ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
-            }
+                if (toggleSwitch.IsOn)
+                {
+                    Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+                    Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
+                    ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = location.Latitude, Longitude = location.Longitude };
+                    await ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
+                }
 
-            if (!btnTrack.Content.ToString().Equals("Cancel"))
-            {
-                await SetCurrentLocation();
+                if (!btnTrack.Content.ToString().Equals("Cancel"))
+                {
+                    await SetCurrentLocation();
+                }
             }
+            catch { }
         }
 
 
@@ -271,40 +285,50 @@ namespace TrackViewer
         private void FetchTrackingInfo() {
             trackerTimer = new DispatcherTimer();
             trackerTimer.Tick += timer_TickFetch;
-            trackerTimer.Interval = TimeSpan.FromSeconds(10);
+            trackerTimer.Interval = TimeSpan.FromSeconds(30);
             trackerTimer.Start();
           
         }
 
         async void timer_TickFetch(object sender, object e)
         {
-
-            long trackId = 0;
-
-            if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("Cancel"))
+            try
             {
+                long trackId = 0;
 
-                if (Int64.TryParse(txtTrackId.Text, out trackId))
+                if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("Cancel"))
                 {
-                    var res= await ProxyTracker.GetInstance().Client.GetTrackingInfoAsync(Convert.ToInt64(txtTrackId.Text));
-                    if (res != null)
-                        SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
-                    else { 
-                        SetMessage(MessageType.Error, "Couldn't find any location info for specified TrackViewer ID");
+
+                    if (Int64.TryParse(txtTrackId.Text, out trackId))
+                    {
+                        var res = await ProxyTracker.GetInstance().Client.GetTrackingInfoAsync(Convert.ToInt64(txtTrackId.Text));
+                        if (res != null)
+                            SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
+                        else
+                        {
+                            SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                            btnTrack_Click(sender, null);
+                        }
+                    }
+                    else
+                    {
+                        SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
                         btnTrack_Click(sender, null);
                     }
+
                 }
-                else
-                {
-                    SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
-                    btnTrack_Click(sender, null);
-                }
-                
             }
+            catch
+            {
+                SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                btnTrack_Click(sender, null);
+            }
+
         }
 
         private async void btnTrack_Click(object sender, RoutedEventArgs e)
         {
+            
             if (btnTrack.Content.Equals("Track now"))
             {
                 if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid Track Id"); txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); return; }

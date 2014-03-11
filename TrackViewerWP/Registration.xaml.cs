@@ -36,18 +36,27 @@ namespace TrackViewerWP
             catch (Exception ex)
             {
                 ProxyTracker.GetInstance().Client.IsUserRegisteredCompleted -= Client_IsUserRegisteredCompleted;
-                SetMessage(MessageType.Warning, "Some error occured in connectivity, trying again...");             
+                SetMessage(MessageType.Warning, "Sorry, we couldn't connect to the service at this time. Trying again...");             
                 CheckIfUserActivated();
             }
         }
 
         void Client_IsUserRegisteredCompleted(object sender, IsUserRegisteredCompletedEventArgs e)
         {
-             if (e.Result == true)
-             {
+            try
+            {
+                if (e.Result == true)
+                {
                     ProxyTracker.GetInstance().Client.IsUserActivatedCompleted += Client_IsUserActivatedCompleted;
                     ProxyTracker.GetInstance().Client.IsUserActivatedAsync(deviceId);
-             }
+                }
+            }
+            catch
+            {
+                ProxyTracker.GetInstance().Client.IsUserRegisteredCompleted -= Client_IsUserRegisteredCompleted;
+                SetMessage(MessageType.Warning, "Sorry, we couldn't connect to the service at this time. Trying again...");
+                CheckIfUserActivated();
+            }
         }
 
         void Client_IsUserActivatedCompleted(object sender, IsUserActivatedCompletedEventArgs e)
@@ -68,9 +77,16 @@ namespace TrackViewerWP
 
         void Client_GetUserInfoCompleted(object sender, GetUserInfoCompletedEventArgs e)
         {
-            TrackViewerUser user = (TrackViewerUser)e.Result;
-            txtName.Text = user.Name;
-            txtEmailAddress.Text = user.Email;
+            try
+            {
+                TrackViewerUser user = (TrackViewerUser)e.Result;
+                txtName.Text = user.Name;
+                txtEmailAddress.Text = user.Email;
+            }
+            catch
+            {
+                
+            }
         }
 
 
@@ -84,22 +100,29 @@ namespace TrackViewerWP
             }
             else
             {
-                SetMessage(MessageType.Error, "Name and Email Address cannot be empty, please enter correct information");
+                SetMessage(MessageType.Error, "Name and Email Address cannot be set empty, please enter complete information");
             }
         }
 
         void Client_RegisterUserCompleted(object sender, Services.TrackService.RegisterUserCompletedEventArgs e)
         {
-            if (e.Result > 0)
+            try
             {
-                SetMessage(MessageType.Information, "Thankyou for registering, your activation code has been sent to your email address");
-                txtName.IsEnabled = false;
-                btnSendActivation.Content = "Resend Code";
-                btnCompleteRegistration.IsEnabled = true;
+                if (e.Result > 0)
+                {
+                    SetMessage(MessageType.Information, "Thank you for registering, your activation code has been sent to your email address");
+                    txtName.IsEnabled = false;
+                    btnSendActivation.Content = "Resend Code";
+                    btnCompleteRegistration.IsEnabled = true;
+                }
+                else
+                {
+                    SetMessage(MessageType.Error, "Sorry, we couldn't process your request at this time. Please check your internet connection or try again later");
+                }
             }
-            else
+            catch
             {
-                SetMessage(MessageType.Error, "Some error occured, please try again later");
+                SetMessage(MessageType.Error, "Sorry, we couldn't process your request at this time. Please check your internet connection or try again later");
             }
         }
 
@@ -144,20 +167,27 @@ namespace TrackViewerWP
             }
             catch (Exception)
             {
-                SetMessage(MessageType.Error, "Some error occured, please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
         }
 
         void Client_UpdateIsActivatedCompleted(object sender, UpdateIsActivatedCompletedEventArgs e)
         {
-            if (e.Result == true)
+            try
             {
-                SetMessage(MessageType.Information, "Thank you for completing your registration");
-                this.NavigationService.Navigate(new Uri("/TrackMap", UriKind.Relative));
+                if (e.Result == true)
+                {
+                    SetMessage(MessageType.Information, "Thank you for completing your registration");
+                    this.NavigationService.Navigate(new Uri("/TrackMap", UriKind.Relative));
+                }
+                else
+                {
+                    SetMessage(MessageType.Error, "Please enter valid activation code");
+                }
             }
-            else
+            catch
             {
-                SetMessage(MessageType.Error, "Please enter valid activation code");
+                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
         }
 
@@ -191,7 +221,7 @@ namespace TrackViewerWP
                 }
                 catch (Exception ex)
                 {
-                    SetMessage(MessageType.Error, "Some error occured, please try again later");
+                    SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 }
             }
         }
