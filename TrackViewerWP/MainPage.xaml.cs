@@ -178,7 +178,7 @@ namespace TrackViewerWP
 
             myTimer = new DispatcherTimer();
             myTimer.Tick += timer_Tick;
-            myTimer.Interval = TimeSpan.FromSeconds(30);
+            myTimer.Interval = TimeSpan.FromSeconds(10);
             myTimer.Start();
 
         }
@@ -195,7 +195,7 @@ namespace TrackViewerWP
                     ProxyTracker.GetInstance().Client.PublishTrackingInfoAsync(ProxyTracker.GetInstance().MyTrackId, ProxyTracker.GetInstance().MyTrackLocation);
                 }
 
-                if (!btnTrack.Content.ToString().Equals("Cancel"))
+                if (!btnTrack.Content.ToString().Equals("❌"))
                 {
                     SetCurrentLocation();
                 }
@@ -209,7 +209,7 @@ namespace TrackViewerWP
         {
             trackerTimer = new DispatcherTimer();
             trackerTimer.Tick += timer_TickFetch;
-            trackerTimer.Interval = TimeSpan.FromSeconds(30);
+            trackerTimer.Interval = TimeSpan.FromSeconds(10);
             trackerTimer.Start();
         }
 
@@ -219,7 +219,7 @@ namespace TrackViewerWP
             {
                 long trackId = 0;
 
-                if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("Cancel"))
+                if (txtTrackId.Text != "" && btnTrack.Content.ToString().Equals("❌"))
                 {
                     ProxyTracker.GetInstance().Client.GetTrackingInfoCompleted += Client_GetTrackingInfoCompleted;
                     if (Int64.TryParse(txtTrackId.Text, out trackId))
@@ -301,16 +301,16 @@ namespace TrackViewerWP
         {
             try
             {
-                if (btnTrack.Content.Equals("Track now"))
+                if (btnTrack.Content.Equals("➤"))
                 {
                     if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid TrackViewer ID"); return; }
-                    btnTrack.Content = "Cancel";
+                    btnTrack.Content = "❌";
                     txtTrackId.IsEnabled = false;
                     ShowMessage("Searching Tracker's location...");
                 }
                 else
                 {
-                    btnTrack.Content = "Track now";
+                    btnTrack.Content = "➤";
                     txtTrackId.IsEnabled = true;
                     SetCurrentLocation();
                     foreach (var children in trvMap.Children)
