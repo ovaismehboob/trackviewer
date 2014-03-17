@@ -11,18 +11,20 @@
     <Grid Background="#FFBBBCC3">
         <Image HorizontalAlignment="Left" Height="51" Margin="177,109,0,0" VerticalAlignment="Top" Width="258"  Source="Assets/trackviewersplash.png" />
 
-        <Maps:Map x:Name="trvMap"   MapType="Aerial"  ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True"  Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="600" Margin="483,96,0,0" VerticalAlignment="Top" Width="783" BorderThickness="5"/>
+        <Maps:Map x:Name="trvMap"   MapType="Aerial"  ShowBreadcrumb="True" ShowNavigationBar="True" ShowScaleBar="True" ShowTraffic="True" ShowBuildings="True"  Credentials="Au74b4cr1Ancj1v4JTm7JGDstNGCdp4IBMGaOKSXHRtC9NWjNli1DSrM1KmaIIg8" HorizontalAlignment="Left" Height="627" Margin="483,96,0,0" VerticalAlignment="Top" Width="783" BorderThickness="5"/>
         <TextBlock HorizontalAlignment="Left" Height="78" Margin="102,184,0,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to know and share its current location with other users. For each session TrackViewer generates a unique TrackViewer id that can be shared across family, friends, etc. to locate your current location over Bing Maps" VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
-        <StackPanel HorizontalAlignment="Left" Height="411" Margin="102,249,0,0" VerticalAlignment="Top" Width="339">
+        
+        <StackPanel HorizontalAlignment="Left" Height="474" Margin="102,249,0,0" VerticalAlignment="Top" Width="339">
             <TextBlock Text="Connecting to TrackViewer service, please wait..."  FontSize="11"  x:Name="txtWelcome" Margin="0,10,0,10"   Foreground="#FF080808" />
-            <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="0,5,10,10" FontSize="20" Foreground="#FF080808" />
+            <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="0,5,10,10" FontSize="15" Foreground="#FF080808" />
             <Image Height="79" x:Name="imgLoading" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
-            <ToggleSwitch  FontSize="15" x:Name="toggleSwitch" Visibility="Collapsed"  OffContent="You're Tracking is Off" Margin="0,0,10,10" OnContent="You're Tracking is On" Foreground="#FF080808" />
-            <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter User TrackViewer ID to track" Margin="0,50,10,10" Foreground="#FF080808" />
+            <ToggleSwitch  FontSize="15" x:Name="toggleSwitch" Visibility="Collapsed"  OffContent="Enable Tracking" Margin="0,0,10,10" OnContent="Disable Tracking" Foreground="#FF080808" />
+            <TextBlock x:Name="txtSyncNow" FontSize="11" Visibility="Collapsed"  Text="By default, application sync location information after every 1 minute. In urgent situation you can manually sync by hitting below button" TextWrapping="Wrap" Margin="0,0,10,10" Foreground="#FF080808" />
+            <Button x:Name="btnSync" Visibility="Collapsed" HorizontalAlignment="Center" Content="Sync Location" Foreground="#FF080808" Background="#FFC9C9C9" Click="btnSync_Click" />
+            <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter User TrackViewer ID to track" Margin="0,20,10,10" Foreground="#FF080808" />
             <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Foreground="#FF080808" />
             <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
-            <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
-
+            <TextBlock x:Name="txtMessage" Margin="0,10,10,10" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="82" Margin="101,96,0,0" VerticalAlignment="Top" Width="71" Source="Assets/trackviewer.png"/>
 

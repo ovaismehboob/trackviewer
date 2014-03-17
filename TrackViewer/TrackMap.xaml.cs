@@ -160,6 +160,8 @@ namespace TrackViewer
             txtEnterUserTrackID.Visibility = Visibility.Visible;
             btnTrack.Visibility = Visibility.Visible;
             imgLoading.Visibility = Visibility.Collapsed;
+            txtSyncNow.Visibility = Visibility.Visible;
+            btnSync.Visibility = Visibility.Visible;
         }
 
         async Task SetCurrentLocation()
@@ -194,8 +196,8 @@ namespace TrackViewer
                 Callout callout = new Callout();
 
                 callout.Text = "My Location";
-                callout.Lon = "Lon (λ): " + location.Longitude.ToString();
-                callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+                callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
+                callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
                 _locationIcon100m.DataContext = callout;
                 // Add the 100m icon and zoom a little closer.
                 trvMap.Children.Add(_locationIcon100m);
@@ -257,8 +259,8 @@ namespace TrackViewer
                 Callout callout = new Callout();
 
                 callout.Text = "Tracker's Location";
-                callout.Lon = "Lon (λ): " + location.Longitude.ToString();
-                callout.Lat = "Lat (φ): " + location.Latitude.ToString();
+                callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
+                callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
                 _locationUserIcon10m.DataContext = callout;
                 // Add the 10m icon and zoom closer.
                 trvMap.Children.Add(_locationUserIcon10m);
@@ -270,9 +272,10 @@ namespace TrackViewer
         }
         private void PostTrackingInfo()
         {
+            timer_Tick(null, null);
             myTimer = new DispatcherTimer();
             myTimer.Tick += timer_Tick;
-            myTimer.Interval = TimeSpan.FromSeconds(30);
+            myTimer.Interval = TimeSpan.FromSeconds(60);
             myTimer.Start();
             
         }
@@ -292,6 +295,7 @@ namespace TrackViewer
                 if (!btnTrack.Content.ToString().Equals("Cancel"))
                 {
                     await SetCurrentLocation();
+                    txtMessage.Text = "";
                 }
             }
             catch { }
@@ -300,9 +304,10 @@ namespace TrackViewer
 
 
         private void FetchTrackingInfo() {
+            timer_TickFetch(null, null);
             trackerTimer = new DispatcherTimer();
             trackerTimer.Tick += timer_TickFetch;
-            trackerTimer.Interval = TimeSpan.FromSeconds(30);
+            trackerTimer.Interval = TimeSpan.FromSeconds(60);
             trackerTimer.Start();
           
         }
@@ -348,10 +353,15 @@ namespace TrackViewer
             
             if (btnTrack.Content.Equals("Track now"))
             {
-                if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid Track Id"); txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); return; }
+                if (txtTrackId.Text.Trim() == "") { 
+                    SetMessage(MessageType.Warning, "Please enter valid Track Id"); 
+                    txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); 
+                    return; 
+                }
                 btnTrack.Content = "Cancel";
                 txtTrackId.IsEnabled = false;
                 ShowMessage("Searching Tracker's location...");
+                timer_TickFetch(null, null);
                 
             }
             else { 
@@ -386,13 +396,13 @@ namespace TrackViewer
             switch(messageType)
             {
                 case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Yellow); 
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black); 
                     break;
                 case MessageType.Error:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.DarkGreen);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 default:
                     break;
@@ -417,6 +427,13 @@ namespace TrackViewer
             var timer=(DispatcherTimer) sender;
             timer.Stop();
             
+        }
+
+        private void btnSync_Click(object sender, RoutedEventArgs e)
+        {
+            timer_TickFetch(null, null);
+            timer_Tick(null, null);
+            SetMessage(MessageType.Information, "Location sync has been done successfully");
         }
     }
 

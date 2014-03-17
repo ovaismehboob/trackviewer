@@ -146,13 +146,13 @@ namespace TrackViewer
             switch (messageType)
             {
                 case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Yellow);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 case MessageType.Error:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.DarkGreen);
+                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     break;
                 default:
                     break;

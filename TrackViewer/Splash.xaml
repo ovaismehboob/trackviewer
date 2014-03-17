@@ -9,7 +9,7 @@
 
     <Grid Background="#FFBBBCC3">
         <Image  HorizontalAlignment="Center" Height="51" Margin="106,109,0,0" VerticalAlignment="Top" Width="258" Source="Assets/trackviewersplash.png" />
-        <TextBlock HorizontalAlignment="Center" Height="65" Margin="565,184,462,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
+        <TextBlock HorizontalAlignment="Center" Height="83" Margin="565,184,462,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to know and share its current location with other users. For each session TrackViewer generates a unique TrackViewer id that can be shared across family, friends, etc. to locate your current location over Bing Maps" VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
         <StackPanel HorizontalAlignment="Center" Height="459" Margin="565,249,462,0" VerticalAlignment="Top" Width="339">
             <TextBlock x:Name="txtMessage" Text="Authenticating device and loading user information, please wait..." TextAlignment="Center" Foreground="Black" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" Margin="0,50,0,0" HorizontalAlignment="Center" ></TextBlock>
             <Button x:Name="btnRetry" HorizontalAlignment="Center" Visibility="Collapsed" Content="Retry" Click="btnRetry_Click" ></Button>
