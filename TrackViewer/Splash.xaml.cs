@@ -51,7 +51,7 @@ namespace TrackViewer
             }
             catch (Exception ex) {
 
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 btnRetry.Visibility = Visibility.Visible;
             }
         }

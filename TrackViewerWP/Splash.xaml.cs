@@ -26,7 +26,7 @@ namespace TrackViewerWP
             }
             catch (Exception)
             {
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 btnRetry.Visibility = Visibility.Visible;
             }
         }
@@ -49,7 +49,7 @@ namespace TrackViewerWP
             }
             catch (Exception ex)
             {
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 btnRetry.Visibility = Visibility.Visible;
                 
             }
@@ -69,7 +69,7 @@ namespace TrackViewerWP
                 }
             }
             catch (Exception ex) {
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 btnRetry.Visibility = Visibility.Visible;
             }
         }
@@ -77,21 +77,21 @@ namespace TrackViewerWP
         private void SetMessage(MessageType messageType, String message)
         {
             txtMessage.Text = message;
-            switch (messageType)
-            {
-                case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.White);
-                    break;
-                case MessageType.Error:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.White);
-                    break;
-                case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.White);
-                    break;
-                default:
-                    break;
+            //switch (messageType)
+            //{
+            //    case MessageType.Warning:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.White);
+            //        break;
+            //    case MessageType.Error:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.White);
+            //        break;
+            //    case MessageType.Information:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.White);
+            //        break;
+            //    default:
+            //        break;
 
-            }
+            //}
         }
 
         private void btnRetry_Click(object sender, RoutedEventArgs e)

@@ -175,10 +175,10 @@ namespace TrackViewerWP
 
         private void PostTrackingInfo()
         {
-
+            timer_Tick(null, null);
             myTimer = new DispatcherTimer();
             myTimer.Tick += timer_Tick;
-            myTimer.Interval = TimeSpan.FromSeconds(10);
+            myTimer.Interval = TimeSpan.FromSeconds(60);
             myTimer.Start();
 
         }
@@ -207,9 +207,10 @@ namespace TrackViewerWP
 
         private void FetchTrackingInfo()
         {
+            timer_TickFetch(null, null);
             trackerTimer = new DispatcherTimer();
             trackerTimer.Tick += timer_TickFetch;
-            trackerTimer.Interval = TimeSpan.FromSeconds(10);
+            trackerTimer.Interval = TimeSpan.FromSeconds(60);
             trackerTimer.Start();
         }
 
@@ -228,7 +229,7 @@ namespace TrackViewerWP
                     }
                     else
                     {
-                        SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
+                        SetMessage(MessageType.Error, "❎ TrackViewer ID entered is invalid");
                         btnTrack_Click(sender, null);
                     }
 
@@ -247,13 +248,13 @@ namespace TrackViewerWP
                     SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
                 else
                 {
-                    SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                    SetMessage(MessageType.Error, "❎ Sorry, there is no location associated with the user's TrackViewer ID");
                     btnTrack_Click(sender, null);
                 }
             }
             catch
             {
-                SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                SetMessage(MessageType.Error, "❎ Sorry, there is no location associated with the user's TrackViewer ID");
                 btnTrack_Click(sender, null);
             }
         }
@@ -303,7 +304,7 @@ namespace TrackViewerWP
             {
                 if (btnTrack.Content.Equals("➤"))
                 {
-                    if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "Please enter valid TrackViewer ID"); return; }
+                    if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "⭙ Please enter valid TrackViewer ID"); return; }
                     btnTrack.Content = "❌";
                     txtTrackId.IsEnabled = false;
                     ShowMessage("Searching Tracker's location...");
@@ -328,21 +329,21 @@ namespace TrackViewerWP
         private void SetMessage(MessageType messageType, String message)
         {
             txtMessage.Text = message;
-            switch (messageType)
-            {
-                case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Yellow);
-                    break;
-                case MessageType.Error:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Red);
-                    break;
-                case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Green);
-                    break;
-                default:
-                    break;
+            //switch (messageType)
+            //{
+            //    case MessageType.Warning:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.Yellow);
+            //        break;
+            //    case MessageType.Error:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.Red);
+            //        break;
+            //    case MessageType.Information:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+            //        break;
+            //    default:
+            //        break;
 
-            }
+            //}
             HideMessage();
 
         }
@@ -366,7 +367,7 @@ namespace TrackViewerWP
         private void ShowMessage(String message)
         {
             txtMessage.Text = message;
-            txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+        //    txtMessage.Foreground = new SolidColorBrush(Colors.Green);
 
         }
 
@@ -381,19 +382,19 @@ namespace TrackViewerWP
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account", "Confirmation", MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account?", "Confirmation", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
                     ProxyTracker.GetInstance().Client.DeactivateUserAccountCompleted += Client_DeactivateUserAccountCompleted;
                     ProxyTracker.GetInstance().Client.DeactivateUserAccountAsync(ProxyTracker.GetInstance().GetDeviceId());
                 }
             }
-            catch { MessageBox.Show("Sorry, we couldnt process your request at this time. Please check your internet connection or try again later","Error",MessageBoxButton.OK); }
+            catch { MessageBox.Show("❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later", "Error", MessageBoxButton.OK); }
          }
 
         void Client_DeactivateUserAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            MessageBox.Show("Account has been deactivated successfully","Information",MessageBoxButton.OK);
+            MessageBox.Show("✔ Account has been deactivated successfully", "Information", MessageBoxButton.OK);
             this.NavigationService.Navigate(new Uri("/Splash", UriKind.Relative));
         }
 

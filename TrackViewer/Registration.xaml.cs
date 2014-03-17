@@ -74,23 +74,23 @@ namespace TrackViewer
                     txtMessage.Text = "Finalizing Registration process...";
                     txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     var result=await ProxyTracker.GetInstance().Client.UpdateIsActivatedAsync(deviceId, txtActivationCode.Text.Trim());
-                    if (result == true) { 
-                        SetMessage(MessageType.Information, "Thank you for completing your registration");
+                    if (result == true) {
+                        SetMessage(MessageType.Information, "✔ Thank you for completing your registration");
                         this.Frame.Navigate(typeof(TrackMap));
                     }
                     else
                     {
-                        SetMessage(MessageType.Error, "Please enter valid activation code");
+                        SetMessage(MessageType.Error, "❎ Please enter valid activation code");
                     }
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Please enter valid activation code");
+                    SetMessage(MessageType.Error, "❎ Please enter valid activation code");
                 }
             }
             catch (Exception)
             {
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
             btnCompleteRegistration.IsEnabled = true;
         }
@@ -108,19 +108,19 @@ namespace TrackViewer
                     Task<long> result = ProxyTracker.GetInstance().Client.RegisterUserAsync(ProxyTracker.GetInstance().GetDeviceId(), "", txtName.Text.Trim(), txtEmailAddress.Text.Trim());
                     if (result.Result > 0)
                     {
-                        SetMessage(MessageType.Information,"Thankyou for registering, your activation code has been sent to your email address");
+                        SetMessage(MessageType.Information, "✔ Thankyou for registering, your activation code has been sent to your email address");
                         txtName.IsEnabled = false;
                         btnSendActivation.Content = "Resend Code";
                         btnCompleteRegistration.IsEnabled = true;
                     }
                     else
                     {
-                        SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                        SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                     }
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Name and Email Address cannot be empty, please enter correct information");
+                    SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
                 }
             }
             else
@@ -131,10 +131,10 @@ namespace TrackViewer
                     txtMessage.Text = "Resending activation code...";
                     txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     await ProxyTracker.GetInstance().Client.ResendCodeAsync(deviceId, txtEmailAddress.Text.Trim());
-                    SetMessage(MessageType.Information, "Activation code has been sent to your email address");
+                    SetMessage(MessageType.Information, "✔ Activation code has been sent to your email address");
                 }
                 catch (Exception ex) {
-                    SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                    SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 }
             }
             btnSendActivation.IsEnabled = true;

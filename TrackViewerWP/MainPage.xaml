@@ -57,8 +57,9 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <Image Margin="0,-7,10,305" HorizontalAlignment="Right" Width="388" Source="Assets/trackviewersplash.png"/>
-
+        <!--<Image Margin="0,-7,10,305" HorizontalAlignment="Right" Width="388" Source="Assets/trackviewersplash.png"/>-->
+        <TextBlock Text="TrackViewer" Margin="0,11,237,287"  HorizontalAlignment="Right" FontSize="65"  Width="161" FontFamily="Eras Medium ITC" FontWeight="Bold"/>
+        <TextBlock Text="Viewer" Margin="0,11,25,287"  HorizontalAlignment="Right" FontSize="65"  Width="212" FontFamily="Eras Medium ITC"/>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
@@ -76,14 +77,14 @@
         <StackPanel HorizontalAlignment="Left" Margin="0,120,0,36" Width="480">
             <TextBlock Text="Connecting to TrackViewer service, please wait..."  FontSize="15" FontWeight="ExtraLight" x:Name="txtWelcome" Margin="10,0,20,0"   />
             <TextBlock Text="" Visibility="Visible" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="10,0,20,0" FontSize="20" />
-            <CheckBox Visibility="Collapsed" x:Name="chkTracking" Content="Enable Tracking" FontSize="15" HorizontalAlignment="Left" Height="76" Width="176" Margin="0,0,0,0"/>
-            <TextBlock Visibility="Collapsed" x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,224,0" Height="26"  />
-            <TextBox Visibility="Collapsed" x:Name="txtTrackId" FontSize="15" Margin="0,0,107,0" Height="66" />
+            <CheckBox Visibility="Visible" x:Name="chkTracking" Content="Enable Tracking" FontSize="15" HorizontalAlignment="Left" Height="76" Width="176" Margin="0,0,0,0"/>
+            <TextBlock Visibility="Visible" x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,224,0" Height="26"  />
+            <TextBox Visibility="Visible" x:Name="txtTrackId" FontSize="15" Margin="0,0,107,0" Height="66" />
             <TextBlock x:Name="txtMessage"  FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="10,0,0,0" />
-            <Image Width="130" Height="130" x:Name="imgLoading" Visibility="Visible" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
+            <Image Width="130" Height="130" x:Name="imgLoading" Visibility="Collapsed" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
         </StackPanel>
 
-        <Button x:Name="btnTrack"  Visibility="Collapsed"  HorizontalAlignment="Center" Content="➤" Click="btnTrack_Click" FontSize="13" Margin="354,268,58,55" Width="68"/>
+        <Button x:Name="btnTrack"  Visibility="Visible"  HorizontalAlignment="Center" Content="➤" Click="btnTrack_Click" FontSize="13" Margin="354,268,58,55" Width="68"/>
         <Image HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="87" Source="/Assets/93-24.png"/>
 
     </Grid>

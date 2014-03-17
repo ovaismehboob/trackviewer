@@ -36,7 +36,7 @@ namespace TrackViewerWP
             catch (Exception ex)
             {
                 ProxyTracker.GetInstance().Client.IsUserRegisteredCompleted -= Client_IsUserRegisteredCompleted;
-                SetMessage(MessageType.Warning, "Sorry, we couldn't connect to the service at this time. Trying again...");             
+                SetMessage(MessageType.Warning, "❎ Sorry, we couldn't connect to the service at this time. Trying again...");             
                 CheckIfUserActivated();
             }
         }
@@ -54,7 +54,7 @@ namespace TrackViewerWP
             catch
             {
                 ProxyTracker.GetInstance().Client.IsUserRegisteredCompleted -= Client_IsUserRegisteredCompleted;
-                SetMessage(MessageType.Warning, "Sorry, we couldn't connect to the service at this time. Trying again...");
+                SetMessage(MessageType.Warning, "❎ Sorry, we couldn't connect to the service at this time. Trying again...");
                 CheckIfUserActivated();
             }
         }
@@ -100,7 +100,7 @@ namespace TrackViewerWP
             }
             else
             {
-                SetMessage(MessageType.Error, "Name and Email Address cannot be set empty, please enter complete information");
+                SetMessage(MessageType.Error, "❎ Name and Email Address cannot be set empty, please enter complete information");
             }
         }
 
@@ -110,40 +110,40 @@ namespace TrackViewerWP
             {
                 if (e.Result > 0)
                 {
-                    SetMessage(MessageType.Information, "Thank you for registering, your activation code has been sent to your email address");
+                    SetMessage(MessageType.Information, "✔ Thank you for registering, your activation code has been sent to your email address");
                     txtName.IsEnabled = false;
                     btnSendActivation.Content = "Resend Code";
                     btnCompleteRegistration.IsEnabled = true;
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Sorry, we couldn't process your request at this time. Please check your internet connection or try again later");
+                    SetMessage(MessageType.Error, "❎ Sorry, we couldn't process your request at this time. Please check your internet connection or try again later");
                 }
             }
             catch
             {
-                SetMessage(MessageType.Error, "Sorry, we couldn't process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldn't process your request at this time. Please check your internet connection or try again later");
             }
         }
 
         private void SetMessage(MessageType messageType, String message)
         {
             txtMessage.Text = message;
-            switch (messageType)
-            {
-                case MessageType.Warning:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Yellow);
-                    break;
-                case MessageType.Error:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Red);
-                    break;
-                case MessageType.Information:
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Green);
-                    break;
-                default:
-                    break;
+            //switch (messageType)
+            //{
+            //    case MessageType.Warning:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.Yellow);
+            //        break;
+            //    case MessageType.Error:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.Red);
+            //        break;
+            //    case MessageType.Information:
+            //        txtMessage.Foreground = new SolidColorBrush(Colors.Green);
+            //        break;
+            //    default:
+            //        break;
 
-            }
+            //}
             HideMessage();
 
         }
@@ -162,12 +162,12 @@ namespace TrackViewerWP
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Please enter valid activation code");
+                    SetMessage(MessageType.Error, "❎ Please enter valid activation code");
                 }
             }
             catch (Exception)
             {
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
         }
 
@@ -177,17 +177,17 @@ namespace TrackViewerWP
             {
                 if (e.Result == true)
                 {
-                    SetMessage(MessageType.Information, "Thank you for completing your registration");
+                    SetMessage(MessageType.Information, "✔ Thank you for completing your registration");
                     this.NavigationService.Navigate(new Uri("/TrackMap", UriKind.Relative));
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Please enter valid activation code");
+                    SetMessage(MessageType.Error, "❎ Please enter valid activation code");
                 }
             }
             catch
             {
-                SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
         }
 
@@ -206,7 +206,7 @@ namespace TrackViewerWP
                 }
                 else
                 {
-                    SetMessage(MessageType.Error, "Name and Email Address cannot be empty, please enter correct information");
+                    SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
                 }
             }
             else
@@ -221,14 +221,14 @@ namespace TrackViewerWP
                 }
                 catch (Exception ex)
                 {
-                    SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
+                    SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 }
             }
         }
 
         void Client_ResendCodeCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            SetMessage(MessageType.Information, "Activation code has been sent to your email address");
+            SetMessage(MessageType.Information, "⩗ Activation code has been sent to your email address");
         }
 
 

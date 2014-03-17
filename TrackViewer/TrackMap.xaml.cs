@@ -146,8 +146,7 @@ namespace TrackViewer
 
         async void pushPin_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            MessageDialog dialog = new MessageDialog("Hello from Seattle.");
-            await dialog.ShowAsync();
+
         }
 
 
@@ -328,13 +327,13 @@ namespace TrackViewer
                             SetUserTrackCurrentLocation(res.Latitude, res.Longitude);
                         else
                         {
-                            SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                            SetMessage(MessageType.Error, "❎ Sorry, there is no location associated with the user's TrackViewer ID");
                             btnTrack_Click(sender, null);
                         }
                     }
                     else
                     {
-                        SetMessage(MessageType.Error, "TrackViewer ID entered is invalid");
+                        SetMessage(MessageType.Error, "❎ TrackViewer ID entered is invalid");
                         btnTrack_Click(sender, null);
                     }
 
@@ -342,7 +341,7 @@ namespace TrackViewer
             }
             catch
             {
-                SetMessage(MessageType.Error, "Sorry, there is no location associated with the user's TrackViewer ID");
+                SetMessage(MessageType.Error, "❎ Sorry, there is no location associated with the user's TrackViewer ID");
                 btnTrack_Click(sender, null);
             }
 
@@ -353,8 +352,8 @@ namespace TrackViewer
             
             if (btnTrack.Content.Equals("Track now"))
             {
-                if (txtTrackId.Text.Trim() == "") { 
-                    SetMessage(MessageType.Warning, "Please enter valid Track Id"); 
+                if (txtTrackId.Text.Trim() == "") {
+                    SetMessage(MessageType.Warning, "❎ Please enter valid TrackViewer ID"); 
                     txtTrackId.Focus(Windows.UI.Xaml.FocusState.Programmatic); 
                     return; 
                 }
@@ -433,7 +432,7 @@ namespace TrackViewer
         {
             timer_TickFetch(null, null);
             timer_Tick(null, null);
-            SetMessage(MessageType.Information, "Location sync has been done successfully");
+            SetMessage(MessageType.Information, "✔ Location syncing has been done successfully");
         }
     }
 
