@@ -66,6 +66,7 @@ namespace TrackViewer
 
         private async void btnSendCompleteRegistration_Click(object sender, RoutedEventArgs e)
         {
+            btnCompleteRegistration.IsEnabled = false;
             try
             {
                 if (txtActivationCode.Text.Trim() != "")
@@ -91,11 +92,13 @@ namespace TrackViewer
             {
                 SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
             }
+            btnCompleteRegistration.IsEnabled = true;
         }
 
 
         private async void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
         {
+            btnSendActivation.IsEnabled = false;
             if (btnSendActivation.Content.ToString().Equals("Register"))
             {
                 if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
@@ -134,6 +137,7 @@ namespace TrackViewer
                     SetMessage(MessageType.Error, "Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 }
             }
+            btnSendActivation.IsEnabled = true;
         }
 
         private void SetMessage(MessageType messageType, String message)

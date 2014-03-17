@@ -48,16 +48,7 @@ namespace TrackViewer
                         TrackViewerSettings sf = new TrackViewerSettings();
                         sf.Show();
                     });
-
-                SettingsCommand deactivateCommand = new SettingsCommand("deactivate", "Deactivate Account",
-                    (handler) =>
-                    {
-                        DeactivateAccount da = new DeactivateAccount();
-                        da.Show();
-                    });
-
                 e.Request.ApplicationCommands.Add(defaultsCommand);
-                e.Request.ApplicationCommands.Add(deactivateCommand);
             };
 
             base.OnWindowCreated(args);

@@ -11,6 +11,7 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -47,6 +48,22 @@ namespace TrackViewer
             if (myTimer != null) myTimer.Stop();
             if (trackerTimer != null) trackerTimer.Stop();
             MapCurrentLocation();
+
+            AddDeactivateAccountMenu();
+        }
+
+        void AddDeactivateAccountMenu()
+        {
+            SettingsPane.GetForCurrentView().CommandsRequested += (s, e) =>
+            {
+                SettingsCommand deactivateCommand = new SettingsCommand("deactivate", "Deactivate Account",
+                    (handler) =>
+                    {
+                        DeactivateAccount da = new DeactivateAccount();
+                        da.Show();
+                    });
+                e.Request.ApplicationCommands.Add(deactivateCommand);
+            };
         }
 
         async void MapCurrentLocation()

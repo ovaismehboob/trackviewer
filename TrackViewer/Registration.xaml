@@ -9,17 +9,17 @@
 
     <Grid Background="#FFBBBCC3">
         <Image HorizontalAlignment="Center" Height="54" Margin="607,109,501,0" VerticalAlignment="Top" Width="258"  Source="Assets/trackviewersplash.png" />
-        <TextBlock HorizontalAlignment="Center" Height="60" Margin="102,184,0,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to share current location using Bing Map. It does not only show user's current location in the map but also generates a trackviewer ID which helps user to share it with other users to let them see." VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
+        <TextBlock HorizontalAlignment="Center" Height="87" Margin="565,184,462,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to know and share its current location with other users. For each session TrackViewer generates a unique TrackViewer id that can be shared across family, friends, etc. to locate your current location over Bing Maps" VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
         <StackPanel HorizontalAlignment="Center" Height="459" Margin="565,249,462,0" VerticalAlignment="Top" Width="339">
             <TextBlock x:Name="txtNewUserRegistration" FontSize="23" FontWeight="SemiBold" Visibility="Visible"  Text="New User Registration" Margin="0,50,10,10" Foreground="#FF080808" />
             <TextBlock x:Name="txtEnterName" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Name" Margin="0,10,10,10" Foreground="#FF080808" />
-            <TextBox x:Name="txtName" FontSize="15" Visibility="Visible" Foreground="#FF080808" />
+            <TextBox x:Name="txtName" MaxLength="25" FontSize="15" Visibility="Visible" Foreground="#FF080808" />
             <TextBlock x:Name="txtEnterEmailAddress" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Email Address" Margin="0,10,10,10" Foreground="#FF080808" />
-            <TextBox x:Name="txtEmailAddress" FontSize="15" Visibility="Visible" Foreground="#FF080808" />
+            <TextBox x:Name="txtEmailAddress" MaxLength="50" FontSize="15" Visibility="Visible" Foreground="#FF080808" />
             <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Center" Content="Complete Registration!" Foreground="#FF080808" Background="#FFC9C9C9" />
             <Button x:Name="btnSendActivation" Visibility="Visible" HorizontalAlignment="Center" Content="Register" Foreground="#FF080808" Margin="0,10,10,10" Background="#FFC9C9C9" Click="btnSendActivation_Click_1" />
             <TextBlock x:Name="txtEnterActivationCode" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Activation Code" Margin="0,10,10,10" Foreground="#FF080808" />
-            <TextBox x:Name="txtActivationCode" FontSize="15" Visibility="Visible" IsEnabled="True" Foreground="#FF080808" />
+            <TextBox x:Name="txtActivationCode" MaxLength="4" FontSize="15" Visibility="Visible" IsEnabled="True" Foreground="#FF080808" />
             <Button x:Name="btnCompleteRegistration" Visibility="Visible"  IsEnabled="False" HorizontalAlignment="Center" Content="Complete Registration!" Foreground="#FF080808" Margin="0,10,10,10" Background="#FFC9C9C9" Click="btnSendCompleteRegistration_Click" />
             <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
