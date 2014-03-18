@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="32071OvaisMehboob.Trackast" Publisher="CN=6F7F17E4-A819-49E8-BE93-1E463E3B8CCA" Version="1.1.0.0" />
+  <Identity Name="32071OvaisMehboob.Trackast" Publisher="CN=6F7F17E4-A819-49E8-BE93-1E463E3B8CCA" Version="1.1.0.2" />
   <Properties>
     <DisplayName>TrackViewer</DisplayName>
     <PublisherDisplayName>Ovais Mehboob</PublisherDisplayName>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TrackViewer.App">
-      <m2:VisualElements DisplayName="TrackViewer" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="TrackViewer" ForegroundText="light" BackgroundColor="#464646">
+      <m2:VisualElements DisplayName="TrackViewer" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="TrackViewer is the real time connected app that helps user to know and share his/her current location with other users. For each session TrackViewer generates a unique TrackViewer ID that can be shared across family, friends, etc. to locate user's location on Bing Map" ForegroundText="light" BackgroundColor="#464646">
         <m2:DefaultTile ShortName="TrackViewer">
         </m2:DefaultTile>
         <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="white" />

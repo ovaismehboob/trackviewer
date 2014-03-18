@@ -304,7 +304,7 @@ namespace TrackViewerWP
             {
                 if (btnTrack.Content.Equals("➤"))
                 {
-                    if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "⭙ Please enter valid TrackViewer ID"); return; }
+                    if (txtTrackId.Text.Trim() == "") { SetMessage(MessageType.Warning, "❎ Please enter valid TrackViewer ID"); return; }
                     btnTrack.Content = "❌";
                     txtTrackId.IsEnabled = false;
                     ShowMessage("Searching Tracker's location...");
@@ -396,6 +396,13 @@ namespace TrackViewerWP
         {
             MessageBox.Show("✔ Account has been deactivated successfully", "Information", MessageBoxButton.OK);
             this.NavigationService.Navigate(new Uri("/Splash", UriKind.Relative));
+        }
+
+        private void btnSync_Click(object sender, RoutedEventArgs e)
+        {
+            timer_TickFetch(null, null);
+            timer_Tick(null, null);
+            SetMessage(MessageType.Information, "✔ Location syncing has been done successfully");
         }
 
 

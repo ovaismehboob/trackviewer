@@ -85,6 +85,7 @@
         </StackPanel>
 
         <Button x:Name="btnTrack"  Visibility="Visible"  HorizontalAlignment="Center" Content="➤" Click="btnTrack_Click" FontSize="13" Margin="354,268,58,55" Width="68"/>
+        <Button x:Name="btnSync"  Visibility="Visible"  HorizontalAlignment="Center" Content="sync"  FontSize="9" Margin="402,268,10,55" Width="68" RenderTransformOrigin="1.529,0.441" Click="btnSync_Click"/>
         <Image HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="87" Source="/Assets/93-24.png"/>
 
     </Grid>
