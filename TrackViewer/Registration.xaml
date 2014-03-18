@@ -21,7 +21,7 @@
             <TextBlock x:Name="txtEnterActivationCode" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Activation Code" Margin="0,10,10,10" Foreground="#FF080808" />
             <TextBox x:Name="txtActivationCode" MaxLength="4" FontSize="15" Visibility="Visible" IsEnabled="True" Foreground="#FF080808" />
             <Button x:Name="btnCompleteRegistration" Visibility="Visible"  IsEnabled="False" HorizontalAlignment="Center" Content="Complete Registration!" Foreground="#FF080808" Margin="0,10,10,10" Background="#FFC9C9C9" Click="btnSendCompleteRegistration_Click" />
-            <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
+            <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Center" Height="49" Margin="567,111,735,0" VerticalAlignment="Top" Width="64" Source="Assets/trackviewer.png" RenderTransformOrigin="-1.569,0.467"/>
         <Image HorizontalAlignment="Center" Height="51" Margin="607,109,518,0" VerticalAlignment="Top" Width="241"  Source="Assets/trackviewersplash.png" />

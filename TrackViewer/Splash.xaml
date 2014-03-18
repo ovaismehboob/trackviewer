@@ -11,7 +11,7 @@
         
         <TextBlock HorizontalAlignment="Center" Height="83" Margin="565,184,462,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to know and share its current location with other users. For each session TrackViewer generates a unique TrackViewer id that can be shared across family, friends, etc. to locate user's current location" VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
         <StackPanel HorizontalAlignment="Center" Height="459" Margin="565,249,462,0" VerticalAlignment="Top" Width="339">
-            <TextBlock x:Name="txtMessage" Text="Authenticating device and loading user information, please wait..." TextAlignment="Center" Foreground="Black" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" Margin="0,50,0,0" HorizontalAlignment="Center" ></TextBlock>
+            <TextBlock x:Name="txtMessage" Text="Authenticating device and loading user information, please wait..." TextAlignment="Center" Foreground="Black" TextWrapping="WrapWholeWords" FontSize="13" FontWeight="SemiBold" Margin="0,50,0,0" HorizontalAlignment="Center" ></TextBlock>
             <Button x:Name="btnRetry" HorizontalAlignment="Center" Visibility="Collapsed" Content="Retry" Click="btnRetry_Click" ></Button>
         </StackPanel>
         <Image HorizontalAlignment="Center" Height="49" Margin="567,111,735,0" VerticalAlignment="Top" Width="64" Source="Assets/trackviewer.png" RenderTransformOrigin="-1.569,0.467"/>

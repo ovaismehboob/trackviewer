@@ -24,7 +24,7 @@
             <!-- Section 1 body -->
             <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap">
                 <TextBlock.Text>
-                    We can store any information you enter or provide to us in any other way. The types of information collected may include your name, email address, device Id and the track information. As the application is network-capable and a real-time in nature, we uses to push and pull data to/from our service. 
+                    We can store any information you enter or provide to us in any other way. The types of information collected may include your name, email address, device Id and the location information. As the application is network-capable and a real-time in nature, we uses to push and pull data to/from our service. 
                 </TextBlock.Text>
             </TextBlock>
 

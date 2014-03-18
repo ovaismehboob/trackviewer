@@ -24,7 +24,7 @@
             <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter User TrackViewer ID to track" Margin="0,20,10,10" Foreground="#FF080808" />
             <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Foreground="#FF080808" />
             <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
-            <TextBlock x:Name="txtMessage" Margin="0,10,10,10" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
+            <TextBlock x:Name="txtMessage" Margin="0,10,10,10" Text="" TextWrapping="WrapWholeWords" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="49" Margin="101,96,0,0" VerticalAlignment="Top" Width="64" Source="Assets/trackviewer.png"/>
         <Image HorizontalAlignment="Left" Height="30" Margin="190,692,0,0" VerticalAlignment="Top" Width="150" Source="Assets/pwa.png"/>
