@@ -7,9 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#FFBBBCC3">
-        <Image HorizontalAlignment="Center" Height="54" Margin="607,109,501,0" VerticalAlignment="Top" Width="258"  Source="Assets/trackviewersplash.png" />
-        <TextBlock HorizontalAlignment="Center" Height="87" Margin="565,184,462,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to know and share its current location with other users. For each session TrackViewer generates a unique TrackViewer id that can be shared across family, friends, etc. to locate your current location over Bing Maps" VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
+    <Grid Background="#FFBBBCC3" HorizontalAlignment="Center">
+      
+        <TextBlock HorizontalAlignment="Center" Height="87" Margin="565,184,462,0"  TextWrapping="Wrap" Text="TrackViewer is the real time connected app that helps user to know and share its current location with other users. For each session TrackViewer generates a unique TrackViewer ID that can be shared across family, friends, etc. to locate user's current location" VerticalAlignment="Top" Width="339" Foreground="#FF080808"/>
         <StackPanel HorizontalAlignment="Center" Height="459" Margin="565,249,462,0" VerticalAlignment="Top" Width="339">
             <TextBlock x:Name="txtNewUserRegistration" FontSize="23" FontWeight="SemiBold" Visibility="Visible"  Text="New User Registration" Margin="0,50,10,10" Foreground="#FF080808" />
             <TextBlock x:Name="txtEnterName" FontSize="15" FontWeight="SemiBold" Visibility="Visible"  Text="Enter Name" Margin="0,10,10,10" Foreground="#FF080808" />
@@ -23,7 +23,9 @@
             <Button x:Name="btnCompleteRegistration" Visibility="Visible"  IsEnabled="False" HorizontalAlignment="Center" Content="Complete Registration!" Foreground="#FF080808" Margin="0,10,10,10" Background="#FFC9C9C9" Click="btnSendCompleteRegistration_Click" />
             <TextBlock x:Name="txtMessage" Text="" TextWrapping="WrapWholeWords" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
-        <Image HorizontalAlignment="Center" Height="82" Margin="565,97,730,0" VerticalAlignment="Top" Width="71" Source="Assets/trackviewer.png" RenderTransformOrigin="-1.569,0.467"/>
-
+        <Image HorizontalAlignment="Center" Height="49" Margin="567,111,735,0" VerticalAlignment="Top" Width="64" Source="Assets/trackviewer.png" RenderTransformOrigin="-1.569,0.467"/>
+        <Image HorizontalAlignment="Center" Height="51" Margin="607,109,518,0" VerticalAlignment="Top" Width="241"  Source="Assets/trackviewersplash.png" />
+        <Image HorizontalAlignment="Left" Height="30" Margin="646,708,0,0" VerticalAlignment="Top" Width="150" Source="Assets/pwa.png"/>
+        
     </Grid>
 </Page>

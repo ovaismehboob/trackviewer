@@ -79,7 +79,7 @@
             <TextBlock Text="" Visibility="Visible" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="10,0,20,0" FontSize="20" />
             <CheckBox Visibility="Visible" x:Name="chkTracking" Content="Enable Tracking" FontSize="15" HorizontalAlignment="Left" Height="76" Width="176" Margin="0,0,0,0"/>
             <TextBlock Visibility="Visible" x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold"   Text="Enter User TrackViewer ID to track" Margin="10,0,224,0" Height="26"  />
-            <TextBox Visibility="Visible" x:Name="txtTrackId" FontSize="15" Margin="0,0,107,0" Height="66" />
+            <TextBox Visibility="Visible" x:Name="txtTrackId" FontSize="15" Margin="0,0,107,0" Height="66" MaxLength="10" />
             <TextBlock x:Name="txtMessage"  FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="10,0,0,0" />
             <Image Width="130" Height="130" x:Name="imgLoading" Visibility="Collapsed" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
         </StackPanel>

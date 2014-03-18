@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TrackViewer.Services.TrackService;
 using Windows.Foundation;
@@ -98,11 +99,26 @@ namespace TrackViewer
 
         private async void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
         {
+
             btnSendActivation.IsEnabled = false;
+            if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
+            {
+                if (!Regex.IsMatch(txtEmailAddress.Text.Trim(), "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
+                {
+                    SetMessage(MessageType.Error, "❎ Email Address is not valid, please enter valid email address");
+                    btnSendActivation.IsEnabled = true;
+                    return;
+                }
+            }
+            else
+            {
+                SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
+                btnSendActivation.IsEnabled = true;
+                return;
+            }    
+
             if (btnSendActivation.Content.ToString().Equals("Register"))
             {
-                if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
-                {
                     txtMessage.Text = "Registering...";
                     txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     Task<long> result = ProxyTracker.GetInstance().Client.RegisterUserAsync(ProxyTracker.GetInstance().GetDeviceId(), "", txtName.Text.Trim(), txtEmailAddress.Text.Trim());
@@ -117,11 +133,7 @@ namespace TrackViewer
                     {
                         SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                     }
-                }
-                else
-                {
-                    SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
-                }
+             
             }
             else
             {
