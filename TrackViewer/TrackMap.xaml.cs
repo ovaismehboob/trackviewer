@@ -161,6 +161,7 @@ namespace TrackViewer
             imgLoading.Visibility = Visibility.Collapsed;
             txtSyncNow.Visibility = Visibility.Visible;
             btnSync.Visibility = Visibility.Visible;
+            txtEnableTracking.Visibility = Visibility.Visible;
         }
 
         async Task SetCurrentLocation()

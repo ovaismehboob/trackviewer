@@ -14,13 +14,14 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>TrackViewer_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>TrackViewer_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86</AppxBundlePlatforms>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <PackageCertificateThumbprint>A36C04611193A4334A886560CFC7DCA50680BFDA</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -161,6 +162,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Package.StoreAssociation.xml" />
     <None Include="Service References\Services.TrackService\TrackService1.disco" />
     <None Include="Service References\Services.TrackService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -186,6 +188,7 @@
     <None Include="Service References\Services.TrackService\TrackViewer.Services.TrackService.TrackViewerUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="TrackViewer_StoreKey.pfx" />
     <None Include="TrackViewer_TemporaryKey.pfx" />
     <PRIResource Include="Strings\en-US\Resources.resw">
       <SubType>Designer</SubType>

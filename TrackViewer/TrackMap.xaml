@@ -18,12 +18,13 @@
             <TextBlock Text="Connecting to TrackViewer service, please wait..."  FontSize="11"  x:Name="txtWelcome" Margin="0,10,0,10"   Foreground="#FF080808" />
             <TextBlock Text="" x:Name="txtMyTrackId" FontWeight="SemiBold" Margin="0,5,10,10" FontSize="15" Foreground="#FF080808" />
             <Image Height="79" x:Name="imgLoading" CacheMode="BitmapCache" Source="/Assets/loading.png"  />
-            <ToggleSwitch  FontSize="15" x:Name="toggleSwitch" Visibility="Collapsed"  OffContent="Enable Tracking" Margin="0,0,10,10" OnContent="Disable Tracking" Foreground="#FF080808" />
-            <TextBlock x:Name="txtSyncNow" FontSize="11" Visibility="Collapsed"  Text="By default, application sync location information after every 1 minute. In urgent situation you can manually sync by hitting below button" TextWrapping="Wrap" Margin="0,0,10,10" Foreground="#FF080808" />
-            <Button x:Name="btnSync" Visibility="Collapsed" HorizontalAlignment="Center" Content="Sync Location" Foreground="#FF080808" Background="#FFC9C9C9" Click="btnSync_Click" />
+            <TextBlock x:Name="txtEnableTracking" FontSize="11" Visibility="Collapsed"  Text="By default, your location tracking is disabled that means your location information is not traceable by anyone. You can enable tracking by toggling the switch below ⇲ " TextWrapping="Wrap" Margin="0,0,10,10" Foreground="#FF080808" />
+            <ToggleSwitch HorizontalAlignment="Right"  FontSize="15" x:Name="toggleSwitch" Visibility="Collapsed"  OffContent="Enable Tracking" Margin="0,0,-8,10" OnContent="Disable Tracking" Foreground="#FF080808" />
+            <TextBlock x:Name="txtSyncNow" FontSize="11" Visibility="Collapsed"  Text="By default, application synchronizes location information after every 1 minute. In emergency situation you can manually synchronize the information using the 'Sync Location' button below ⇲ " TextWrapping="Wrap" Margin="0,0,10,10" Foreground="#FF080808" />
+            <Button x:Name="btnSync" Visibility="Collapsed" HorizontalAlignment="Right" Content="Sync Location" Foreground="#FF080808" Background="#FFC9C9C9" Margin="0,0,0,0" Click="btnSync_Click" />
             <TextBlock x:Name="txtEnterUserTrackID" FontSize="15" FontWeight="SemiBold" Visibility="Collapsed"  Text="Enter User TrackViewer ID to track" Margin="0,20,10,10" Foreground="#FF080808" />
-            <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Foreground="#FF080808" />
-            <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Background="#FFC9C9C9" />
+            <TextBox x:Name="txtTrackId" FontSize="15" Visibility="Collapsed" Margin="0,0,3,5" Foreground="#FF080808" />
+            <Button x:Name="btnTrack" Visibility="Collapsed" HorizontalAlignment="Right" Content="Track now" Click="btnTrack_Click" Foreground="#FF080808" Margin="0,0,0,0" Background="#FFC9C9C9" />
             <TextBlock x:Name="txtMessage" Margin="0,10,10,10" Text="" TextWrapping="WrapWholeWords" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
         <Image HorizontalAlignment="Left" Height="49" Margin="101,96,0,0" VerticalAlignment="Top" Width="64" Source="Assets/trackviewer.png"/>
