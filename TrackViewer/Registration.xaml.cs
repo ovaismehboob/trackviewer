@@ -100,12 +100,20 @@ namespace TrackViewer
         private async void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
         {
 
-            if (txtName.Text.Equals("ovaismehboob!@#"))
+            //For testing purpose
+            if (txtName.Text.Equals("test"))
             {
-                this.Frame.Navigate(typeof(TrackMap));
+
+                var result = ProxyTracker.GetInstance().Client.GetUserInfoAsync("test").Result;
+                if (result != null && result.Email == "test")
+                {
+                    ProxyTracker.GetInstance().IsTestAccount = true;
+                    this.Frame.Navigate(typeof(TrackMap));
+
+                }
             }
 
-            btnSendActivation.IsEnabled = false;
+          
             if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
             {
                 if (!Regex.IsMatch(txtEmailAddress.Text.Trim(), "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
@@ -120,8 +128,8 @@ namespace TrackViewer
                 SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
                 btnSendActivation.IsEnabled = true;
                 return;
-            }    
-
+            }
+            btnSendActivation.IsEnabled = false;
             if (btnSendActivation.Content.ToString().Equals("Register"))
             {
                     txtMessage.Text = "Registering...";

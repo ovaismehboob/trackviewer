@@ -101,7 +101,7 @@ namespace TrackViewer
                         //var trackLocation = ProxyTracker.GetInstance().MyTrackLocation;
                         //SetPushPin("↓", new Location { Latitude = trackLocation.Latitude, Longitude = trackLocation.Longitude });
                     }
-                    catch (Exception ex) { MapCurrentLocation(); }
+                    catch (Exception ex)  {  MapCurrentLocation(); }
 
                     // Display the location information in the textboxes.
                     //   LatitudeTextbox.Text = pos.Coordinate.Latitude.ToString();
@@ -162,21 +162,14 @@ namespace TrackViewer
             txtSyncNow.Visibility = Visibility.Visible;
             btnSync.Visibility = Visibility.Visible;
             txtEnableTracking.Visibility = Visibility.Visible;
+            txtLoading.Visibility = Visibility.Collapsed;
         }
 
         async Task SetCurrentLocation()
         {
             try
             {
-                foreach (var children in trvMap.Children)
-                {
-                    if (children.GetType().Name == "LocationIcon100m")
-                    {
-                        trvMap.Children.Remove(children);
-                        break;
-                    }
 
-                }
 
                 // Get the cancellation token.
                 _cts = new CancellationTokenSource();
@@ -199,6 +192,17 @@ namespace TrackViewer
                 callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
                 callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
                 _locationIcon100m.DataContext = callout;
+
+                foreach (var children in trvMap.Children)
+                {
+                    if (children.GetType().Name == "LocationIcon100m")
+                    {
+                        trvMap.Children.Remove(children);
+                        break;
+                    }
+
+                }
+
                 // Add the 100m icon and zoom a little closer.
                 trvMap.Children.Add(_locationIcon100m);
 
@@ -207,8 +211,14 @@ namespace TrackViewer
 
                 // Set the map to the given location and zoom level.
                 trvMap.SetView(location, zoomLevel);
+                txtMessage.Text = "";
             }
-            catch { }
+            catch (Exception ex)
+            {
+                txtMessage.Foreground = new SolidColorBrush(Colors.Black); 
+                txtMessage.Text = "❎ Location services is disabled on this computer";
+                txtMessage.Visibility = Visibility.Visible;
+            }
 
         }
 

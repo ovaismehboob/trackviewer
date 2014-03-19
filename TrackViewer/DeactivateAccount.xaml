@@ -28,6 +28,7 @@
                 </TextBlock.Text>
             </TextBlock>
             <Button Content="Deactivate" x:Name="btnDeactivate" HorizontalAlignment="Right" Click="btnDeactivate_Click" ></Button>
+            <TextBlock x:Name="txtMessage" TextWrapping="Wrap" ></TextBlock>
         </StackPanel>
 
         <!-- Define more Content Sections below as necessary -->

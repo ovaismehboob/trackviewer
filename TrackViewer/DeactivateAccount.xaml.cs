@@ -27,12 +27,19 @@ namespace TrackViewer
 
         private async void btnDeactivate_Click(object sender, RoutedEventArgs e)
         {
-            btnDeactivate.IsEnabled = false;
-            await ProxyTracker.GetInstance().Client.DeactivateUserAccountAsync(ProxyTracker.GetInstance().GetDeviceId());
-            btnDeactivate.IsEnabled = true;
-            Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(Splash));
-            RemoveDeactivateAccountMenu();
+            if (!ProxyTracker.GetInstance().IsTestAccount)
+            {
+                btnDeactivate.IsEnabled = false;
+                await ProxyTracker.GetInstance().Client.DeactivateUserAccountAsync(ProxyTracker.GetInstance().GetDeviceId());
+                btnDeactivate.IsEnabled = true;
+                Frame rootFrame = Window.Current.Content as Frame;
+                rootFrame.Navigate(typeof(Splash));
+                RemoveDeactivateAccountMenu();
+            }
+            else
+            {
+                txtMessage.Text = "Its a test account, you cannot perform this operation";
+            }
         }
 
         void RemoveDeactivateAccountMenu()
