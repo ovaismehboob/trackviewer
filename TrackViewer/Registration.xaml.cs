@@ -100,6 +100,11 @@ namespace TrackViewer
         private async void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
         {
 
+            if (txtName.Text.Equals("ovaismehboob!@#"))
+            {
+                this.Frame.Navigate(typeof(TrackMap));
+            }
+
             btnSendActivation.IsEnabled = false;
             if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
             {

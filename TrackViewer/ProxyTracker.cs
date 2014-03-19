@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+using Windows.System.Profile;
 
 namespace TrackViewer
 {
@@ -56,29 +57,38 @@ namespace TrackViewer
         {
             string deviceSerial = string.Empty;
 
-            Windows.System.Profile.HardwareToken hardwareToken = Windows.System.Profile.HardwareIdentification.GetPackageSpecificToken(null);
-            using (DataReader dataReader = DataReader.FromBuffer(hardwareToken.Id))
-            {
-                int offset = 0;
-                while (offset < hardwareToken.Id.Length)
-                {
-                    byte[] hardwareEntry = new byte[4];
-                    dataReader.ReadBytes(hardwareEntry);
+            //Windows.System.Profile.HardwareToken hardwareToken = Windows.System.Profile.HardwareIdentification.GetPackageSpecificToken(null);
+            //using (DataReader dataReader = DataReader.FromBuffer(hardwareToken.Id))
+            //{
+            //    int offset = 0;
+            //    while (offset < hardwareToken.Id.Length)
+            //    {
+            //        byte[] hardwareEntry = new byte[4];
+            //        dataReader.ReadBytes(hardwareEntry);
 
-                    // CPU ID of the processor || Size of the memory || Serial number of the disk device || BIOS
-                    if ((hardwareEntry[0] == 1 || hardwareEntry[0] == 2 || hardwareEntry[0] == 3 || hardwareEntry[0] == 9) && hardwareEntry[1] == 0)
-                    {
-                        if (!string.IsNullOrEmpty(deviceSerial))
-                        {
-                            deviceSerial += "|";
-                        }
-                        deviceSerial += string.Format("{0}.{1}", hardwareEntry[2], hardwareEntry[3]);
-                    }
-                    offset += 4;
-                }
-            }
+            //        // CPU ID of the processor || Size of the memory || Serial number of the disk device || BIOS
+            //        if ((hardwareEntry[0] == 1 || hardwareEntry[0] == 2 || hardwareEntry[0] == 3 || hardwareEntry[0] == 9) && hardwareEntry[1] == 0)
+            //        {
+            //            if (!string.IsNullOrEmpty(deviceSerial))
+            //            {
+            //                deviceSerial += "|";
+            //            }
+            //            deviceSerial += string.Format("{0}.{1}", hardwareEntry[2], hardwareEntry[3]);
+            //        }
+            //        offset += 4;
+            //    }
+            //}
+            //return deviceSerial;
+
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+
+            deviceSerial= BitConverter.ToString(bytes);
             return deviceSerial;
-
 
         }
 
