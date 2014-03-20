@@ -180,7 +180,6 @@ namespace TrackViewer
 
                 Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
                 ProxyTracker.GetInstance().MyTrackLocation = new Services.TrackService.TrackLocation { Latitude = pos.Coordinate.Latitude, Longitude = pos.Coordinate.Longitude };
-
                 // Now set the zoom level of the map based on the accuracy of our location data.
                 // Default to IP level accuracy. We only show the region at this level - No icon is displayed.
                 double zoomLevel = 13.0f;
@@ -211,13 +210,11 @@ namespace TrackViewer
 
                 // Set the map to the given location and zoom level.
                 trvMap.SetView(location, zoomLevel);
-                txtMessage.Text = "";
+              //  txtMessage.Text = "";
             }
             catch (Exception ex)
             {
-                txtMessage.Foreground = new SolidColorBrush(Colors.Black); 
-                txtMessage.Text = "❎ Location services is disabled on this computer";
-                txtMessage.Visibility = Visibility.Visible;
+                SetMessage(MessageType.Error, "❎ Location services is disabled on this computer");
             }
 
         }
@@ -227,15 +224,7 @@ namespace TrackViewer
         {
             try
             {
-                foreach (var children in trvMap.Children)
-                {
-                    if (children.GetType().Name == "LocationIcon10m")
-                    {
-                        trvMap.Children.Remove(children);
-                        break;
-                    }
-
-                }
+               
 
                 CloseMessage();
                 //  trvMap.Children.Clear();
@@ -272,6 +261,16 @@ namespace TrackViewer
                 callout.Lon = "Lon (λ): " + location.Longitude.ToString().Substring(0, 7);
                 callout.Lat = "Lat (φ): " + location.Latitude.ToString().Substring(0, 7);
                 _locationUserIcon10m.DataContext = callout;
+
+                foreach (var children in trvMap.Children)
+                {
+                    if (children.GetType().Name == "LocationIcon10m")
+                    {
+                        trvMap.Children.Remove(children);
+                        break;
+                    }
+
+                }
                 // Add the 10m icon and zoom closer.
                 trvMap.Children.Add(_locationUserIcon10m);
                 MapLayer.SetPosition(_locationUserIcon10m, location);
@@ -285,7 +284,7 @@ namespace TrackViewer
             timer_Tick(null, null);
             myTimer = new DispatcherTimer();
             myTimer.Tick += timer_Tick;
-            myTimer.Interval = TimeSpan.FromSeconds(60);
+            myTimer.Interval = TimeSpan.FromSeconds(2);
             myTimer.Start();
             
         }
@@ -305,7 +304,7 @@ namespace TrackViewer
                 if (!btnTrack.Content.ToString().Equals("Cancel"))
                 {
                     await SetCurrentLocation();
-                    txtMessage.Text = "";
+            //        txtMessage.Text = "";
                 }
             }
             catch { }
@@ -427,16 +426,16 @@ namespace TrackViewer
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += timer_HideMessage;
-            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Interval = TimeSpan.FromSeconds(3);
             timer.Start();
         }
 
         async void timer_HideMessage(object sender, object e)
         {
             txtMessage.Text = "";
+            
             var timer=(DispatcherTimer) sender;
             timer.Stop();
-            
         }
 
         private void btnSync_Click(object sender, RoutedEventArgs e)
