@@ -404,7 +404,7 @@ namespace TrackViewerWP
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account? Next time when you reopen the application, it will ask you to register again", "Confirmation", MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account. Next time when you reopen the application, it will ask you to register again?", "Confirmation", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
                     ProxyTracker.GetInstance().Client.DeactivateUserAccountCompleted += Client_DeactivateUserAccountCompleted;
