@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="32071OvaisMehboob.Trackast" Publisher="CN=6F7F17E4-A819-49E8-BE93-1E463E3B8CCA" Version="1.1.0.3" />
+  <Identity Name="32071OvaisMehboob.Trackast" Publisher="CN=6F7F17E4-A819-49E8-BE93-1E463E3B8CCA" Version="1.1.0.14" />
   <Properties>
     <DisplayName>TrackViewer</DisplayName>
     <PublisherDisplayName>Ovais Mehboob</PublisherDisplayName>
