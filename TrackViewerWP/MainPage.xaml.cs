@@ -120,6 +120,8 @@ namespace TrackViewerWP
 
             try
             {
+                if (!btnTrack.Content.Equals("➤")) return;
+
                 foreach (var children in trvMap.Children)
                 {
 
@@ -135,7 +137,19 @@ namespace TrackViewerWP
                 _cts = new CancellationTokenSource();
                 token = _cts.Token;
                 // Get the location.
-                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+
+                var asyncResult = _geolocator.GetGeopositionAsync();
+                var task = asyncResult.AsTask();
+
+                var readyTask = await Task.WhenAny(task, Task.Delay(10000));
+                if (readyTask != task)
+                {
+                    SetMessage(MessageType.Error, "❎ Unable to find your location, trying again...");
+                    SetCurrentLocation();
+                }
+
+                Geoposition pos = await task;
+                //Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
                 //  MessageTextbox.Text = "";
 
                 System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate(pos.Coordinate.Latitude, pos.Coordinate.Longitude);
@@ -262,6 +276,8 @@ namespace TrackViewerWP
         {
             try
             {
+                if (btnTrack.Content.Equals("➤")) return;
+
                 foreach (var children in trvMap.Children)
                 {
                     if (children.GetType().Name == "LocationIcon10m")
@@ -308,6 +324,7 @@ namespace TrackViewerWP
                     btnTrack.Content = "❌";
                     txtTrackId.IsEnabled = false;
                     ShowMessage("Searching Tracker's location...");
+                    timer_TickFetch(null, null);
                 }
                 else
                 {
@@ -319,7 +336,6 @@ namespace TrackViewerWP
                         if (children.GetType().Name == "LocationIcon10m")
                         {
                             trvMap.Children.Remove(children);
-                            break;
                         }
                     }
                 }
@@ -353,7 +369,7 @@ namespace TrackViewerWP
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += timer_HideMessage;
-            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Interval = TimeSpan.FromSeconds(3);
             timer.Start();
         }
 
@@ -378,11 +394,17 @@ namespace TrackViewerWP
             MessageBox.Show("We can store any information you enter or provide to us in any other way. The types of information collected may include your name, email address, device Id and the track information. As the application is network-capable and a real-time in nature, we uses to push and pull data to/from our service.", "Privacy Policy", MessageBoxButton.OK);
         }
 
+        private void ApplicationBarMenuItemHelp_Click(object sender, EventArgs e)
+        {
+            
+            this.NavigationService.Navigate(new Uri("/Help.xaml", UriKind.Relative));
+        }
+
         private void ApplicationBarMenuItemDeactivateAccount_Click(object sender, EventArgs e)
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account?", "Confirmation", MessageBoxButton.OKCancel);
+                MessageBoxResult result = MessageBox.Show("Are you sure to deactivate your account? Next time when you reopen the application, it will ask you to register again", "Confirmation", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
                     ProxyTracker.GetInstance().Client.DeactivateUserAccountCompleted += Client_DeactivateUserAccountCompleted;
@@ -395,7 +417,7 @@ namespace TrackViewerWP
         void Client_DeactivateUserAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             MessageBox.Show("✔ Account has been deactivated successfully", "Information", MessageBoxButton.OK);
-            this.NavigationService.Navigate(new Uri("/Splash", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("/Splash.xaml", UriKind.Relative));
         }
 
         private void btnSync_Click(object sender, RoutedEventArgs e)

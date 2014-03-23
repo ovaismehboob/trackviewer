@@ -15,7 +15,7 @@
         <Ellipse Height="25" Width="25" Fill="#FFF0F0F0" Margin="-12.5,-12.5,0,0"></Ellipse>
         <Ellipse Height="20"  Width="20" Fill="Black" Margin="-10,-10,0,0"></Ellipse>
         <Ellipse Height="10" Width="10" Fill="White" Margin="-5,-5,0,0"></Ellipse>
-        <Rectangle Height="58" Canvas.Left="1" Canvas.Top="1" Width="113" Opacity="0.7" RenderTransformOrigin="0.5,0.5" Fill="#FFCFEBF9" ScrollViewer.VerticalScrollBarVisibility="Disabled" RadiusX="13" RadiusY="13">
+        <Rectangle Height="58" Canvas.Left="1" Canvas.Top="1" Width="93" Opacity="0.7" RenderTransformOrigin="0.5,0.5" Fill="#FFCFEBF9" ScrollViewer.VerticalScrollBarVisibility="Disabled" RadiusX="13" RadiusY="13">
             <Rectangle.RenderTransform>
                 <CompositeTransform ScaleX="-1"/>
             </Rectangle.RenderTransform>

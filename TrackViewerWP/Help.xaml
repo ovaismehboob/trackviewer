@@ -1,0 +1,37 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="TrackViewerWP.Help"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <ScrollViewer>
+        <StackPanel Grid.Row="0" Margin="12,117,0,287">
+                <TextBlock Margin="10,10,10,10" FontSize="33" Text="Help"></TextBlock>
+                <TextBlock Margin="10,10,10,10" Text="⍰ By default, application synchronizes location information after every 1 minute. In emergency situation you can manually synchronize the information using the 'sync' button in the Track viewer screen" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Margin="10,10,10,10" Text="⍰ By default, your location tracking is disabled that means your location information is not traceable by anyone. You can enable tracking using checkbox 'Enable Tracking' from the Track viewer screen" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+        </ScrollViewer>
+        <!--ContentPanel - place additional content here-->
+        <TextBlock Text="TrackViewer" Margin="0,11,237,287"  HorizontalAlignment="Right" FontSize="65"  Width="161" FontFamily="Eras Medium ITC" FontWeight="Bold"/>
+        <TextBlock Text="Viewer" Margin="0,11,25,287"  HorizontalAlignment="Right" FontSize="65"  Width="212" FontFamily="Eras Medium ITC"/>
+        <Image HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="87" Source="/Assets/93-24.png"/>
+    </Grid>
+
+</phone:PhoneApplicationPage>

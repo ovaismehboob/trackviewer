@@ -24,6 +24,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Help" Click="ApplicationBarMenuItemHelp_Click"/>
                 <shell:ApplicationBarMenuItem Text="Privacy Policy" Click="ApplicationBarMenuItemPrivacyPolicy_Click"/>
                 <shell:ApplicationBarMenuItem Text="Deactivate Account" Click="ApplicationBarMenuItemDeactivateAccount_Click"  />
             </shell:ApplicationBar.MenuItems>

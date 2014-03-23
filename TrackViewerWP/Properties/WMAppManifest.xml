@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{6f70c0b6-fee7-43bd-b653-f1fcbdfede53}" Title="TrackViewer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Ovais Mehboob" Description="Sample description" Publisher="TrackViewer" PublisherID="{c6aa5697-a6d9-4560-9453-57dfdd3871ee}">
+  <App xmlns="" ProductID="{6f70c0b6-fee7-43bd-b653-f1fcbdfede53}" Title="TrackViewer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Ovais Mehboob" Description="TrackViewer is the real time connected app that helps user to know and share his/her current location with other users. For each session TrackViewer generates a unique TrackViewer ID that can be shared across family, friends, etc. to locate user's location" Publisher="TrackViewer" PublisherID="{c6aa5697-a6d9-4560-9453-57dfdd3871ee}">
     <IconPath IsRelative="true" IsResource="false">Assets\64-64.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

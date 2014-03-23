@@ -48,7 +48,7 @@ namespace TrackViewer
             if (myTimer != null) myTimer.Stop();
             if (trackerTimer != null) trackerTimer.Stop();
             MapCurrentLocation();
-
+            
             AddDeactivateAccountMenu();
         }
 
@@ -175,7 +175,18 @@ namespace TrackViewer
                 _cts = new CancellationTokenSource();
                 token = _cts.Token;
                 // Get the location.
-                Geoposition pos = await _geolocator.GetGeopositionAsync().AsTask(token);
+
+                var asyncResult = _geolocator.GetGeopositionAsync();
+                var task = asyncResult.AsTask();
+
+                var readyTask = await Task.WhenAny(task, Task.Delay(10000));
+                if (readyTask != task)
+                {
+                    SetMessage(MessageType.Error, "❎ Unable to find your location, trying again...");
+                    SetCurrentLocation();
+                }
+
+                Geoposition pos = await task;
                 //  MessageTextbox.Text = "";
 
                 Location location = new Location(pos.Coordinate.Latitude, pos.Coordinate.Longitude);

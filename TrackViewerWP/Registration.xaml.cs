@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TrackViewerWP.Services.TrackService;
+using System.Text.RegularExpressions;
 
 namespace TrackViewerWP
 {
@@ -155,7 +156,6 @@ namespace TrackViewerWP
                 if (txtActivationCode.Text.Trim() != "")
                 {
                     txtMessage.Text = "Finalizing Registration process...";
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     ProxyTracker.GetInstance().Client.UpdateIsActivatedCompleted += Client_UpdateIsActivatedCompleted;
                     ProxyTracker.GetInstance().Client.UpdateIsActivatedAsync(deviceId, txtActivationCode.Text.Trim());
                    
@@ -178,7 +178,7 @@ namespace TrackViewerWP
                 if (e.Result == true)
                 {
                     SetMessage(MessageType.Information, "✔ Thank you for completing your registration");
-                    this.NavigationService.Navigate(new Uri("/TrackMap", UriKind.Relative));
+                    this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                 }
                 else
                 {
@@ -194,20 +194,28 @@ namespace TrackViewerWP
 
         private void btnSendActivation_Click_1(object sender, RoutedEventArgs e)
         {
+
+            if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
+            {
+                if (!Regex.IsMatch(txtEmailAddress.Text.Trim(), "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
+                {
+                    SetMessage(MessageType.Error, "❎ Email Address is not valid, please enter valid email address");
+                    btnSendActivation.IsEnabled = true;
+                    return;
+                }
+            }
+            else
+            {
+                SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
+                btnSendActivation.IsEnabled = true;
+                return;
+            }
+            btnSendActivation.IsEnabled = false;
             if (btnSendActivation.Content.ToString().Equals("Register"))
             {
-                if (txtName.Text.Trim() != "" && txtEmailAddress.Text.Trim() != "")
-                {
                     txtMessage.Text = "Registering...";
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     ProxyTracker.GetInstance().Client.RegisterUserCompleted+=Client_RegisterUserCompleted;     
                     ProxyTracker.GetInstance().Client.RegisterUserAsync(ProxyTracker.GetInstance().GetDeviceId(), "", txtName.Text.Trim(), txtEmailAddress.Text.Trim());
-                    
-                }
-                else
-                {
-                    SetMessage(MessageType.Error, "❎ Name and Email Address cannot be empty, please enter correct information");
-                }
             }
             else
             {
@@ -215,7 +223,6 @@ namespace TrackViewerWP
                 try
                 {
                     txtMessage.Text = "Resending activation code...";
-                    txtMessage.Foreground = new SolidColorBrush(Colors.Black);
                     ProxyTracker.GetInstance().Client.ResendCodeCompleted += Client_ResendCodeCompleted;
                     ProxyTracker.GetInstance().Client.ResendCodeAsync(deviceId, txtEmailAddress.Text.Trim());
                 }
@@ -224,6 +231,7 @@ namespace TrackViewerWP
                     SetMessage(MessageType.Error, "❎ Sorry, we couldnt process your request at this time. Please check your internet connection or try again later");
                 }
             }
+            btnSendActivation.IsEnabled = true;
         }
 
         void Client_ResendCodeCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -231,6 +239,16 @@ namespace TrackViewerWP
             SetMessage(MessageType.Information, "⩗ Activation code has been sent to your email address");
         }
 
+        private void ApplicationBarMenuItemHelp_Click(object sender, EventArgs e)
+        {
+
+            this.NavigationService.Navigate(new Uri("/HelpReg.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBarMenuItemPrivacyPolicy_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("We can store any information you enter or provide to us in any other way. The types of information collected may include your name, email address, device Id and the track information. As the application is network-capable and a real-time in nature, we uses to push and pull data to/from our service.", "Privacy Policy", MessageBoxButton.OK);
+        }
 
 
         private void HideMessage()
