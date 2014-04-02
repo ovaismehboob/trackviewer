@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TrackViewerWP</RootNamespace>
-    <AssemblyName>TrackViewerWP</AssemblyName>
+    <AssemblyName>TrackViewer</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -167,8 +167,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="300x300.png" />
     <Content Include="Assets\loading.png" />
     <Content Include="Assets\trackviewersplash.png" />
+    <Content Include="Logo.scale-180.png" />
     <Content Include="README_FIRST.txt" />
     <None Include="Service References\Services.TrackService\TrackService.disco" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
